@@ -1,4 +1,4 @@
-namespace BoardGameHub.Models
+namespace BoardGameHub.Core.Models
 {
     public class ErrorViewModel
     {
