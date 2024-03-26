@@ -29,5 +29,25 @@ namespace BoardGameHub.Data.Constants
 
         public const int CategoryNameMaxLength = 50;
         public const int CategoryNameMinLength = 3;
+
+        //Place constants:
+
+        public const int PlaceCapacityMinValue = 2;
+        public const int PlaceCapacityMaxValue = 10;
+
+        public const string PlacePricePerHourMinValue = "10.00";
+        public const string PlacePricePerHourMaxValue = "300.00";
+
+        //GameReview constants:
+
+        public const int GameReviewMinLength = 10;
+        public const int GameReviewMaxLength = 1000;
+
+        //Reservation constants:
+
+        public const int ReservationAdditionalCommentMaxValue = 300;
+
+        public const string ReservationTotalPriceMinValue = "10.00";
+        public const string ReservationTotalPriceMaxValue = "900.00";
     }
 }

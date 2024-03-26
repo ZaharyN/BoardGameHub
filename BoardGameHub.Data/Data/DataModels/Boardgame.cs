@@ -45,16 +45,18 @@ namespace BoardGameHub.Data.Data.DataModels
         public DateTime YearPublished { get; set; }
 
         [Required]
+        [Column(TypeName = "decimal(18,2)")]
         [Range(typeof(decimal),
             BoardGamePriceInShopMinValue, 
-            BoardGamePriceInShopMaxValue, 
-            ErrorMessage = "Price must be between 0.00 and 1000.00 lv")]
+            BoardGamePriceInShopMaxValue)]
         public decimal PriceInShop { get; set; }
 
+        [Display(Name = "Minimum players")]
         [Required]
         [Range(BoardGameMinimumPlayersMinValue, BoardGameMinimumPlayersMaxValue)]
         public int MinimumPlayersAllowedToPlay { get; set; }
 
+        [Display(Name = "Maximum players")]
         [Required]
         [Range(BoardGameMaximumPlayersMinValue, BoardGameMaximumPlayersMaxValue)]
         public int MaximumPlayersAllowedToPlay { get; set; }

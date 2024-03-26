@@ -8,5 +8,6 @@ namespace BoardGameHub.Data.Data.DataModels
 {
     public class User
     {
+
     }
 }
