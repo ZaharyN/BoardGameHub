@@ -1,12 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
+using static BoardGameHub.Data.Constants.DataConstants;
 
 namespace BoardGameHub.Data.Data.DataModels
 {
     public class Genre
     {
+        [Key]
+        public int Id { get; set; }
+
+        [Required]
+        [MaxLength(CategoryNameMaxLength)]
+        public string Name { get; set; } = string.Empty;
     }
 }

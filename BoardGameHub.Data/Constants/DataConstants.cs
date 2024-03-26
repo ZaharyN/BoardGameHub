@@ -8,6 +8,8 @@ namespace BoardGameHub.Data.Constants
 {
     public static class DataConstants
     {
+        //Boardgame constants:
+
         public const int BoardgameNameMaxLength = 200;
         public const int BoardgameNameMinLength = 1;
 
@@ -22,5 +24,10 @@ namespace BoardGameHub.Data.Constants
 
         public const int BoardGameMaximumPlayersMinValue = 2;
         public const int BoardGameMaximumPlayersMaxValue = 20;
+
+        //Category constants:
+
+        public const int CategoryNameMaxLength = 50;
+        public const int CategoryNameMinLength = 3;
     }
 }
