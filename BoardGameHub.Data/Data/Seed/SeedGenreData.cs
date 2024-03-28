@@ -26,6 +26,7 @@ namespace BoardGameHub.Data.Data.Seed
         public Genre CooperativeGenre { get; set; }
         public Genre CombatGenre { get; set; }
         public Genre PartyGenre { get; set; }
+        public Genre StrategyGenre { get; set; }
 
         private void SeedGenres()
         {
@@ -124,6 +125,12 @@ namespace BoardGameHub.Data.Data.Seed
             {
                 Id = 16,
                 Name = "Party"
+            };
+
+            StrategyGenre = new Genre()
+            {
+                Id = 17,
+                Name = "Strategy"
             };
         }
     }

@@ -28,7 +28,8 @@ namespace BoardGameHub.Data.Data.Configuration
                 data.PlacementGenre,
                 data.CooperativeGenre,
                 data.CombatGenre,
-                data.PartyGenre
+                data.PartyGenre,
+                data.StrategyGenre
             });
         }
     }

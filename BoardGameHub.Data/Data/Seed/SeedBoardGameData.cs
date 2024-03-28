@@ -41,7 +41,20 @@ namespace BoardGameHub.Data.Data.Seed
             DuneBoardgame = new Boardgame()
             {
                 Id = 1,
-                Name = "Dune: Imperium"
+                Name = "Dune: Imperium",
+                Genres = new List<BoardgameGenre>
+                {
+                    new BoardgameGenre()
+                    {
+                        BoardgameId = 1,
+                        GenreId = 17
+                    },
+                    new BoardgameGenre()
+                    {
+
+                    }
+                },
+
             };
         }
 
