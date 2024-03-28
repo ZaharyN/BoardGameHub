@@ -14,11 +14,7 @@ namespace BoardGameHub.Data.Data.DataModels
         public string Name { get; set; } = string.Empty;
 
         [Required]
-        [ForeignKey(nameof(Genre))]
-        public int GenreId { get; set; }
-
-        [Required]
-        public Genre Genre { get; set; } = null!;
+        public List<BoardgameGenre> Genres { get; set; } = null!;
 
         [Range(0, 5)]
         public int? Rating { get; set; }

@@ -216,7 +216,6 @@ namespace BoardGameHub.Data.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
-                    GenreId = table.Column<int>(type: "int", nullable: false),
                     Rating = table.Column<int>(type: "int", nullable: true),
                     AveragePlayingTime = table.Column<int>(type: "int", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(1500)", maxLength: 1500, nullable: false),
@@ -232,12 +231,6 @@ namespace BoardGameHub.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Boardgames", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Boardgames_Genres_GenreId",
-                        column: x => x.GenreId,
-                        principalTable: "Genres",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Boardgames_Reservations_ReservationId",
                         column: x => x.ReservationId,
@@ -266,6 +259,30 @@ namespace BoardGameHub.Data.Migrations
                         column: x => x.ReservationId,
                         principalTable: "Reservations",
                         principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "BoardgamesGenres",
+                columns: table => new
+                {
+                    BoardgameId = table.Column<int>(type: "int", nullable: false),
+                    GenreId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BoardgamesGenres", x => new { x.BoardgameId, x.GenreId });
+                    table.ForeignKey(
+                        name: "FK_BoardgamesGenres_Boardgames_BoardgameId",
+                        column: x => x.BoardgameId,
+                        principalTable: "Boardgames",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_BoardgamesGenres_Genres_GenreId",
+                        column: x => x.GenreId,
+                        principalTable: "Genres",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -341,14 +358,14 @@ namespace BoardGameHub.Data.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Boardgames_GenreId",
-                table: "Boardgames",
-                column: "GenreId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Boardgames_ReservationId",
                 table: "Boardgames",
                 column: "ReservationId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_BoardgamesGenres_GenreId",
+                table: "BoardgamesGenres",
+                column: "GenreId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_GameReviews_BoardGameId",
@@ -389,6 +406,9 @@ namespace BoardGameHub.Data.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "BoardgamesGenres");
+
+            migrationBuilder.DropTable(
                 name: "GameReviews");
 
             migrationBuilder.DropTable(
@@ -398,10 +418,10 @@ namespace BoardGameHub.Data.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "Boardgames");
+                name: "Genres");
 
             migrationBuilder.DropTable(
-                name: "Genres");
+                name: "Boardgames");
 
             migrationBuilder.DropTable(
                 name: "Reservations");

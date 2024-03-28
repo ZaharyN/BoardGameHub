@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BoardGameHub.Data.Migrations
 {
     [DbContext(typeof(BoardGameHubDbContext))]
-    [Migration("20240328085939_Initial")]
+    [Migration("20240328120305_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -66,9 +66,6 @@ namespace BoardGameHub.Data.Migrations
                     b.Property<double>("Difficulty")
                         .HasColumnType("float");
 
-                    b.Property<int>("GenreId")
-                        .HasColumnType("int");
-
                     b.Property<bool>("IsReserved")
                         .HasColumnType("bit");
 
@@ -100,11 +97,24 @@ namespace BoardGameHub.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("GenreId");
-
                     b.HasIndex("ReservationId");
 
                     b.ToTable("Boardgames");
+                });
+
+            modelBuilder.Entity("BoardGameHub.Data.Data.DataModels.BoardgameGenre", b =>
+                {
+                    b.Property<int>("BoardgameId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("GenreId")
+                        .HasColumnType("int");
+
+                    b.HasKey("BoardgameId", "GenreId");
+
+                    b.HasIndex("GenreId");
+
+                    b.ToTable("BoardgamesGenres");
                 });
 
             modelBuilder.Entity("BoardGameHub.Data.Data.DataModels.GameReview", b =>
@@ -430,21 +440,32 @@ namespace BoardGameHub.Data.Migrations
 
             modelBuilder.Entity("BoardGameHub.Data.Data.DataModels.Boardgame", b =>
                 {
-                    b.HasOne("BoardGameHub.Data.Data.DataModels.Genre", "Genre")
-                        .WithMany("Boardgames")
-                        .HasForeignKey("GenreId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("BoardGameHub.Data.Data.DataModels.Reservation", "Reservation")
                         .WithMany("BoardgamesReserved")
                         .HasForeignKey("ReservationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Genre");
-
                     b.Navigation("Reservation");
+                });
+
+            modelBuilder.Entity("BoardGameHub.Data.Data.DataModels.BoardgameGenre", b =>
+                {
+                    b.HasOne("BoardGameHub.Data.Data.DataModels.Boardgame", "Boardgame")
+                        .WithMany("Genres")
+                        .HasForeignKey("BoardgameId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BoardGameHub.Data.Data.DataModels.Genre", "Genre")
+                        .WithMany("BoardgamesGenres")
+                        .HasForeignKey("GenreId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Boardgame");
+
+                    b.Navigation("Genre");
                 });
 
             modelBuilder.Entity("BoardGameHub.Data.Data.DataModels.GameReview", b =>
@@ -543,11 +564,13 @@ namespace BoardGameHub.Data.Migrations
             modelBuilder.Entity("BoardGameHub.Data.Data.DataModels.Boardgame", b =>
                 {
                     b.Navigation("GameReviews");
+
+                    b.Navigation("Genres");
                 });
 
             modelBuilder.Entity("BoardGameHub.Data.Data.DataModels.Genre", b =>
                 {
-                    b.Navigation("Boardgames");
+                    b.Navigation("BoardgamesGenres");
                 });
 
             modelBuilder.Entity("BoardGameHub.Data.Data.DataModels.Reservation", b =>
