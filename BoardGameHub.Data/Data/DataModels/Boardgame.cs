@@ -32,6 +32,9 @@ namespace BoardGameHub.Data.Data.DataModels
         public double Difficulty { get; set; }
 
         [Required]
+        public string ImageUrl { get; set; } = string.Empty;
+
+        [Required]
         public DateTime YearPublished { get; set; }
 
         [Required]
@@ -39,6 +42,7 @@ namespace BoardGameHub.Data.Data.DataModels
         [Range(typeof(decimal),
             BoardGamePriceInShopMinValue, 
             BoardGamePriceInShopMaxValue)]
+
         public decimal PriceInShop { get; set; }
 
         [Display(Name = "Minimum players")]
@@ -59,7 +63,7 @@ namespace BoardGameHub.Data.Data.DataModels
         public Reservation? Reservation { get; set; }
 
         [ForeignKey(nameof(Reservation))]
-        public int ReservationId { get; set; }
+        public int? ReservationId { get; set; }
         public bool IsUpcoming { get; set; }
     }
 }

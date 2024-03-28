@@ -4,6 +4,7 @@ using BoardGameHub.Data.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BoardGameHub.Data.Migrations
 {
     [DbContext(typeof(BoardGameHubDbContext))]
-    partial class BoardGameHubDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240328133401_[Seed_Categories]")]
+    partial class Seed_Categories
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -91,7 +93,7 @@ namespace BoardGameHub.Data.Migrations
                     b.Property<int?>("Rating")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ReservationId")
+                    b.Property<int>("ReservationId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("YearPublished")
@@ -166,88 +168,6 @@ namespace BoardGameHub.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Genres");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Abstract"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Adventure"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "Deduction"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Name = "Dexterity"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Name = "Family"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Name = "Exploration"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Name = "Horror"
-                        },
-                        new
-                        {
-                            Id = 8,
-                            Name = "Industry"
-                        },
-                        new
-                        {
-                            Id = 9,
-                            Name = "Territory building"
-                        },
-                        new
-                        {
-                            Id = 10,
-                            Name = "Economy"
-                        },
-                        new
-                        {
-                            Id = 11,
-                            Name = "Puzzle"
-                        },
-                        new
-                        {
-                            Id = 12,
-                            Name = "Deckbuilder"
-                        },
-                        new
-                        {
-                            Id = 13,
-                            Name = "Placement"
-                        },
-                        new
-                        {
-                            Id = 14,
-                            Name = "Cooperative"
-                        },
-                        new
-                        {
-                            Id = 15,
-                            Name = "Combat"
-                        },
-                        new
-                        {
-                            Id = 16,
-                            Name = "Party"
-                        });
                 });
 
             modelBuilder.Entity("BoardGameHub.Data.Data.DataModels.PlaceType", b =>
@@ -548,7 +468,9 @@ namespace BoardGameHub.Data.Migrations
                 {
                     b.HasOne("BoardGameHub.Data.Data.DataModels.Reservation", "Reservation")
                         .WithMany("BoardgamesReserved")
-                        .HasForeignKey("ReservationId");
+                        .HasForeignKey("ReservationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Reservation");
                 });

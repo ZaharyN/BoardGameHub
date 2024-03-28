@@ -1,4 +1,5 @@
-﻿using BoardGameHub.Data.Data.DataModels;
+﻿using BoardGameHub.Data.Data.Configuration;
+using BoardGameHub.Data.Data.DataModels;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -23,26 +24,11 @@ namespace BoardGameHub.Data.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.Entity<BoardgameGenre>()
-                .HasKey(bg => new
-                {
-                    bg.BoardgameId,
-                    bg.GenreId
-                });
+            builder.ApplyConfiguration(new GameReviewConfiguration());
+            builder.ApplyConfiguration(new BoardgameGenreConfiguration());
+            builder.ApplyConfiguration(new GenreConfiguration());
 
 
-            builder.Entity<GameReview>()
-                .HasOne(gr => gr.Boardgame)
-                    .WithMany(b => b.GameReviews)
-                .HasForeignKey(gr => gr.BoardGameId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            builder.Entity<GameReview>()
-                .HasOne(gr => gr.ReviewOwner)
-                    .WithMany(reviewOwner => reviewOwner.GameReviews)
-                .HasForeignKey(gr => gr.ReviewOwnerId)
-                .OnDelete(DeleteBehavior.Restrict);
-                
             base.OnModelCreating(builder);
         }
     }
