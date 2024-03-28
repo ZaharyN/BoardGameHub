@@ -15,17 +15,22 @@ namespace BoardGameHub.Data.Data
         public DbSet<Boardgame> Boardgames { get; set; } = null!;
         public DbSet<GameReview> GameReviews { get; set; } = null!;
         public DbSet<Genre> Genres { get; set; } = null!;
-        public DbSet<Place> Places { get; set; } = null!;
+        public DbSet<BoardgameGenre> BoardgamesGenres { get; set; } = null!;
+        public DbSet<PlaceType> PlaceTypes { get; set; } = null!;
         public DbSet<Reservation> Reservations { get; set; } = null!;
         public DbSet<ApplicationUser> ApplicationUsers { get; set; } = null!;
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            
-        }
+        public DbSet<ReservationPlace> ReservationPlaces { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder.Entity<BoardgameGenre>()
+                .HasKey(bg => new
+                {
+                    bg.BoardgameId,
+                    bg.GenreId
+                });
+
+
             builder.Entity<GameReview>()
                 .HasOne(gr => gr.Boardgame)
                     .WithMany(b => b.GameReviews)
@@ -38,9 +43,7 @@ namespace BoardGameHub.Data.Data
                 .HasForeignKey(gr => gr.ReviewOwnerId)
                 .OnDelete(DeleteBehavior.Restrict);
                 
-
             base.OnModelCreating(builder);
         }
-
     }
 }

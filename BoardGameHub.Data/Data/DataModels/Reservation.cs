@@ -31,7 +31,7 @@ namespace BoardGameHub.Data.Data.DataModels
         public decimal TotalPrice { get; set; }
 
         [Required]
-        public List<Place> PlacesReserved { get; set; } = new List<Place>();
+        public List<ReservationPlace> ReservationPlaces { get; set; } = new List<ReservationPlace>();
 
         public List<Boardgame>? BoardgamesReserved { get; set; } = new List<Boardgame>();
     }

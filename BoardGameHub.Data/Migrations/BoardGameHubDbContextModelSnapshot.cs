@@ -164,7 +164,7 @@ namespace BoardGameHub.Data.Migrations
                     b.ToTable("Genres");
                 });
 
-            modelBuilder.Entity("BoardGameHub.Data.Data.DataModels.Place", b =>
+            modelBuilder.Entity("BoardGameHub.Data.Data.DataModels.PlaceType", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -175,9 +175,6 @@ namespace BoardGameHub.Data.Migrations
                     b.Property<int>("Capacity")
                         .HasColumnType("int");
 
-                    b.Property<bool>("IsReserved")
-                        .HasColumnType("bit");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -185,14 +182,9 @@ namespace BoardGameHub.Data.Migrations
                     b.Property<decimal>("PricePerHour")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int?>("ReservationId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("ReservationId");
-
-                    b.ToTable("Places");
+                    b.ToTable("PlaceTypes");
                 });
 
             modelBuilder.Entity("BoardGameHub.Data.Data.DataModels.Reservation", b =>
@@ -221,6 +213,36 @@ namespace BoardGameHub.Data.Migrations
                     b.HasIndex("ReservationOwnerId");
 
                     b.ToTable("Reservations");
+                });
+
+            modelBuilder.Entity("BoardGameHub.Data.Data.DataModels.ReservationPlace", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<bool>("IsReserved")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PlaceTypeId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ReservationId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PlaceTypeId");
+
+                    b.HasIndex("ReservationId");
+
+                    b.ToTable("ReservationPlaces");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -485,13 +507,6 @@ namespace BoardGameHub.Data.Migrations
                     b.Navigation("ReviewOwner");
                 });
 
-            modelBuilder.Entity("BoardGameHub.Data.Data.DataModels.Place", b =>
-                {
-                    b.HasOne("BoardGameHub.Data.Data.DataModels.Reservation", null)
-                        .WithMany("PlacesReserved")
-                        .HasForeignKey("ReservationId");
-                });
-
             modelBuilder.Entity("BoardGameHub.Data.Data.DataModels.Reservation", b =>
                 {
                     b.HasOne("BoardGameHub.Data.Data.DataModels.ApplicationUser", "ReservationOwner")
@@ -501,6 +516,23 @@ namespace BoardGameHub.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("ReservationOwner");
+                });
+
+            modelBuilder.Entity("BoardGameHub.Data.Data.DataModels.ReservationPlace", b =>
+                {
+                    b.HasOne("BoardGameHub.Data.Data.DataModels.PlaceType", "PlaceType")
+                        .WithMany()
+                        .HasForeignKey("PlaceTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BoardGameHub.Data.Data.DataModels.Reservation", "Reservation")
+                        .WithMany("ReservationPlaces")
+                        .HasForeignKey("ReservationId");
+
+                    b.Navigation("PlaceType");
+
+                    b.Navigation("Reservation");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -575,7 +607,7 @@ namespace BoardGameHub.Data.Migrations
                 {
                     b.Navigation("BoardgamesReserved");
 
-                    b.Navigation("PlacesReserved");
+                    b.Navigation("ReservationPlaces");
                 });
 #pragma warning restore 612, 618
         }

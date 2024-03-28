@@ -62,6 +62,21 @@ namespace BoardGameHub.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "PlaceTypes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Capacity = table.Column<int>(type: "int", nullable: false),
+                    PricePerHour = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PlaceTypes", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -240,22 +255,27 @@ namespace BoardGameHub.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Places",
+                name: "ReservationPlaces",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Capacity = table.Column<int>(type: "int", nullable: false),
-                    PricePerHour = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    PlaceTypeId = table.Column<int>(type: "int", nullable: false),
                     IsReserved = table.Column<bool>(type: "bit", nullable: false),
                     ReservationId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Places", x => x.Id);
+                    table.PrimaryKey("PK_ReservationPlaces", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Places_Reservations_ReservationId",
+                        name: "FK_ReservationPlaces_PlaceTypes_PlaceTypeId",
+                        column: x => x.PlaceTypeId,
+                        principalTable: "PlaceTypes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ReservationPlaces_Reservations_ReservationId",
                         column: x => x.ReservationId,
                         principalTable: "Reservations",
                         principalColumn: "Id");
@@ -378,8 +398,13 @@ namespace BoardGameHub.Data.Migrations
                 column: "ReviewOwnerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Places_ReservationId",
-                table: "Places",
+                name: "IX_ReservationPlaces_PlaceTypeId",
+                table: "ReservationPlaces",
+                column: "PlaceTypeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ReservationPlaces_ReservationId",
+                table: "ReservationPlaces",
                 column: "ReservationId");
 
             migrationBuilder.CreateIndex(
@@ -412,7 +437,7 @@ namespace BoardGameHub.Data.Migrations
                 name: "GameReviews");
 
             migrationBuilder.DropTable(
-                name: "Places");
+                name: "ReservationPlaces");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
@@ -422,6 +447,9 @@ namespace BoardGameHub.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "Boardgames");
+
+            migrationBuilder.DropTable(
+                name: "PlaceTypes");
 
             migrationBuilder.DropTable(
                 name: "Reservations");

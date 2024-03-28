@@ -4,7 +4,7 @@ using static BoardGameHub.Data.Constants.DataConstants;
 
 namespace BoardGameHub.Data.Data.DataModels
 {
-    public class Place
+    public class PlaceType
     {
         public int Id { get; set; }
 
@@ -22,7 +22,5 @@ namespace BoardGameHub.Data.Data.DataModels
             PlacePricePerHourMaxValue)]
         public decimal PricePerHour { get; set; }
 
-        [Required]
-        public bool IsReserved { get; set; }
     }
 }
