@@ -1,4 +1,4 @@
-﻿using BoardGameHub.Models;
+﻿using BoardGameHub.Core.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 

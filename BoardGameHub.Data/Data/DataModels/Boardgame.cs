@@ -55,7 +55,7 @@ namespace BoardGameHub.Data.Data.DataModels
         [Range(BoardGameMaximumPlayersMinValue, BoardGameMaximumPlayersMaxValue)]
         public int MaximumPlayersAllowedToPlay { get; set; }
 
-        public List<GameReview>? Reviews { get; set; } = new List<GameReview>();
+        public List<GameReview>? GameReviews { get; set; } = new List<GameReview>();
 
         [Required]
         public bool IsReserved { get; set; }

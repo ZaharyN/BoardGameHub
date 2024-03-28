@@ -10,11 +10,11 @@ namespace BoardGameHub.Data.Data.DataModels
         public int Id { get; set; }
 
         [Required]
-        public ApplicationUser Owner { get; set; } = null!;
+        public ApplicationUser ReservationOwner { get; set; } = null!;
 
         [Required]
-        [ForeignKey(nameof(Owner))]
-        public int OwnerId { get; set; }
+        [ForeignKey(nameof(ReservationOwner))]
+        public int ReservationOwnerId { get; set; }
 
         [Display(Name = "Date and time")]
         [Required]

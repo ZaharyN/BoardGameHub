@@ -13,6 +13,6 @@ namespace BoardGameHub.Data.Data.DataModels
         public string Name { get; set; } = string.Empty;
 
         [Required]
-        List<Boardgame> Boardgames { get; set; } = new List<Boardgame>();
+        public List<Boardgame> Boardgames { get; set; } = new List<Boardgame>();
     }
 }

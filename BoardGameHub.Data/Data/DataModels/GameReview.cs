@@ -24,10 +24,10 @@ namespace BoardGameHub.Data.Data.DataModels
         public int BoardGameId { get; set; }
 
         [Required]
-        public ApplicationUser User { get; set; } = null!;
+        public ApplicationUser ReviewOwner { get; set; } = null!;
 
         [Required]
-        [ForeignKey(nameof(User))]
-        public int UserId { get; set; }
+        [ForeignKey(nameof(ReviewOwner))]
+        public int ReviewOwnerId { get; set; }
     }
 }
