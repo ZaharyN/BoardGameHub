@@ -10,7 +10,7 @@ namespace BoardGameHub.Data.Data.DataModels
         public int Id { get; set; }
 
         [Required]
-        public User Owner { get; set; } = null!;
+        public ApplicationUser Owner { get; set; } = null!;
 
         [Required]
         [ForeignKey(nameof(Owner))]

@@ -24,7 +24,7 @@ namespace BoardGameHub.Data.Data.DataModels
         public int BoardGameId { get; set; }
 
         [Required]
-        public User User { get; set; } = null!;
+        public ApplicationUser User { get; set; } = null!;
 
         [Required]
         [ForeignKey(nameof(User))]

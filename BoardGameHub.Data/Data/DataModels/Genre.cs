@@ -11,5 +11,8 @@ namespace BoardGameHub.Data.Data.DataModels
         [Required]
         [MaxLength(CategoryNameMaxLength)]
         public string Name { get; set; } = string.Empty;
+
+        [Required]
+        List<Boardgame> Boardgames { get; set; } = new List<Boardgame>();
     }
 }
