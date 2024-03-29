@@ -10,7 +10,7 @@ namespace BoardGameHub.Data.Data.Seed
         }
 
         public Boardgame DuneBoardgame { get; set; } 
-        public Boardgame TerraformMarsBoardgame { get; set; }
+        public Boardgame TerraformingMarsBoardgame { get; set; }
         public Boardgame CatanBoardgame { get; set; }
         public Boardgame PhotosynthesisBoardgame { get; set; }
         public Boardgame TicketToRideBoardgame { get; set; }
