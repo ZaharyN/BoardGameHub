@@ -29,7 +29,9 @@ namespace BoardGameHub.Data.Data.Configuration
                 data.CooperativeGenre,
                 data.CombatGenre,
                 data.PartyGenre,
-                data.StrategyGenre
+                data.StrategyGenre,
+                data.NegotiationGenre,
+                data.TrainsGenre
             });
         }
     }

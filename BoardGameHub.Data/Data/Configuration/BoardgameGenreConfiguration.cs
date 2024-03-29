@@ -2,11 +2,6 @@
 using BoardGameHub.Data.Data.Seed;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BoardGameHub.Data.Data.Configuration
 {
@@ -26,7 +21,22 @@ namespace BoardGameHub.Data.Data.Configuration
             builder.HasData(new BoardgameGenre[]
             {
                 data.DuneGenre1,
-                data.DuneGenre2
+                data.DuneGenre2,
+                data.DuneGenre3,
+
+                data.TerraformMarsGenre1,
+                data.TerraformMarsGenre2,
+                data.TerraformMarsGenre3,
+
+                data.CatanGenre1,
+                data.CatanGenre2,
+
+                data.PhotosynthesisGenre1,
+                data.PhotosynthesisGenre2,
+
+                data.TicketToRideGenre,
+
+
             });
         }
     }

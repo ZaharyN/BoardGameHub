@@ -2,11 +2,6 @@
 using BoardGameHub.Data.Data.Seed;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BoardGameHub.Data.Data.Configuration
 {
@@ -18,7 +13,11 @@ namespace BoardGameHub.Data.Data.Configuration
 
             builder.HasData(new Boardgame[]
             {
-                data.DuneBoardgame
+                data.DuneBoardgame,
+                data.TerraformingMarsBoardgame,
+                data.CatanBoardgame,
+                data.PhotosynthesisBoardgame,
+                data.TicketToRideBoardgame
             });
         }
     }
