@@ -2,9 +2,9 @@
 
 namespace BoardGameHub.Data.Data.Seed
 {
-    internal class SeedBoardGameData
+    internal class SeedBoardgameData
     {
-        public SeedBoardGameData()
+        public SeedBoardgameData()
         {
             SeedBoardgames();
         }

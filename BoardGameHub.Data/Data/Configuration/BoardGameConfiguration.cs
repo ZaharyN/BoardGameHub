@@ -10,15 +10,15 @@ using System.Threading.Tasks;
 
 namespace BoardGameHub.Data.Data.Configuration
 {
-    internal class BoardGameConfiguration : IEntityTypeConfiguration<Boardgame>
+    internal class BoardgameConfiguration : IEntityTypeConfiguration<Boardgame>
     {
         public void Configure(EntityTypeBuilder<Boardgame> builder)
         {
-            SeedBoardGameData seedBoardGameData = new SeedBoardGameData();
+            SeedBoardgameData data = new SeedBoardgameData();
 
             builder.HasData(new Boardgame[]
             {
-                seedBoardGameData.DuneBoardgame
+                data.DuneBoardgame
             });
         }
     }

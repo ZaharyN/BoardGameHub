@@ -14,6 +14,6 @@ namespace BoardGameHub.Data.Data.DataModels
         public string Name { get; set; } = string.Empty;
 
         [Required]
-        public List<BoardgameGenre> BoardgamesGenres { get; set; } = new List<BoardgameGenre>();
+        public List<BoardgameGenre> BoardgamesGenres { get; set; } = null!;
     }
 }

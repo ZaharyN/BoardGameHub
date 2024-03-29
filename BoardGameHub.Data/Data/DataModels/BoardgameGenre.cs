@@ -22,7 +22,5 @@ namespace BoardGameHub.Data.Data.DataModels
 
         [Required]
         public int GenreId { get; set; }
-
-        public List<BoardgameGenre> BoardgamesGenres { get; set; } = null!;
     }
 }
