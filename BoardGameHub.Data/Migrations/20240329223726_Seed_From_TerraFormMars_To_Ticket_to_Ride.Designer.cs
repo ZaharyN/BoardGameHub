@@ -4,6 +4,7 @@ using BoardGameHub.Data.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BoardGameHub.Data.Migrations
 {
     [DbContext(typeof(BoardGameHubDbContext))]
-    partial class BoardGameHubDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240329223726_Seed_From_TerraFormMars_To_Ticket_to_Ride")]
+    partial class Seed_From_TerraFormMars_To_Ticket_to_Ride
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
