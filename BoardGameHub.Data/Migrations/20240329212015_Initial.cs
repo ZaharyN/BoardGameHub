@@ -333,6 +333,45 @@ namespace BoardGameHub.Data.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.InsertData(
+                table: "Boardgames",
+                columns: new[] { "Id", "AveragePlayingTime", "Description", "Difficulty", "ImageUrl", "IsReserved", "IsUpcoming", "MaximumPlayersAllowedToPlay", "MinimumPlayersAllowedToPlay", "Name", "PriceInShop", "Rating", "ReservationId", "YearPublished" },
+                values: new object[] { 1, 90, "Dune: Imperium is a game that uses deck-building to add a hidden-information angle to traditional worker placement. It finds inspiration in elements and characters from the Dune legacy, both the new film from Legendary Pictures and the seminal literary series from Frank Herbert, Brian Herbert, and Kevin J.Anderson.As a leader of one of the Great Houses of the Landsraad, raise your banner and marshal your forces and spies. War is coming, and at the center of the conflict is Arrakis – Dune, the desert planet.", 3.0, "~/assets/games/Dune_Imperium.jpg", false, false, 4, 1, "Dune: Imperium", 90.00m, null, null, 2020 });
+
+            migrationBuilder.InsertData(
+                table: "Genres",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { 1, "Abstract" },
+                    { 2, "Adventure" },
+                    { 3, "Deduction" },
+                    { 4, "Dexterity" },
+                    { 5, "Family" },
+                    { 6, "Exploration" },
+                    { 7, "Horror" },
+                    { 8, "Industry" },
+                    { 9, "Territory building" },
+                    { 10, "Economy" },
+                    { 11, "Puzzle" },
+                    { 12, "Deckbuilder" },
+                    { 13, "Placement" },
+                    { 14, "Cooperative" },
+                    { 15, "Combat" },
+                    { 16, "Party" },
+                    { 17, "Strategy" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "BoardgamesGenres",
+                columns: new[] { "BoardgameId", "GenreId" },
+                values: new object[] { 1, 13 });
+
+            migrationBuilder.InsertData(
+                table: "BoardgamesGenres",
+                columns: new[] { "BoardgameId", "GenreId" },
+                values: new object[] { 1, 17 });
+
             migrationBuilder.CreateIndex(
                 name: "IX_ApplicationUsers_UserId",
                 table: "ApplicationUsers",

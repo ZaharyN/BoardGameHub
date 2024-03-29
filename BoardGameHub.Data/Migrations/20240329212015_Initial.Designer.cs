@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BoardGameHub.Data.Migrations
 {
     [DbContext(typeof(BoardGameHubDbContext))]
-    [Migration("20240329135537_SeedGenres")]
-    partial class SeedGenres
+    [Migration("20240329212015_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -104,6 +104,23 @@ namespace BoardGameHub.Data.Migrations
                     b.HasIndex("ReservationId");
 
                     b.ToTable("Boardgames");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AveragePlayingTime = 90,
+                            Description = "Dune: Imperium is a game that uses deck-building to add a hidden-information angle to traditional worker placement. It finds inspiration in elements and characters from the Dune legacy, both the new film from Legendary Pictures and the seminal literary series from Frank Herbert, Brian Herbert, and Kevin J.Anderson.As a leader of one of the Great Houses of the Landsraad, raise your banner and marshal your forces and spies. War is coming, and at the center of the conflict is Arrakis – Dune, the desert planet.",
+                            Difficulty = 3.0,
+                            ImageUrl = "~/assets/games/Dune_Imperium.jpg",
+                            IsReserved = false,
+                            IsUpcoming = false,
+                            MaximumPlayersAllowedToPlay = 4,
+                            MinimumPlayersAllowedToPlay = 1,
+                            Name = "Dune: Imperium",
+                            PriceInShop = 90.00m,
+                            YearPublished = 2020
+                        });
                 });
 
             modelBuilder.Entity("BoardGameHub.Data.Data.DataModels.BoardgameGenre", b =>
@@ -119,6 +136,18 @@ namespace BoardGameHub.Data.Migrations
                     b.HasIndex("GenreId");
 
                     b.ToTable("BoardgamesGenres");
+
+                    b.HasData(
+                        new
+                        {
+                            BoardgameId = 1,
+                            GenreId = 17
+                        },
+                        new
+                        {
+                            BoardgameId = 1,
+                            GenreId = 13
+                        });
                 });
 
             modelBuilder.Entity("BoardGameHub.Data.Data.DataModels.GameReview", b =>
@@ -563,7 +592,7 @@ namespace BoardGameHub.Data.Migrations
             modelBuilder.Entity("BoardGameHub.Data.Data.DataModels.BoardgameGenre", b =>
                 {
                     b.HasOne("BoardGameHub.Data.Data.DataModels.Boardgame", "Boardgame")
-                        .WithMany("Genre")
+                        .WithMany("BoardgamesGenres")
                         .HasForeignKey("BoardgameId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -684,9 +713,9 @@ namespace BoardGameHub.Data.Migrations
 
             modelBuilder.Entity("BoardGameHub.Data.Data.DataModels.Boardgame", b =>
                 {
-                    b.Navigation("GameReviews");
+                    b.Navigation("BoardgamesGenres");
 
-                    b.Navigation("Genre");
+                    b.Navigation("GameReviews");
                 });
 
             modelBuilder.Entity("BoardGameHub.Data.Data.DataModels.Genre", b =>

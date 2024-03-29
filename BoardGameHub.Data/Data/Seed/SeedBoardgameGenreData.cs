@@ -20,10 +20,16 @@ namespace BoardGameHub.Data.Data.Seed
 
         void SeedBoardgameGenres()
         {
-            DuneGenre1 = new BoardgameGenre
+            DuneGenre1 = new BoardgameGenre()
             {
                 BoardgameId = 1,
                 GenreId = 17
+            };
+
+            DuneGenre2 = new BoardgameGenre()
+            {
+                BoardgameId = 1,
+                GenreId = 13
             };
         }
     }

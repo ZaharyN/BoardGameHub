@@ -25,7 +25,8 @@ namespace BoardGameHub.Data.Data.Configuration
 
             builder.HasData(new BoardgameGenre[]
             {
-                data.DuneGenre1
+                data.DuneGenre1,
+                data.DuneGenre2
             });
         }
     }
