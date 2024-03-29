@@ -14,7 +14,7 @@ namespace BoardGameHub.Data.Data.DataModels
         public string Name { get; set; } = string.Empty;
 
         [Required]
-        public List<BoardgameGenre> Genres { get; set; } = null!;
+        public List<BoardgameGenre> Genre { get; set; } = null!;
 
         [Range(0, 5)]
         public int? Rating { get; set; }
@@ -35,14 +35,13 @@ namespace BoardGameHub.Data.Data.DataModels
         public string ImageUrl { get; set; } = string.Empty;
 
         [Required]
-        public DateTime YearPublished { get; set; }
+        public string YearPublished { get; set; } = string.Empty;
 
         [Required]
         [Column(TypeName = "decimal(18,2)")]
         [Range(typeof(decimal),
             BoardGamePriceInShopMinValue, 
             BoardGamePriceInShopMaxValue)]
-
         public decimal PriceInShop { get; set; }
 
         [Display(Name = "Minimum players")]
