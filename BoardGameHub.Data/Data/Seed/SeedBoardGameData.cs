@@ -37,27 +37,8 @@ namespace BoardGameHub.Data.Data.Seed
             {
                 Id = 1,
                 Name = "Dune: Imperium",
-                Genre = new List<BoardgameGenre>
-                {
-                    new BoardgameGenre()
-                    {
-                        BoardgameId = DuneBoardgame.Id,
-                        GenreId = 13
-                    },
-                    new BoardgameGenre()
-                    {
-                        BoardgameId = DuneBoardgame.Id,
-                        GenreId = 12
-                    },
-                    new BoardgameGenre()
-                    {
-                        BoardgameId = DuneBoardgame.Id,
-                        GenreId = 17
-                    }
-                },
                 AveragePlayingTime = 90,
                 Description = "Dune: Imperium is a game that uses deck-building to add a hidden-information angle to traditional worker placement. It finds inspiration in elements and characters from the Dune legacy, both the new film from Legendary Pictures and the seminal literary series from Frank Herbert, Brian Herbert, and Kevin J.Anderson.As a leader of one of the Great Houses of the   Landsraad, raise your banner and marshal your forces and spies. War is coming, and at the center of the conflict is Arrakis – Dune, the desert planet.",
-
                 Difficulty = 3,
                 ImageUrl = "~/assets/games/Dune_Imperium.jpg",
                 YearPublished = 2020,

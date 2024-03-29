@@ -13,8 +13,7 @@ namespace BoardGameHub.Data.Data.DataModels
         [MaxLength(BoardgameNameMaxLength)]
         public string Name { get; set; } = string.Empty;
 
-        [Required]
-        public List<BoardgameGenre> Genre { get; set; } = null!;
+        public List<BoardgameGenre> BoardgamesGenres { get; set; } = null!;
 
         [Range(0, 5)]
         public int? Rating { get; set; }

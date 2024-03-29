@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BoardGameHub.Data.Migrations
 {
     [DbContext(typeof(BoardGameHubDbContext))]
-    [Migration("20240328134820_SeedCategories")]
-    partial class SeedCategories
+    [Migration("20240329142305_Seed_DuneBoardgame")]
+    partial class Seed_DuneBoardgame
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -96,14 +96,31 @@ namespace BoardGameHub.Data.Migrations
                     b.Property<int?>("ReservationId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("YearPublished")
-                        .HasColumnType("datetime2");
+                    b.Property<int>("YearPublished")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ReservationId");
 
                     b.ToTable("Boardgames");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AveragePlayingTime = 90,
+                            Description = "Dune: Imperium is a game that uses deck-building to add a hidden-information angle to traditional worker placement. It finds inspiration in elements and characters from the Dune legacy, both the new film from Legendary Pictures and the seminal literary series from Frank Herbert, Brian Herbert, and Kevin J.Anderson.As a leader of one of the Great Houses of the   Landsraad, raise your banner and marshal your forces and spies. War is coming, and at the center of the conflict is Arrakis – Dune, the desert planet.",
+                            Difficulty = 3.0,
+                            ImageUrl = "~/assets/games/Dune_Imperium.jpg",
+                            IsReserved = false,
+                            IsUpcoming = false,
+                            MaximumPlayersAllowedToPlay = 4,
+                            MinimumPlayersAllowedToPlay = 1,
+                            Name = "Dune: Imperium",
+                            PriceInShop = 90.00m,
+                            YearPublished = 2020
+                        });
                 });
 
             modelBuilder.Entity("BoardGameHub.Data.Data.DataModels.BoardgameGenre", b =>
@@ -168,6 +185,93 @@ namespace BoardGameHub.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Genres");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Abstract"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Adventure"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Deduction"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Dexterity"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "Family"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Name = "Exploration"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Name = "Horror"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Name = "Industry"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Name = "Territory building"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Name = "Economy"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Name = "Puzzle"
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Name = "Deckbuilder"
+                        },
+                        new
+                        {
+                            Id = 13,
+                            Name = "Placement"
+                        },
+                        new
+                        {
+                            Id = 14,
+                            Name = "Cooperative"
+                        },
+                        new
+                        {
+                            Id = 15,
+                            Name = "Combat"
+                        },
+                        new
+                        {
+                            Id = 16,
+                            Name = "Party"
+                        },
+                        new
+                        {
+                            Id = 17,
+                            Name = "Strategy"
+                        });
                 });
 
             modelBuilder.Entity("BoardGameHub.Data.Data.DataModels.PlaceType", b =>
@@ -476,7 +580,7 @@ namespace BoardGameHub.Data.Migrations
             modelBuilder.Entity("BoardGameHub.Data.Data.DataModels.BoardgameGenre", b =>
                 {
                     b.HasOne("BoardGameHub.Data.Data.DataModels.Boardgame", "Boardgame")
-                        .WithMany("Genres")
+                        .WithMany("Genre")
                         .HasForeignKey("BoardgameId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -599,7 +703,7 @@ namespace BoardGameHub.Data.Migrations
                 {
                     b.Navigation("GameReviews");
 
-                    b.Navigation("Genres");
+                    b.Navigation("Genre");
                 });
 
             modelBuilder.Entity("BoardGameHub.Data.Data.DataModels.Genre", b =>

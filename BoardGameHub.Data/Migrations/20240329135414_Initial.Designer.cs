@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BoardGameHub.Data.Migrations
 {
     [DbContext(typeof(BoardGameHubDbContext))]
-    [Migration("20240328150023_Add_strategy_genre")]
-    partial class Add_strategy_genre
+    [Migration("20240329135414_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -96,8 +96,8 @@ namespace BoardGameHub.Data.Migrations
                     b.Property<int?>("ReservationId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("YearPublished")
-                        .HasColumnType("datetime2");
+                    b.Property<int>("YearPublished")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -168,93 +168,6 @@ namespace BoardGameHub.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Genres");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Abstract"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Adventure"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "Deduction"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Name = "Dexterity"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Name = "Family"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Name = "Exploration"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Name = "Horror"
-                        },
-                        new
-                        {
-                            Id = 8,
-                            Name = "Industry"
-                        },
-                        new
-                        {
-                            Id = 9,
-                            Name = "Territory building"
-                        },
-                        new
-                        {
-                            Id = 10,
-                            Name = "Economy"
-                        },
-                        new
-                        {
-                            Id = 11,
-                            Name = "Puzzle"
-                        },
-                        new
-                        {
-                            Id = 12,
-                            Name = "Deckbuilder"
-                        },
-                        new
-                        {
-                            Id = 13,
-                            Name = "Placement"
-                        },
-                        new
-                        {
-                            Id = 14,
-                            Name = "Cooperative"
-                        },
-                        new
-                        {
-                            Id = 15,
-                            Name = "Combat"
-                        },
-                        new
-                        {
-                            Id = 16,
-                            Name = "Party"
-                        },
-                        new
-                        {
-                            Id = 17,
-                            Name = "Strategy"
-                        });
                 });
 
             modelBuilder.Entity("BoardGameHub.Data.Data.DataModels.PlaceType", b =>
@@ -563,7 +476,7 @@ namespace BoardGameHub.Data.Migrations
             modelBuilder.Entity("BoardGameHub.Data.Data.DataModels.BoardgameGenre", b =>
                 {
                     b.HasOne("BoardGameHub.Data.Data.DataModels.Boardgame", "Boardgame")
-                        .WithMany("Genres")
+                        .WithMany("Genre")
                         .HasForeignKey("BoardgameId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -686,7 +599,7 @@ namespace BoardGameHub.Data.Migrations
                 {
                     b.Navigation("GameReviews");
 
-                    b.Navigation("Genres");
+                    b.Navigation("Genre");
                 });
 
             modelBuilder.Entity("BoardGameHub.Data.Data.DataModels.Genre", b =>

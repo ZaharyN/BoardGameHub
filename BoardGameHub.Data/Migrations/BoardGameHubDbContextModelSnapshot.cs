@@ -42,7 +42,7 @@ namespace BoardGameHub.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("ApplicationUsers", (string)null);
+                    b.ToTable("ApplicationUsers");
                 });
 
             modelBuilder.Entity("BoardGameHub.Data.Data.DataModels.Boardgame", b =>
@@ -94,14 +94,31 @@ namespace BoardGameHub.Data.Migrations
                     b.Property<int?>("ReservationId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("YearPublished")
-                        .HasColumnType("datetime2");
+                    b.Property<int>("YearPublished")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ReservationId");
 
-                    b.ToTable("Boardgames", (string)null);
+                    b.ToTable("Boardgames");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AveragePlayingTime = 90,
+                            Description = "Dune: Imperium is a game that uses deck-building to add a hidden-information angle to traditional worker placement. It finds inspiration in elements and characters from the Dune legacy, both the new film from Legendary Pictures and the seminal literary series from Frank Herbert, Brian Herbert, and Kevin J.Anderson.As a leader of one of the Great Houses of the   Landsraad, raise your banner and marshal your forces and spies. War is coming, and at the center of the conflict is Arrakis – Dune, the desert planet.",
+                            Difficulty = 3.0,
+                            ImageUrl = "~/assets/games/Dune_Imperium.jpg",
+                            IsReserved = false,
+                            IsUpcoming = false,
+                            MaximumPlayersAllowedToPlay = 4,
+                            MinimumPlayersAllowedToPlay = 1,
+                            Name = "Dune: Imperium",
+                            PriceInShop = 90.00m,
+                            YearPublished = 2020
+                        });
                 });
 
             modelBuilder.Entity("BoardGameHub.Data.Data.DataModels.BoardgameGenre", b =>
@@ -116,7 +133,7 @@ namespace BoardGameHub.Data.Migrations
 
                     b.HasIndex("GenreId");
 
-                    b.ToTable("BoardgamesGenres", (string)null);
+                    b.ToTable("BoardgamesGenres");
                 });
 
             modelBuilder.Entity("BoardGameHub.Data.Data.DataModels.GameReview", b =>
@@ -147,7 +164,7 @@ namespace BoardGameHub.Data.Migrations
 
                     b.HasIndex("ReviewOwnerId");
 
-                    b.ToTable("GameReviews", (string)null);
+                    b.ToTable("GameReviews");
                 });
 
             modelBuilder.Entity("BoardGameHub.Data.Data.DataModels.Genre", b =>
@@ -165,7 +182,7 @@ namespace BoardGameHub.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Genres", (string)null);
+                    b.ToTable("Genres");
 
                     b.HasData(
                         new
@@ -275,7 +292,7 @@ namespace BoardGameHub.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("PlaceTypes", (string)null);
+                    b.ToTable("PlaceTypes");
                 });
 
             modelBuilder.Entity("BoardGameHub.Data.Data.DataModels.Reservation", b =>
@@ -303,7 +320,7 @@ namespace BoardGameHub.Data.Migrations
 
                     b.HasIndex("ReservationOwnerId");
 
-                    b.ToTable("Reservations", (string)null);
+                    b.ToTable("Reservations");
                 });
 
             modelBuilder.Entity("BoardGameHub.Data.Data.DataModels.ReservationPlace", b =>
@@ -333,7 +350,7 @@ namespace BoardGameHub.Data.Migrations
 
                     b.HasIndex("ReservationId");
 
-                    b.ToTable("ReservationPlaces", (string)null);
+                    b.ToTable("ReservationPlaces");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -561,7 +578,7 @@ namespace BoardGameHub.Data.Migrations
             modelBuilder.Entity("BoardGameHub.Data.Data.DataModels.BoardgameGenre", b =>
                 {
                     b.HasOne("BoardGameHub.Data.Data.DataModels.Boardgame", "Boardgame")
-                        .WithMany("Genres")
+                        .WithMany("Genre")
                         .HasForeignKey("BoardgameId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -684,7 +701,7 @@ namespace BoardGameHub.Data.Migrations
                 {
                     b.Navigation("GameReviews");
 
-                    b.Navigation("Genres");
+                    b.Navigation("Genre");
                 });
 
             modelBuilder.Entity("BoardGameHub.Data.Data.DataModels.Genre", b =>

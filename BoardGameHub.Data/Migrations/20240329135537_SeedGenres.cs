@@ -4,7 +4,7 @@
 
 namespace BoardGameHub.Data.Migrations
 {
-    public partial class Add_Genres_Hope_so : Migration
+    public partial class SeedGenres : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -28,7 +28,8 @@ namespace BoardGameHub.Data.Migrations
                     { 13, "Placement" },
                     { 14, "Cooperative" },
                     { 15, "Combat" },
-                    { 16, "Party" }
+                    { 16, "Party" },
+                    { 17, "Strategy" }
                 });
         }
 
@@ -113,6 +114,11 @@ namespace BoardGameHub.Data.Migrations
                 table: "Genres",
                 keyColumn: "Id",
                 keyValue: 16);
+
+            migrationBuilder.DeleteData(
+                table: "Genres",
+                keyColumn: "Id",
+                keyValue: 17);
         }
     }
 }

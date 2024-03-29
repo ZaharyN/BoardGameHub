@@ -235,12 +235,13 @@ namespace BoardGameHub.Data.Migrations
                     AveragePlayingTime = table.Column<int>(type: "int", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(1500)", maxLength: 1500, nullable: false),
                     Difficulty = table.Column<double>(type: "float", nullable: false),
-                    YearPublished = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    YearPublished = table.Column<int>(type: "int", nullable: false),
                     PriceInShop = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     MinimumPlayersAllowedToPlay = table.Column<int>(type: "int", nullable: false),
                     MaximumPlayersAllowedToPlay = table.Column<int>(type: "int", nullable: false),
                     IsReserved = table.Column<bool>(type: "bit", nullable: false),
-                    ReservationId = table.Column<int>(type: "int", nullable: false),
+                    ReservationId = table.Column<int>(type: "int", nullable: true),
                     IsUpcoming = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
@@ -250,8 +251,7 @@ namespace BoardGameHub.Data.Migrations
                         name: "FK_Boardgames_Reservations_ReservationId",
                         column: x => x.ReservationId,
                         principalTable: "Reservations",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(

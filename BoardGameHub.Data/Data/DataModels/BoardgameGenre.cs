@@ -11,10 +11,10 @@ namespace BoardGameHub.Data.Data.DataModels
     
     public class BoardgameGenre
     {
-        [ForeignKey(nameof(BoardgameId))]
         public Boardgame Boardgame { get; set; } = null!;
 
         [Required]
+        [ForeignKey(nameof(Boardgame))]
         public int BoardgameId { get; set; }
 
         [ForeignKey(nameof(GenreId))]
@@ -22,5 +22,7 @@ namespace BoardGameHub.Data.Data.DataModels
 
         [Required]
         public int GenreId { get; set; }
+
+        public List<BoardgameGenre> BoardgamesGenres { get; set; } = null!;
     }
 }
