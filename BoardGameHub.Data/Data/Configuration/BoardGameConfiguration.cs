@@ -14,10 +14,24 @@ namespace BoardGameHub.Data.Data.Configuration
             builder.HasData(new Boardgame[]
             {
                 data.DuneBoardgame,
+
                 data.TerraformingMarsBoardgame,
+
                 data.CatanBoardgame,
+
                 data.PhotosynthesisBoardgame,
-                data.TicketToRideBoardgame
+
+                data.TicketToRideBoardgame,
+
+                data.GloomhavenBoardgame,
+
+                data.MysteriumBoardgame,
+
+                data.EverdellBoardgame,
+
+                data.MonopolyBulgariaBoardgame,
+
+                data.PandemicBoardgame
             });
         }
     }

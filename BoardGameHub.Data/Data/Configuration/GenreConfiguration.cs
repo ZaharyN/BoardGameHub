@@ -31,7 +31,9 @@ namespace BoardGameHub.Data.Data.Configuration
                 data.PartyGenre,
                 data.StrategyGenre,
                 data.NegotiationGenre,
-                data.TrainsGenre
+                data.TrainsGenre,
+                data.AnimalsGenre,
+                data.CardGameGenre
             });
         }
     }

@@ -36,7 +36,24 @@ namespace BoardGameHub.Data.Data.Configuration
 
                 data.TicketToRideGenre,
 
+                data.GloomhavenGenre1,
+                data.GloomhavenGenre2,
+                data.GloomhavenGenre3,
+                data.GloomhavenGenre4,
 
+                data.MysteriumGenre1,
+                data.MysteriumGenre2,
+                data.MysteriumGenre3,
+
+                data.EverdellGenre1,
+                data.EverdellGenre2,
+                data.EverdellGenre3,
+
+                data.MonopolyBulgariaGenre1,
+                data.MonopolyBulgariaGenre2,
+
+                data.PandemicGenre1,
+                data.PandemicGenre2
             });
         }
     }

@@ -4,6 +4,7 @@ using BoardGameHub.Data.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BoardGameHub.Data.Migrations
 {
     [DbContext(typeof(BoardGameHubDbContext))]
-    partial class BoardGameHubDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240329233045_Add_New_Genres")]
+    partial class Add_New_Genres
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -178,81 +180,6 @@ namespace BoardGameHub.Data.Migrations
                             Name = "Ticket to Ride",
                             PriceInShop = 70.00m,
                             YearPublished = 2004
-                        },
-                        new
-                        {
-                            Id = 6,
-                            AveragePlayingTime = 120,
-                            Description = "Gloomhaven is a game of Euro-inspired tactical combat in a persistent world of shifting motives. Players will take on the role of a wandering adventurer with their own special set of skills and their own reasons for traveling to this dark corner of the world. Players must work together out of necessity to clear out menacing dungeons and forgotten ruins. In the process, they will enhance their abilities with experience and loot, discover new locations to explore and plunder, and expand an ever-branching story fueled by the decisions they make. This is a game with a persistent and changing world that is ideally played over many game sessions. After a scenario, players will make decisions on what to do, which will determine how the story continues, kind of like a “Choose Your Own Adventure” book. Playing through a scenario is a cooperative affair where players will fight against automated monsters using an innovative card system to determine the order of play and what a player does on their turn.",
-                            Difficulty = 4.0,
-                            ImageUrl = "~/assets/games/Gloomhaven_card.jpg",
-                            IsReserved = false,
-                            IsUpcoming = true,
-                            MaximumPlayersAllowedToPlay = 4,
-                            MinimumPlayersAllowedToPlay = 1,
-                            Name = "Gloomhaven",
-                            PriceInShop = 250.00m,
-                            YearPublished = 2017
-                        },
-                        new
-                        {
-                            Id = 7,
-                            AveragePlayingTime = 45,
-                            Description = "In the 1920s, Mr. MacDowell, a gifted astrologer, immediately detected a supernatural being upon entering his new house in Scotland. He gathered eminent mediums of his time for an extraordinary séance, and they have seven hours to make contact with the ghost and investigate any clues that it can provide to unlock an old mystery.Unable to talk, the amnesiac ghost communicates with the mediums through visions, which are represented in the game by illustrated cards. The mediums must decipher the images to help the ghost remember how he was murdered: Who did the crime? Where did it take place? Which weapon caused the death? The more the mediums cooperate and guess well, the easier it is to catch the right culprit.",
-                            Difficulty = 2.0,
-                            ImageUrl = "~/assets/games/Mysterium_card.jpg",
-                            IsReserved = false,
-                            IsUpcoming = false,
-                            MaximumPlayersAllowedToPlay = 7,
-                            MinimumPlayersAllowedToPlay = 2,
-                            Name = "Mysterium",
-                            PriceInShop = 70.00m,
-                            YearPublished = 2015
-                        },
-                        new
-                        {
-                            Id = 8,
-                            AveragePlayingTime = 60,
-                            Description = "Within the charming valley of Everdell, beneath the boughs of towering trees, among meandering streams and mossy hollows, a civilization of forest critters is thriving and expanding. From Everfrost to Bellsong, many a year have come and gone, but the time has come for new territories to be settled and new cities established. You will be the leader of a group of critters intent on just such a task. There are buildings to construct, lively characters to meet, events to host—you have a busy year ahead of yourself. Will the sun shine brightest on your city before the winter moon rises?",
-                            Difficulty = 2.7999999999999998,
-                            ImageUrl = "~/assets/games/Everdell_card.jpg",
-                            IsReserved = false,
-                            IsUpcoming = false,
-                            MaximumPlayersAllowedToPlay = 4,
-                            MinimumPlayersAllowedToPlay = 1,
-                            Name = "Everdell",
-                            PriceInShop = 110m,
-                            YearPublished = 2018
-                        },
-                        new
-                        {
-                            Id = 9,
-                            AveragePlayingTime = 90,
-                            Description = "Know your motherland, to love it. But what if you could own a small part of Bulgaria for yourself? This is possible with the special edition of Monopoly - Bulgaria is wonderful. Buy one of the most majestic sights in our country - the unique Stobski pyramids, the National Palace of Culture, the temple-monument \"St. Alexander Nevsky\". Take a walk along some of our most beautiful hiking trails - go inside Devetashka Cave, cross the Devil's Bridge and connect with nature through the Paneurhythmy around the Seven Rila Lakes. The rules are well known to everyone - build hotels and houses to develop your properties, try your luck with the BANK or CHANCE cards. Roll the dice and discover the wonders of Bulgaria as you fight for victory.",
-                            Difficulty = 1.5,
-                            ImageUrl = "~/assets/games/Monopoly_Bulgaria_card.jpg",
-                            IsReserved = false,
-                            IsUpcoming = false,
-                            MaximumPlayersAllowedToPlay = 6,
-                            MinimumPlayersAllowedToPlay = 2,
-                            Name = "Monopoly-Bulgaria",
-                            PriceInShop = 55.00m,
-                            YearPublished = 2021
-                        },
-                        new
-                        {
-                            Id = 10,
-                            AveragePlayingTime = 45,
-                            Description = "In Pandemic, several virulent diseases have broken out simultaneously all over the world! The players are disease-fighting specialists whose mission is to treat disease hotspots while researching cures for each of four plagues before they get out of hand. The game board depicts several major population centers on Earth. On each turn, a player can use up to four actions to travel between cities, treat infected populaces, discover a cure, or build a research station. A deck of cards provides the players with these abilities, but sprinkled throughout this deck are Epidemic! cards that accelerate and intensify the diseases' activity. A second, separate deck of cards controls the \"normal\" spread of the infections.",
-                            Difficulty = 2.5,
-                            ImageUrl = "~/assets/games/Pandemic_card.jpg",
-                            IsReserved = false,
-                            IsUpcoming = false,
-                            MaximumPlayersAllowedToPlay = 4,
-                            MinimumPlayersAllowedToPlay = 2,
-                            Name = "Pandemic",
-                            PriceInShop = 45.00m,
-                            YearPublished = 2008
                         });
                 });
 
@@ -325,76 +252,6 @@ namespace BoardGameHub.Data.Migrations
                         {
                             BoardgameId = 5,
                             GenreId = 19
-                        },
-                        new
-                        {
-                            BoardgameId = 6,
-                            GenreId = 2
-                        },
-                        new
-                        {
-                            BoardgameId = 6,
-                            GenreId = 6
-                        },
-                        new
-                        {
-                            BoardgameId = 6,
-                            GenreId = 15
-                        },
-                        new
-                        {
-                            BoardgameId = 6,
-                            GenreId = 14
-                        },
-                        new
-                        {
-                            BoardgameId = 7,
-                            GenreId = 3
-                        },
-                        new
-                        {
-                            BoardgameId = 7,
-                            GenreId = 7
-                        },
-                        new
-                        {
-                            BoardgameId = 7,
-                            GenreId = 16
-                        },
-                        new
-                        {
-                            BoardgameId = 8,
-                            GenreId = 20
-                        },
-                        new
-                        {
-                            BoardgameId = 8,
-                            GenreId = 21
-                        },
-                        new
-                        {
-                            BoardgameId = 8,
-                            GenreId = 9
-                        },
-                        new
-                        {
-                            BoardgameId = 9,
-                            GenreId = 18
-                        },
-                        new
-                        {
-                            BoardgameId = 9,
-                            GenreId = 10
-                        },
-                        new
-                        {
-                            BoardgameId = 10,
-                            GenreId = 13
-                        },
-                        new
-                        {
-                            BoardgameId = 10,
-                            GenreId = 14
                         });
                 });
 
