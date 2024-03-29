@@ -42,7 +42,7 @@ namespace BoardGameHub.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("ApplicationUsers");
+                    b.ToTable("ApplicationUsers", (string)null);
                 });
 
             modelBuilder.Entity("BoardGameHub.Data.Data.DataModels.Boardgame", b =>
@@ -101,7 +101,7 @@ namespace BoardGameHub.Data.Migrations
 
                     b.HasIndex("ReservationId");
 
-                    b.ToTable("Boardgames");
+                    b.ToTable("Boardgames", (string)null);
                 });
 
             modelBuilder.Entity("BoardGameHub.Data.Data.DataModels.BoardgameGenre", b =>
@@ -116,7 +116,7 @@ namespace BoardGameHub.Data.Migrations
 
                     b.HasIndex("GenreId");
 
-                    b.ToTable("BoardgamesGenres");
+                    b.ToTable("BoardgamesGenres", (string)null);
                 });
 
             modelBuilder.Entity("BoardGameHub.Data.Data.DataModels.GameReview", b =>
@@ -147,7 +147,7 @@ namespace BoardGameHub.Data.Migrations
 
                     b.HasIndex("ReviewOwnerId");
 
-                    b.ToTable("GameReviews");
+                    b.ToTable("GameReviews", (string)null);
                 });
 
             modelBuilder.Entity("BoardGameHub.Data.Data.DataModels.Genre", b =>
@@ -165,7 +165,7 @@ namespace BoardGameHub.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Genres");
+                    b.ToTable("Genres", (string)null);
 
                     b.HasData(
                         new
@@ -275,7 +275,7 @@ namespace BoardGameHub.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("PlaceTypes");
+                    b.ToTable("PlaceTypes", (string)null);
                 });
 
             modelBuilder.Entity("BoardGameHub.Data.Data.DataModels.Reservation", b =>
@@ -303,7 +303,7 @@ namespace BoardGameHub.Data.Migrations
 
                     b.HasIndex("ReservationOwnerId");
 
-                    b.ToTable("Reservations");
+                    b.ToTable("Reservations", (string)null);
                 });
 
             modelBuilder.Entity("BoardGameHub.Data.Data.DataModels.ReservationPlace", b =>
@@ -333,7 +333,7 @@ namespace BoardGameHub.Data.Migrations
 
                     b.HasIndex("ReservationId");
 
-                    b.ToTable("ReservationPlaces");
+                    b.ToTable("ReservationPlaces", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

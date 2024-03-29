@@ -60,7 +60,7 @@ namespace BoardGameHub.Data.Data.Seed
 
                 Difficulty = 3,
                 ImageUrl = "~/assets/games/Dune_Imperium.jpg",
-                YearPublished = "2020",
+                YearPublished = 2020,
                 PriceInShop = 90.00M,
                 MinimumPlayersAllowedToPlay = 1,
                 MaximumPlayersAllowedToPlay = 4,

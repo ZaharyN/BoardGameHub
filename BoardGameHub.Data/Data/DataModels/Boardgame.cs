@@ -35,7 +35,8 @@ namespace BoardGameHub.Data.Data.DataModels
         public string ImageUrl { get; set; } = string.Empty;
 
         [Required]
-        public string YearPublished { get; set; } = string.Empty;
+        [Range(BoardGameYearMinValue,BoardGameYearMaxValue)]
+        public int YearPublished { get; set; }
 
         [Required]
         [Column(TypeName = "decimal(18,2)")]

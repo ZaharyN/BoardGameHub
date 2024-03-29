@@ -26,8 +26,8 @@ namespace BoardGameHub.Data.Data
         {
             builder.ApplyConfiguration(new GameReviewConfiguration());
             builder.ApplyConfiguration(new BoardgameGenreConfiguration());
-            builder.ApplyConfiguration(new GenreConfiguration());
-
+            //builder.ApplyConfiguration(new GenreConfiguration());
+            //builder.ApplyConfiguration(new BoardGameConfiguration());
 
             base.OnModelCreating(builder);
         }

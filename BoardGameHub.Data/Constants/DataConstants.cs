@@ -19,6 +19,9 @@ namespace BoardGameHub.Data.Constants
         public const string BoardGamePriceInShopMaxValue = "1000";
         public const string BoardGamePriceInShopMinValue = "0";
 
+        public const int BoardGameYearMinValue = 1980;
+        public const int BoardGameYearMaxValue = 2024;
+
         public const int BoardGameMinimumPlayersMinValue = 2;
         public const int BoardGameMinimumPlayersMaxValue = 4;
 
