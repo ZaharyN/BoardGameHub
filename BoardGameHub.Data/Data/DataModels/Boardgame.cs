@@ -19,6 +19,9 @@ namespace BoardGameHub.Data.Data.DataModels
         public int? Rating { get; set; }
 
         [Required]
+        public int AppropriateAge { get; set; }
+
+        [Required]
         [Display(Name = "Average playing time")]
         public int AveragePlayingTime { get; set; }
 
