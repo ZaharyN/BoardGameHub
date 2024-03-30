@@ -1,4 +1,5 @@
-﻿using BoardGameHub.Data.Data;
+﻿using BoardGameHub.Core.Contracts;
+using BoardGameHub.Data.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Runtime.CompilerServices;
@@ -9,6 +10,7 @@ namespace BoardGameHub.Extensions
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
+            services.AddScoped<IBoardgameService, IBoardgameService>();
             return services;
         }
 
