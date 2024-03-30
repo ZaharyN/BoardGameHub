@@ -53,7 +53,46 @@ namespace BoardGameHub.Data.Data.Configuration
                 data.MonopolyBulgariaGenre2,
 
                 data.PandemicGenre1,
-                data.PandemicGenre2
+                data.PandemicGenre2,
+
+                data.BrassBirminghamGenre1,
+                data.BrassBirminghamGenre2,
+                data.BrassBirminghamGenre3,
+                
+                data.ArkNovaGenre1,
+                data.ArkNovaGenre2,
+                data.ArkNovaGenre3,
+                
+                data.ScytheGenre1,
+                data.ScytheGenre2,
+                
+                data.NemesisGenre1,
+                data.NemesisGenre2,
+                data.NemesisGenre3,
+                
+                data.WingspanGenre1,
+                data.WingspanGenre2,
+                data.WingspanGenre3,
+                
+                data.CascadiaGenre1,
+                data.CascadiaGenre2,
+                data.CascadiaGenre3,
+                
+                data.CodenamesGenre1,
+                data.CodenamesGenre2,
+                data.CodenamesGenre3,
+                
+                data.DixitGenre1,
+                data.DixitGenre2,
+                
+                data.ExplodingKittensGenre1,
+                data.ExplodingKittensGenre2,
+                
+                data.DecryptoGenre1,
+                data.DecryptoGenre2,
+                
+                data.EclipseGenre1,
+                data.EclipseGenre2
             });
         }
     }

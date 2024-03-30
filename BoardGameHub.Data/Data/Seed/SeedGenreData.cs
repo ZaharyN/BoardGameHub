@@ -31,6 +31,10 @@ namespace BoardGameHub.Data.Data.Seed
         public Genre TrainsGenre { get; set; }
         public Genre AnimalsGenre { get; set; }
         public Genre CardGameGenre { get; set; }
+        public Genre EnvironmentalGenre { get; set; }
+        public Genre EducationalGenre { get; set; }
+        public Genre CivilizationGenre { get; set; }
+
 
         private void SeedGenres()
         {
@@ -159,6 +163,24 @@ namespace BoardGameHub.Data.Data.Seed
             {
                 Id = 21,
                 Name = "Card game"
+            };
+
+            EnvironmentalGenre = new Genre()
+            {
+                Id = 22,
+                Name = "Environmental"
+            };
+
+            EducationalGenre = new Genre()
+            {
+                Id = 23,
+                Name = "Educational"
+            };
+
+            CivilizationGenre = new Genre()
+            {
+                Id = 24,
+                Name = "Civilization"
             };
         }
     }

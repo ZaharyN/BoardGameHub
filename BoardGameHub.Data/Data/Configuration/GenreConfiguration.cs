@@ -33,7 +33,10 @@ namespace BoardGameHub.Data.Data.Configuration
                 data.NegotiationGenre,
                 data.TrainsGenre,
                 data.AnimalsGenre,
-                data.CardGameGenre
+                data.CardGameGenre,
+                data.EnvironmentalGenre,
+                data.EducationalGenre,
+                data.CivilizationGenre
             });
         }
     }

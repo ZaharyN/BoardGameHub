@@ -25,9 +25,9 @@ namespace BoardGameHub.Data.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.ApplyConfiguration(new GameReviewConfiguration());
-            builder.ApplyConfiguration(new BoardgameGenreConfiguration());
             builder.ApplyConfiguration(new GenreConfiguration());
             builder.ApplyConfiguration(new BoardgameConfiguration());
+            builder.ApplyConfiguration(new BoardgameGenreConfiguration());
 
             base.OnModelCreating(builder);
         }

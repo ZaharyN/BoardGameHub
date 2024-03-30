@@ -31,7 +31,29 @@ namespace BoardGameHub.Data.Data.Configuration
 
                 data.MonopolyBulgariaBoardgame,
 
-                data.PandemicBoardgame
+                data.PandemicBoardgame,
+                
+                data.BrassBirminghamBoardgame,
+                
+                data.ArkNovaBoardgame,
+                
+                data.ScytheBoardgame,
+                
+                data.NemesisBoardgame,
+                
+                data.WingspanBoardgame,
+                
+                data.CascadiaBoardgame,
+                
+                data.CodenamesBoardgame,
+                
+                data.DixitBoardgame,
+                
+                data.ExplodingKittensBoardgame,
+                
+                data.DecryptoBoardgame,
+                
+                data.EclipseSecondDawnForTheGalaxyBoardgame
             });
         }
     }
