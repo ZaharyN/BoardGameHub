@@ -14,6 +14,8 @@ namespace BoardGameHub.Controllers
         {
             boardGameService = _boardgameService;
         }
+
+        [AllowAnonymous]
         public async Task<IActionResult> All()
         {
             var models = await boardGameService.AllAsync();
@@ -21,9 +23,12 @@ namespace BoardGameHub.Controllers
             return View(models);
         }
 
+        [AllowAnonymous]
         public async Task<IActionResult> Upcoming()
         {
-            return View();
+            var models = await boardGameService.UpcomingAsync();
+
+            return View(models);
         }
     }
 }

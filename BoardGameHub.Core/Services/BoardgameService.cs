@@ -48,7 +48,6 @@ namespace BoardGameHub.Core.Services
                 .ToListAsync();
 
             return models;
-
         }
 
         public Task<BoardgameCreateViewModel> CreateAsync()
@@ -81,9 +80,32 @@ namespace BoardGameHub.Core.Services
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<BoardgameUpcomingViewModel>> UpcomingAsync()
+        public async Task<IEnumerable<BoardgameUpcomingViewModel>> UpcomingAsync()
         {
-            throw new NotImplementedException();
-        }
+			IEnumerable<BoardgameUpcomingViewModel> models = await context.Boardgames
+				.Where(b => b.IsUpcoming == true)
+				.AsNoTracking()
+				.Select(b => new BoardgameUpcomingViewModel()
+				{
+					Id = b.Id,
+					Name = b.Name,
+					BoardgameGenres = b.BoardgamesGenres
+						.Select(bg => new BoardgameGenreViewModel()
+						{
+							Id = bg.GenreId,
+							Name = bg.Genre.Name
+						})
+						.ToList(),
+					Rating = b.Rating,
+					AppropriateAge = b.AppropriateAge,
+					Difficulty = b.Difficulty,
+					ImageUrl = b.ImageUrl,
+					MinimumPlayersAllowedToPlay = b.MinimumPlayersAllowedToPlay,
+					MaximumPlayersAllowedToPlay = b.MaximumPlayersAllowedToPlay
+				})
+				.ToListAsync();
+
+            return models;
+		}
     }
 }

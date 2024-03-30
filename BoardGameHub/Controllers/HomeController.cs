@@ -8,7 +8,7 @@ namespace BoardGameHub.Controllers
     {
         public IActionResult Index()
         {
-            return RedirectToAction("All", nameof(BoardgameController));
+            return View();
         }
 
         public IActionResult Privacy()
