@@ -2,6 +2,7 @@
 using BoardGameHub.Core.Models.BoardgameViewModels;
 using BoardGameHub.Data.Data;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System;
 using System.Collections.Generic;
@@ -21,9 +22,33 @@ namespace BoardGameHub.Core.Services
             context = _context;
         }
 
-        public Task<IEnumerable<BoardgameAllViewModel>> AllAsync()
+        public async Task<IEnumerable<BoardgameAllViewModel>> AllAsync()
         {
-            throw new NotImplementedException();
+            IEnumerable<BoardgameAllViewModel> models = await context.Boardgames
+                .Where(b => b.IsUpcoming == false)
+                .AsNoTracking()
+                .Select(b => new BoardgameAllViewModel()
+                {
+                    Id = b.Id,
+                    Name = b.Name,
+                    BoardgameGenres = b.BoardgamesGenres
+                        .Select(bg => new BoardgameGenreViewModel()
+                        {
+                            Id = bg.GenreId,
+                            Name = bg.Genre.Name
+                        })
+                        .ToList(),
+                    Rating = b.Rating,
+                    AppropriateAge = b.AppropriateAge,
+                    Difficulty = b.Difficulty,
+                    ImageUrl = b.ImageUrl,
+                    MinimumPlayersAllowedToPlay = b.MinimumPlayersAllowedToPlay,
+                    MaximumPlayersAllowedToPlay = b.MaximumPlayersAllowedToPlay
+                })
+                .ToListAsync();
+
+            return models;
+
         }
 
         public Task<BoardgameCreateViewModel> CreateAsync()
