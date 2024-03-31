@@ -16,6 +16,7 @@ namespace BoardGameHub.Controllers
         }
 
         [AllowAnonymous]
+        [HttpGet]
         public async Task<IActionResult> All()
         {
             var models = await boardGameService.AllAsync();

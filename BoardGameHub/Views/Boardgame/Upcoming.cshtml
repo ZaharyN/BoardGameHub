@@ -1,1 +1,8 @@
-﻿
+﻿@model IEnumerable<BoardgameUpcomingViewModel>
+
+@{
+	ViewData["Title"] = "Coming soon";
+	var models = Model.ToList();
+}
+
+<h1>Coming soon games!</h1>
