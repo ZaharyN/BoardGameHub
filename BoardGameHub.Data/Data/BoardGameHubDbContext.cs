@@ -28,6 +28,8 @@ namespace BoardGameHub.Data.Data
             builder.ApplyConfiguration(new GenreConfiguration());
             builder.ApplyConfiguration(new BoardgameConfiguration());
             builder.ApplyConfiguration(new BoardgameGenreConfiguration());
+            builder.ApplyConfiguration(new PlaceTypeConfiguration());
+            builder.ApplyConfiguration(new ReservationPlaceConfiguration());
 
             base.OnModelCreating(builder);
         }
