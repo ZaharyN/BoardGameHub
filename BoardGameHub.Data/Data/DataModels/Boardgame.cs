@@ -15,8 +15,8 @@ namespace BoardGameHub.Data.Data.DataModels
 
         public List<BoardgameGenre> BoardgamesGenres { get; set; } = null!;
 
-        [Range(0, 5)]
-        public int? Rating { get; set; }
+        [Range(BoardgameRatingMinValue, BoardgameRatingMaxValue)]
+        public double? Rating { get; set; }
 
         [Required]
         public int AppropriateAge { get; set; }
@@ -34,7 +34,10 @@ namespace BoardGameHub.Data.Data.DataModels
         public double Difficulty { get; set; }
 
         [Required]
-        public string ImageUrl { get; set; } = string.Empty;
+        public string CardImageUrl { get; set; } = string.Empty;
+
+        [Required]
+        public string DetailsImageUrl { get; set; } = string.Empty;
 
         [Required]
         [Range(BoardGameYearMinValue,BoardGameYearMaxValue)]
