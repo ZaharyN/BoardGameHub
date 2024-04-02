@@ -20,7 +20,7 @@ namespace BoardGameHub.Core.Models.BoardgameViewModels
         [Display(Name = "Genre")]
         public int GenreId { get; set; }
 
-        public List<BoardgameGenreViewModel> BoardgamesGenres { get; set; } =
+        public List<BoardgameGenreViewModel> Genres { get; set; } =
             new List<BoardgameGenreViewModel>();
 
         [Required(ErrorMessage = RequiredMessage)]

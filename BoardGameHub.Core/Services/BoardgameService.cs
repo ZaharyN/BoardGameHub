@@ -44,9 +44,39 @@ namespace BoardGameHub.Core.Services
             return models;
         }
 
+        public async Task<IEnumerable<BoardgameGenreViewModel>> AllGenresAsync()
+        {
+            IEnumerable<BoardgameGenreViewModel> genres = await context.Genres
+                .Select(g => new BoardgameGenreViewModel()
+                {
+                    Id = g.Id,
+                    Name = g.Name
+                })
+                .ToListAsync();
+
+            return genres;
+        }
+
         public Task CreateAsync(BoardgameCreateViewModel model, string userId)
         {
-            throw new NotImplementedException();
+            return Task.CompletedTask;
+        }
+
+        public async Task<BoardgameCreateViewModel> CreateAsync()
+        {
+            BoardgameCreateViewModel model = new BoardgameCreateViewModel()
+            {
+                Genres =
+                    await context.Genres.
+                    Select(g => new BoardgameGenreViewModel()
+                    {
+                        Id = g.Id,
+                        Name = g.Name
+                    })
+                    .ToListAsync()
+            };
+
+            return model;
         }
 
         public Task Delete(int id)
@@ -69,9 +99,14 @@ namespace BoardGameHub.Core.Services
             throw new NotImplementedException();
         }
 
-        public async Task PromoteToActiveAsync(Boardgame boardgame)
+        public async Task PromoteToActiveAsync(int id)
         {
-            boardgame.IsUpcoming = false;
+            Boardgame boardgame = await context.Boardgames.FindAsync(id);
+
+            if (boardgame != null)
+            {
+                boardgame.IsUpcoming = false;
+            }
 
             await context.SaveChangesAsync();
         }

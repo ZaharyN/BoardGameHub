@@ -1,12 +1,5 @@
 ﻿using BoardGameHub.Core.Models.BoardgameViewModels;
 using BoardGameHub.Data.Data.DataModels;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BoardGameHub.Core.Contracts
 {
@@ -14,11 +7,13 @@ namespace BoardGameHub.Core.Contracts
     {
         Task<IEnumerable<BoardgameActiveViewModel>> ActiveAsync();
         Task<IEnumerable<BoardgameUpcomingViewModel>> UpcomingAsync();
-        Task PromoteToActiveAsync(Boardgame boardgame);
+        Task PromoteToActiveAsync(int id);
         Task CreateAsync(BoardgameCreateViewModel model, string userId);
+        Task<BoardgameCreateViewModel> CreateAsync();
         Task<BoardgameEditViewModel> EditAsync(int id);
         Task EditAsync(BoardgameEditViewModel model, string userId);
         Task Delete(int id);
         Task<BoardgameDetailsViewModel> Details(int id);
+        Task<IEnumerable<BoardgameGenreViewModel>> AllGenresAsync(); 
     }
 }
