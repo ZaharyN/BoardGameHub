@@ -1,15 +1,8 @@
 ﻿using BoardGameHub.Core.Contracts;
 using BoardGameHub.Core.Models.BoardgameViewModels;
 using BoardGameHub.Data.Data;
-using Microsoft.AspNetCore.Mvc;
+using BoardGameHub.Data.Data.DataModels;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BoardGameHub.Core.Services
 {
@@ -22,12 +15,12 @@ namespace BoardGameHub.Core.Services
             context = _context;
         }
 
-        public async Task<IEnumerable<BoardgameAllViewModel>> AllAsync()
+        public async Task<IEnumerable<BoardgameActiveViewModel>> ActiveAsync()
         {
-            IEnumerable<BoardgameAllViewModel> models = await context.Boardgames
+            IEnumerable<BoardgameActiveViewModel> models = await context.Boardgames
                 .Where(b => b.IsUpcoming == false)
                 .AsNoTracking()
-                .Select(b => new BoardgameAllViewModel()
+                .Select(b => new BoardgameActiveViewModel()
                 {
                     Id = b.Id,
                     Name = b.Name,
@@ -49,11 +42,6 @@ namespace BoardGameHub.Core.Services
                 .ToListAsync();
 
             return models;
-        }
-
-        public Task<BoardgameCreateViewModel> CreateAsync()
-        {
-            throw new NotImplementedException();
         }
 
         public Task CreateAsync(BoardgameCreateViewModel model, string userId)
@@ -79,6 +67,13 @@ namespace BoardGameHub.Core.Services
         public Task EditAsync(BoardgameEditViewModel model, string userId)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task PromoteToActiveAsync(Boardgame boardgame)
+        {
+            boardgame.IsUpcoming = false;
+
+            await context.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<BoardgameUpcomingViewModel>> UpcomingAsync()

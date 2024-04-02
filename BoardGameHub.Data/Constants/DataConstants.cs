@@ -30,6 +30,12 @@ namespace BoardGameHub.Data.Constants
 
         public const double BoardgameRatingMinValue = 0.00;
         public const double BoardgameRatingMaxValue = 5.00;
+
+        public const double BoardgameDifficultyMinValue = 0.00;
+        public const double BoardgameDifficultyMaxValue = 5.00;
+
+        public const int BoardgameAppropriateAgeMinValue = 0;
+        public const int BoardgameAppropriateAgeMaxValue = 18;
         //Category constants:
 
         public const int CategoryNameMaxLength = 50;
