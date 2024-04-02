@@ -1,4 +1,5 @@
 ﻿using BoardGameHub.Core.Models.BoardgameViewModels;
+using BoardGameHub.Data.Data.DataModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System;
@@ -11,9 +12,9 @@ namespace BoardGameHub.Core.Contracts
 {
     public interface IBoardgameService
     {
-        Task<IEnumerable<BoardgameAllViewModel>> AllAsync();
+        Task<IEnumerable<BoardgameActiveViewModel>> ActiveAsync();
         Task<IEnumerable<BoardgameUpcomingViewModel>> UpcomingAsync();
-        Task<BoardgameCreateViewModel> CreateAsync();
+        Task PromoteToActiveAsync(Boardgame boardgame);
         Task CreateAsync(BoardgameCreateViewModel model, string userId);
         Task<BoardgameEditViewModel> EditAsync(int id);
         Task EditAsync(BoardgameEditViewModel model, string userId);

@@ -17,9 +17,9 @@ namespace BoardGameHub.Controllers
 
         [AllowAnonymous]
         [HttpGet]
-        public async Task<IActionResult> All()
+        public async Task<IActionResult> Active()
         {
-            var models = await boardGameService.AllAsync();
+            var models = await boardGameService.ActiveAsync();
 
             return View(models);
         }
@@ -28,7 +28,7 @@ namespace BoardGameHub.Controllers
         public async Task<IActionResult> Upcoming()
         {
             var models = await boardGameService.UpcomingAsync();
-
+            
             return View(models);
         }
     }

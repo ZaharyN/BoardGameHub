@@ -30,7 +30,7 @@ namespace BoardGameHub.Data.Data.DataModels
         public string Description { get; set; } = string.Empty;
 
         [Required]
-        [Range(0.00, 5.00)]
+        [Range(BoardgameDifficultyMinValue, BoardgameDifficultyMaxValue)]
         public double Difficulty { get; set; }
 
         [Required]
