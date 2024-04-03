@@ -17,10 +17,16 @@ namespace BoardGameHub.Core.Models.BoardgameViewModels
         public string Name { get; set; } = string.Empty;
 
         [Required(ErrorMessage = RequiredMessage)]
-        [Display(Name = "Genre")]
-        public int GenreId { get; set; }
+        [Display(Name = "Main genre")]
+        public int GenreId_1 { get; set; }
 
-        public List<BoardgameGenreViewModel> Genres { get; set; } =
+        [Display(Name= "Subgenre 1")]
+        public int? GenreId_2 { get; set; }
+
+        [Display(Name = "Subgenre 2")]
+        public int? GenreId_3 { get; set; }
+
+        public IEnumerable<BoardgameGenreViewModel> Genres { get; set; } =
             new List<BoardgameGenreViewModel>();
 
         [Required(ErrorMessage = RequiredMessage)]
@@ -51,11 +57,9 @@ namespace BoardGameHub.Core.Models.BoardgameViewModels
             ErrorMessage = ValueMessage)]
         public double Difficulty { get; set; }
 
-        [Required]
-        public string CardImageUrl { get; set; } = string.Empty;
+        public string? CardImageUrl { get; set; } = string.Empty;
 
-        [Required]
-        public string DetailsImageUrl { get; set; } = string.Empty;
+        public string? DetailsImageUrl { get; set; } = string.Empty;
 
         [Required]
         [Display(Name = "Year published")]

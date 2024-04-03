@@ -57,9 +57,52 @@ namespace BoardGameHub.Core.Services
             return genres;
         }
 
-        public Task CreateAsync(BoardgameCreateViewModel model, string userId)
+        public async Task<int> CreateAsync(BoardgameCreateViewModel model)
         {
-            return Task.CompletedTask;
+            var boardgame =  new Boardgame()
+            {
+                Id = model.Id,
+                Name = model.Name,
+                Rating = model.Rating,
+                AppropriateAge = model.AppropriateAge,
+                AveragePlayingTime = model.AveragePlayingTime,
+                Description = model.Description,
+                Difficulty = model.Difficulty,
+                YearPublished = model.YearPublished,
+                PriceInShop = model.PriceInShop,
+                MinimumPlayersAllowedToPlay = model.MinimumPlayersAllowedToPlay,
+                MaximumPlayersAllowedToPlay = model.MaximumPlayersAllowedToPlay,
+                IsUpcoming = model.IsUpcoming
+            };
+
+            boardgame.BoardgamesGenres.Add(new BoardgameGenre()
+            {
+                BoardgameId = boardgame.Id,
+                GenreId = model.GenreId_1
+            });
+
+            if(model.GenreId_2 != null)
+            {
+                boardgame.BoardgamesGenres.Add(new BoardgameGenre()
+                {
+                    BoardgameId = boardgame.Id,
+                    GenreId = (int)model.GenreId_2
+                });
+            }
+
+            if(model.GenreId_3 != null)
+            {
+                boardgame.BoardgamesGenres.Add(new BoardgameGenre()
+                {
+                    BoardgameId = boardgame.Id,
+                    GenreId = (int)model.GenreId_3
+                });
+            }
+
+            context.Boardgames.Add(boardgame);
+            await context.SaveChangesAsync();
+
+            return boardgame.Id;
         }
 
         public async Task<BoardgameCreateViewModel> CreateAsync()
@@ -101,7 +144,7 @@ namespace BoardGameHub.Core.Services
 
         public async Task PromoteToActiveAsync(int id)
         {
-            Boardgame boardgame = await context.Boardgames.FindAsync(id);
+            Boardgame? boardgame = await context.Boardgames.FindAsync(id);
 
             if (boardgame != null)
             {

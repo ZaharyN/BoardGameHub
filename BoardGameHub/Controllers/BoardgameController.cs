@@ -46,6 +46,8 @@ namespace BoardGameHub.Controllers
         {
             BoardgameCreateViewModel model = await boardgameService.CreateAsync();
 
+            model.Genres = await boardgameService.AllGenresAsync();
+
             return View(model);
         }
 
@@ -53,11 +55,18 @@ namespace BoardGameHub.Controllers
         {
             if(!ModelState.IsValid)
             {
-                model.Genres = (List<BoardgameGenreViewModel>)await boardgameService.AllGenresAsync();
+                model.Genres = await boardgameService.AllGenresAsync();
                 return View(model);
             }
 
-            return RedirectToAction(nameof(Active));   
+            int boardgameId = await boardgameService.CreateAsync(model);
+
+            return RedirectToAction(nameof(Details), new {id = boardgameId});   
+        }
+
+        public async Task<IActionResult> Details(int id)
+        {
+            return Ok();
         }
     }
 }
