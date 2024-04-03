@@ -5,68 +5,69 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BoardGameHub.Controllers
 {
-    [Authorize]
-    public class BoardgameController : Controller
-    {
-        private readonly IBoardgameService boardgameService;
+	[Authorize]
+	public class BoardgameController : Controller
+	{
+		private readonly IBoardgameService boardgameService;
 
-        public BoardgameController(IBoardgameService _boardgameService)
-        {
-            boardgameService = _boardgameService;
-        }
+		public BoardgameController(IBoardgameService _boardgameService)
+		{
+			boardgameService = _boardgameService;
+		}
 
-        [AllowAnonymous]
-        [HttpGet]
-        public async Task<IActionResult> Active()
-        {
-            var models = await boardgameService.ActiveAsync();
+		[AllowAnonymous]
+		[HttpGet]
+		public async Task<IActionResult> Active()
+		{
+			var models = await boardgameService.ActiveAsync();
 
-            return View(models);
-        }
+			return View(models);
+		}
 
-        [AllowAnonymous]
-        [HttpGet]
-        public async Task<IActionResult> Upcoming()
-        {
-            var models = await boardgameService.UpcomingAsync();
-            
-            return View(models);
-        }
+		[AllowAnonymous]
+		[HttpGet]
+		public async Task<IActionResult> Upcoming()
+		{
+			var models = await boardgameService.UpcomingAsync();
 
-        [HttpPost]
-        public async Task<IActionResult> ChangeGameStatus(int id)
-        {
-            await boardgameService.PromoteToActiveAsync(id);
+			return View(models);
+		}
 
-            return RedirectToAction(nameof(Active));
-        }
+		[HttpPost]
+		public async Task<IActionResult> ChangeGameStatus(int id)
+		{
+			await boardgameService.PromoteToActiveAsync(id);
 
-        [HttpGet]
-        public async Task<IActionResult> Create()
-        {
-            BoardgameCreateViewModel model = await boardgameService.CreateAsync();
+			return RedirectToAction(nameof(Active));
+		}
 
-            model.Genres = await boardgameService.AllGenresAsync();
+		[HttpGet]
+		public async Task<IActionResult> Create()
+		{
+			BoardgameCreateViewModel model = await boardgameService.CreateAsync();
 
-            return View(model);
-        }
+			model.Genres = await boardgameService.AllGenresAsync();
 
-        public async Task<IActionResult> Create(BoardgameCreateViewModel model)
-        {
-            if(!ModelState.IsValid)
-            {
-                model.Genres = await boardgameService.AllGenresAsync();
-                return View(model);
-            }
+			return View(model);
+		}
 
-            int boardgameId = await boardgameService.CreateAsync(model);
+		[HttpPost]
+		public async Task<IActionResult> Create(BoardgameCreateViewModel model)
+		{
+			if (!ModelState.IsValid)
+			{
+				model.Genres = await boardgameService.AllGenresAsync();
+				return View(model);
+			}
 
-            return RedirectToAction(nameof(Details), new {id = boardgameId});   
-        }
+			int boardgameId = await boardgameService.CreateAsync(model);
 
-        public async Task<IActionResult> Details(int id)
-        {
-            return Ok();
-        }
-    }
+			return RedirectToAction(nameof(Details), new { id = boardgameId });
+		}
+
+		public async Task<IActionResult> Details(int id)
+		{
+			return Ok();
+		}
+	}
 }
