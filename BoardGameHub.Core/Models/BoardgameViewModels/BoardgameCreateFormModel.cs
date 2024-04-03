@@ -6,7 +6,7 @@ using static BoardGameHub.Core.Constants.MessageConstants;
 
 namespace BoardGameHub.Core.Models.BoardgameViewModels
 {
-    public class BoardgameCreateViewModel
+    public class BoardgameCreateFormModel
     {
         public int Id { get; set; }
 

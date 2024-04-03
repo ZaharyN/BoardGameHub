@@ -1,5 +1,6 @@
 ﻿using BoardGameHub.Core.Contracts;
 using BoardGameHub.Core.Models.BoardgameViewModels;
+using BoardGameHub.Data.Data.DataModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -44,7 +45,7 @@ namespace BoardGameHub.Controllers
 		[HttpGet]
 		public async Task<IActionResult> Create()
 		{
-			BoardgameCreateViewModel model = await boardgameService.CreateAsync();
+			BoardgameCreateFormModel model = await boardgameService.CreateAsync();
 
 			model.Genres = await boardgameService.AllGenresAsync();
 
@@ -52,7 +53,7 @@ namespace BoardGameHub.Controllers
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> Create(BoardgameCreateViewModel model)
+		public async Task<IActionResult> Create(BoardgameCreateFormModel model)
 		{
 			if (!ModelState.IsValid)
 			{
@@ -67,7 +68,14 @@ namespace BoardGameHub.Controllers
 
 		public async Task<IActionResult> Details(int id)
 		{
-			return Ok();
+			if(await boardgameService.ExistsAsync(id) == null)
+			{
+				return NotFound();
+			}
+
+			BoardgameDetailsViewModel model = await boardgameService.Details(id);
+
+			return View(model);
 		}
 	}
 }

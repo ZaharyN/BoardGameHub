@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BoardGameHub.Core.Services
 {
-    public class BoardgameService : IBoardgameService
+	public class BoardgameService : IBoardgameService
     {
         private readonly BoardGameHubDbContext context;
 
@@ -57,7 +57,7 @@ namespace BoardGameHub.Core.Services
             return genres;
         }
 
-        public async Task<int> CreateAsync(BoardgameCreateViewModel model)
+        public async Task<int> CreateAsync(BoardgameCreateFormModel model)
         {
             var boardgame =  new Boardgame()
             {
@@ -105,9 +105,9 @@ namespace BoardGameHub.Core.Services
             return boardgame.Id;
         }
 
-        public async Task<BoardgameCreateViewModel> CreateAsync()
+        public async Task<BoardgameCreateFormModel> CreateAsync()
         {
-            BoardgameCreateViewModel model = new BoardgameCreateViewModel()
+            BoardgameCreateFormModel model = new BoardgameCreateFormModel()
             {
                 Genres =
                     await context.Genres.
@@ -127,9 +127,35 @@ namespace BoardGameHub.Core.Services
             throw new NotImplementedException();
         }
 
-        public Task<BoardgameDetailsViewModel> Details(int id)
+        public async Task<BoardgameDetailsViewModel> DetailsAsync(int id)
         {
-            throw new NotImplementedException();
+            Boardgame boardgame = await ExistsAsync(id);
+
+            BoardgameDetailsViewModel model = new BoardgameDetailsViewModel()
+            {
+                Id = boardgame.Id,
+                Name = boardgame.Name,
+                BoardgameGenres = boardgame.BoardgamesGenres
+                    .Select(bg => new BoardgameGenreViewModel()
+                    {
+                        Id = bg.GenreId,
+                        Name = bg.Genre.Name
+                    })
+                    .ToList(),
+                Rating = boardgame.Rating,
+                AppropriateAge = boardgame.AppropriateAge,
+                AveragePlayingTime = boardgame.AveragePlayingTime,
+                Description = boardgame.Description,
+                Difficulty = boardgame.Difficulty,
+                CardImageUrl = boardgame.CardImageUrl,
+                DetailsImageUrl = boardgame.DetailsImageUrl,
+                YearPublished = boardgame.YearPublished,
+                PriceInShop = boardgame.PriceInShop,
+                MinimumPlayersAllowedToPlay = boardgame.MinimumPlayersAllowedToPlay,
+                MaximumPlayersAllowedToPlay = boardgame.MaximumPlayersAllowedToPlay
+            };
+
+            return model;
         }
 
         public Task<BoardgameEditViewModel> EditAsync(int id)
@@ -142,7 +168,12 @@ namespace BoardGameHub.Core.Services
             throw new NotImplementedException();
         }
 
-        public async Task PromoteToActiveAsync(int id)
+		public async Task<Boardgame> ExistsAsync(int id)
+		{
+            return await context.Boardgames.FindAsync(id);
+		}
+
+		public async Task PromoteToActiveAsync(int id)
         {
             Boardgame? boardgame = await context.Boardgames.FindAsync(id);
 

@@ -8,12 +8,13 @@ namespace BoardGameHub.Core.Contracts
         Task<IEnumerable<BoardgameActiveViewModel>> ActiveAsync();
         Task<IEnumerable<BoardgameUpcomingViewModel>> UpcomingAsync();
         Task PromoteToActiveAsync(int id);
-        Task<int> CreateAsync(BoardgameCreateViewModel model);
-        Task<BoardgameCreateViewModel> CreateAsync();
+        Task<int> CreateAsync(BoardgameCreateFormModel model);
+        Task<BoardgameCreateFormModel> CreateAsync();
         Task<BoardgameEditViewModel> EditAsync(int id);
         Task EditAsync(BoardgameEditViewModel model, string userId);
         Task Delete(int id);
-        Task<BoardgameDetailsViewModel> Details(int id);
-        Task<IEnumerable<BoardgameGenreViewModel>> AllGenresAsync(); 
+        Task<BoardgameDetailsViewModel> DetailsAsync(int id);
+        Task<IEnumerable<BoardgameGenreViewModel>> AllGenresAsync();
+        Task<Boardgame> ExistsAsync(int id);
     }
 }
