@@ -73,7 +73,7 @@ namespace BoardGameHub.Controllers
 				return NotFound();
 			}
 
-			BoardgameDetailsViewModel model = await boardgameService.Details(id);
+			BoardgameDetailsViewModel model = await boardgameService.DetailsAsync(id);
 
 			return View(model);
 		}

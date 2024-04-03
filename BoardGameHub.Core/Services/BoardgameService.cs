@@ -163,7 +163,7 @@ namespace BoardGameHub.Core.Services
             throw new NotImplementedException();
         }
 
-        public Task EditAsync(BoardgameEditViewModel model, string userId)
+        public Task EditAsync(BoardgameEditViewModel model)
         {
             throw new NotImplementedException();
         }
