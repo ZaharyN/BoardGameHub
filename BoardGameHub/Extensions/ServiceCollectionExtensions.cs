@@ -12,6 +12,8 @@ namespace BoardGameHub.Extensions
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
             services.AddScoped<IBoardgameService, BoardgameService>();
+            services.AddScoped<ICategoryService, CategoryService>();
+
             return services;
         }
 

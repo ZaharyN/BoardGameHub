@@ -23,6 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Views\Category\" />
     <Folder Include="wwwroot\assets\games\" />
   </ItemGroup>
 
