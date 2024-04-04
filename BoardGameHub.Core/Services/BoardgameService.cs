@@ -122,11 +122,6 @@ namespace BoardGameHub.Core.Services
             return model;
         }
 
-        public Task Delete(int id)
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task<BoardgameDetailsViewModel> DetailsAsync(int id)
         {
             Boardgame boardgame = await ExistsAsync(id);
@@ -281,6 +276,24 @@ namespace BoardGameHub.Core.Services
                 .ToListAsync();
 
             return models;
+        }
+
+        public async Task<BoardgameDeleteFormModel> GetDeleteFormAsync(Boardgame boardgame)
+        {
+            BoardgameDeleteFormModel model = new BoardgameDeleteFormModel()
+            {
+                Id = boardgame.Id,
+                Name = boardgame.Name,
+            };
+
+            return model;
+        }
+
+        public async Task DeleteConfirmed(Boardgame boardgame)
+        {
+            context.Boardgames.Remove(boardgame);
+
+            await context.SaveChangesAsync();
         }
     }
 }

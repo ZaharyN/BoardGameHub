@@ -47,8 +47,6 @@ namespace BoardGameHub.Controllers
         {
             BoardgameCreateFormModel model = await boardgameService.GetCreateFormAsync();
 
-            model.Genres = await boardgameService.AllGenresAsync();
-
             return View(model);
         }
 
@@ -66,6 +64,7 @@ namespace BoardGameHub.Controllers
             return RedirectToAction(nameof(Details), new { id = boardgameId });
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> Details(int id)
         {
@@ -107,6 +106,36 @@ namespace BoardGameHub.Controllers
             await boardgameService.EditAsync(model, boardgame);
 
             return RedirectToAction(nameof(Details), new { id });
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
+        {
+            Boardgame boardgame = await boardgameService.ExistsAsync(id);
+
+            if (boardgame == null)
+            {
+                return NotFound();
+            }
+
+            BoardgameDeleteFormModel model = await boardgameService.GetDeleteFormAsync(boardgame);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            Boardgame boardgame = await boardgameService.ExistsAsync(id);
+
+            if (boardgame == null)
+            {
+                return NotFound();
+            }
+
+            await boardgameService.DeleteConfirmed(boardgame);
+
+            return RedirectToAction(nameof(Active));
         }
     }
 }
