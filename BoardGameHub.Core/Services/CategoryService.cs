@@ -3,11 +3,6 @@ using BoardGameHub.Core.Models.BoardgameViewModels;
 using BoardGameHub.Core.Models.CategoryViewModel;
 using BoardGameHub.Data.Data;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BoardGameHub.Core.Services
 {
@@ -166,7 +161,7 @@ namespace BoardGameHub.Core.Services
 			return sorted;
 		}
 
-		public async Task<IEnumerable<CategoryBoardgameViewModel>> SortByLowestPriceInShopAsync()
+		public async Task<IEnumerable<CategoryBoardgameViewModel>> SortByLowestPriceAsync()
 		{
 			var sorted = await context.Boardgames
 				.AsNoTracking()
@@ -195,7 +190,7 @@ namespace BoardGameHub.Core.Services
 			return sorted;
 		}
 
-		public async Task<IEnumerable<CategoryBoardgameViewModel>> SortByHighestPriceInShopAsync()
+		public async Task<IEnumerable<CategoryBoardgameViewModel>> SortByHighestPriceAsync()
 		{
 			var sorted = await context.Boardgames
 				.AsNoTracking()
