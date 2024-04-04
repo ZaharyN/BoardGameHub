@@ -9,7 +9,6 @@
         public int AppropriateAge { get; set; }
         public double Difficulty { get; set; }
         public string CardImageUrl { get; set; } = string.Empty;
-        public string DetailsImageUrl { get; set; } = string.Empty;
         public int MinimumPlayersAllowedToPlay { get; set; }
         public int MaximumPlayersAllowedToPlay { get; set; }
     }

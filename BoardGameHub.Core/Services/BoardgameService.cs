@@ -35,7 +35,6 @@ namespace BoardGameHub.Core.Services
                     AppropriateAge = b.AppropriateAge,
                     Difficulty = b.Difficulty,
                     CardImageUrl = b.CardImageUrl,
-                    DetailsImageUrl = b.DetailsImageUrl,
                     MinimumPlayersAllowedToPlay = b.MinimumPlayersAllowedToPlay,
                     MaximumPlayersAllowedToPlay = b.MaximumPlayersAllowedToPlay
                 })
@@ -269,7 +268,6 @@ namespace BoardGameHub.Core.Services
                     AppropriateAge = b.AppropriateAge,
                     Difficulty = b.Difficulty,
                     CardImageUrl = b.CardImageUrl,
-                    DetailsImageUrl = b.DetailsImageUrl,
                     MinimumPlayersAllowedToPlay = b.MinimumPlayersAllowedToPlay,
                     MaximumPlayersAllowedToPlay = b.MaximumPlayersAllowedToPlay
                 })
