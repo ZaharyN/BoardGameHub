@@ -15,6 +15,7 @@ namespace BoardGameHub.Extensions
             services.AddScoped<IBoardgameService, BoardgameService>();
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IReservationService, ReservationService>();
+            services.AddScoped<IApplicationUserService, ApplicationUserService>();
 
             return services;
         }

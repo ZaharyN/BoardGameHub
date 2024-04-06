@@ -10,12 +10,12 @@ namespace BoardGameHub.Core.Contracts
 {
 	public interface IReservationService
 	{
-		public Task<ReservationCreateFormModel> GetCreateReservationFormAsync();
-		public Task<int> CreateReservationAsync();
-		public Task<IEnumerable<ReservationViewModel>> MyReservationsAsync();
-		public Task<ReservationDetailsViewModel> ReservationDetailsAsync();
-		public Task<Reservation> GetDeleteFormAsync();
-		public Task<ReservationDeleteFormModel> DeleteConfirmedAsync();
+		Task<ReservationCreateFormModel> GetCreateReservationFormAsync();
+		Task<int> CreateReservationAsync();
+		Task<IEnumerable<ReservationViewModel>> MyReservationsAsync();
+		Task<ReservationDetailsViewModel> ReservationDetailsAsync();
+		Task<Reservation> GetDeleteFormAsync();
+		Task<ReservationDeleteFormModel> DeleteConfirmedAsync();
 
 	}
 }

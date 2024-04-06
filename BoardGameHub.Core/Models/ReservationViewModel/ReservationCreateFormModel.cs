@@ -8,6 +8,8 @@ namespace BoardGameHub.Core.Models.ReservationViewModel
 {
 	public class ReservationCreateFormModel
 	{
+        public int Id { get; set; }
 
-	}
+
+    }
 }
