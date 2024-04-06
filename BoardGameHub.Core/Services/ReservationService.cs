@@ -1,5 +1,7 @@
 ﻿using BoardGameHub.Core.Contracts;
+using BoardGameHub.Core.Models.ReservationViewModel;
 using BoardGameHub.Data.Data;
+using BoardGameHub.Data.Data.DataModels;
 
 namespace BoardGameHub.Core.Services
 {
@@ -12,5 +14,34 @@ namespace BoardGameHub.Core.Services
             context = _context;
         }
 
-    }
+		public Task<ReservationCreateFormModel> GetCreateReservationFormAsync()
+		{
+			throw new NotImplementedException();
+		}
+
+		public Task<int> CreateReservationAsync()
+		{
+			throw new NotImplementedException();
+		}
+
+		public Task<IEnumerable<ReservationViewModel>> MyReservationsAsync()
+		{
+			throw new NotImplementedException();
+		}
+
+		public Task<ReservationDetailsViewModel> ReservationDetailsAsync()
+		{
+			throw new NotImplementedException();
+		}
+
+		public Task<Reservation> GetDeleteFormAsync()
+		{
+			throw new NotImplementedException();
+		}
+
+		public Task<ReservationDeleteFormModel> DeleteConfirmedAsync()
+		{
+			throw new NotImplementedException();
+		}
+	}
 }
