@@ -36,6 +36,7 @@ namespace BoardGameHub.Data.Constants
 
         public const int BoardgameAppropriateAgeMinValue = 0;
         public const int BoardgameAppropriateAgeMaxValue = 18;
+
         //Category constants:
 
         public const int CategoryNameMaxLength = 50;
@@ -60,5 +61,15 @@ namespace BoardGameHub.Data.Constants
 
         public const string ReservationTotalPriceMinValue = "10.00";
         public const string ReservationTotalPriceMaxValue = "900.00";
-    }
+
+        //Application user constants:
+
+        public const string ApplicationUserPhoneNumber = @"^(\+?359|0)?(87[0-9]{7}|88[789][0-9]{6}|89[0-9]{7}|98[0-9]{7})$";
+
+        public const int FirstNameMinLength = 2;
+        public const int FirstNameMaxLength = 30;
+
+        public const int LastNameMinLength = 2;
+        public const int LastNameMaxLength = 30;
+	}
 }
