@@ -14,7 +14,7 @@ namespace BoardGameHub.Data.Data.DataModels
 
         [Required]
         [ForeignKey(nameof(ReservationOwner))]
-        public int ReservationOwnerId { get; set; }
+        public string ReservationOwnerId { get; set; }
 
         [Display(Name = "Date and time")]
         [Required]

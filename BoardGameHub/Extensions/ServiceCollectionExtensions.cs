@@ -1,6 +1,7 @@
 ﻿using BoardGameHub.Core.Contracts;
 using BoardGameHub.Core.Services;
 using BoardGameHub.Data.Data;
+using BoardGameHub.Data.Data.DataModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Runtime.CompilerServices;
@@ -20,7 +21,7 @@ namespace BoardGameHub.Extensions
 
         public static IServiceCollection AddApplicationIdentity(this IServiceCollection services)
         {
-            services.AddDefaultIdentity<IdentityUser>(options =>
+            services.AddDefaultIdentity<ApplicationUser>(options =>
             {
                 options.SignIn.RequireConfirmedAccount = false;
                 options.Password.RequireNonAlphanumeric = false;

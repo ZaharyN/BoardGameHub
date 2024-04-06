@@ -66,10 +66,10 @@ namespace BoardGameHub.Data.Constants
 
         public const string ApplicationUserPhoneNumber = @"^(\+?359|0)?(87[0-9]{7}|88[789][0-9]{6}|89[0-9]{7}|98[0-9]{7})$";
 
-        public const int FirstNameMinLength = 2;
-        public const int FirstNameMaxLength = 30;
+        public const int UserFirstNameMinLength = 2;
+        public const int UserFirstNameMaxLength = 30;
 
-        public const int LastNameMinLength = 2;
-        public const int LastNameMaxLength = 30;
+        public const int UserLastNameMinLength = 2;
+        public const int UserLastNameMaxLength = 30;
 	}
 }

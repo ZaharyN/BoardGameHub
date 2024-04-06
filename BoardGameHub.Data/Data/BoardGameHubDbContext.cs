@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BoardGameHub.Data.Data
 {
-    public class BoardGameHubDbContext : IdentityDbContext
+    public class BoardGameHubDbContext : IdentityDbContext<ApplicationUser>
     {
         public BoardGameHubDbContext(DbContextOptions<BoardGameHubDbContext> options)
             : base(options)
@@ -30,6 +30,7 @@ namespace BoardGameHub.Data.Data
             builder.ApplyConfiguration(new BoardgameGenreConfiguration());
             builder.ApplyConfiguration(new PlaceTypeConfiguration());
             builder.ApplyConfiguration(new ReservationPlaceConfiguration());
+            builder.ApplyConfiguration(new ApplicationUserConfiguration());
 
             base.OnModelCreating(builder);
         }

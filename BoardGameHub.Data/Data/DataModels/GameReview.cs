@@ -28,6 +28,6 @@ namespace BoardGameHub.Data.Data.DataModels
 
         [Required]
         [ForeignKey(nameof(ReviewOwner))]
-        public int ReviewOwnerId { get; set; }
+        public string ReviewOwnerId { get; set; } = string.Empty;
     }
 }
