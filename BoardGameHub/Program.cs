@@ -1,4 +1,7 @@
 using BoardGameHub.Extensions;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using BoardGameHub.Data.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
