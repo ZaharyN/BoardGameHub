@@ -6,19 +6,17 @@
 }
 
 
-
-
 <div class="container">
 	<div class="row">
 		<div class="col-xs-12">All boardgames</div>
 		<div class="col-xs-12">
-			<div>
+			<div class="w-25 my-2 d-flex justify-content-end">
 				<label for="sortSelect">Sort By:</label>
 				<select class="form-control" id="sortSelect" onchange="location = this.value;">
-					<option> <a asp-controller="Category" asp-action="SortByLowestRating"> Lowest Rating</a></option>
-					<option asp-controller="Category" asp-action="SortByHighestRating">Highest Rating</option>
-					<option asp-controller="Category" asp-action="SortByLowestDifficulty">Lowest Difficulty</option>
-					<option asp-controller="Category" asp-action="SortByHighestDifficulty">Highest Difficulty</option>
+					<option> <a asp-area="" asp-controller="Category" asp-action="SortByLowestRating"></a> Lowest Rating</option>
+					<option> <a asp-area="" asp-controller="Category" asp-action="SortByHighestRating"></a>Highest Rating</option>
+					<option> <a asp-area="" asp-controller="Category" asp-action="SortByLowestDifficulty"></a>Lowest Difficulty</option>
+					<option> <a asp-area="" asp-controller="Category" asp-action="SortByHighestDifficulty"></a>Highest Difficulty</option>
 				</select>
 			</div>
 		</div>

@@ -11,14 +11,15 @@
 <div class="container">
 	<div class="row">
 		<div class="col-xs-12">All boardgames</div>
-		<div class="col-xs-12">
-			<div>
+		<div class="col-xs-12 d-flex justify-content-end">
+			<div class="w-50 my-3">
 				<label for="sortSelect">Sort By:</label>
 				<select class="form-control" id="sortSelect" onchange="location = this.value;">
-					<option asp-controller="Category" asp-action="SortByLowestRating">Lowest Rating</option>
-					<option asp-controller="Category" asp-action="SortByHighestRating">Highest Rating</option>
-					<option asp-controller="Category" asp-action="SortByLowestDifficulty">Lowest Difficulty</option>
-					<option asp-controller="Category" asp-action="SortByHighestDifficulty">Highest Difficulty</option>
+					<option value="" selected disabled hidden>Choose here</option>
+					<option value="SortByLowestRating">Lowest Rating</option>
+					<option value="SortByHighestRating">Highest Rating</option>
+					<option value="SortByLowestDifficulty">Lowest Difficulty</option>
+					<option value="SortByHighestDifficulty">Highest Difficulty</option>
 				</select>
 			</div>
 		</div>
