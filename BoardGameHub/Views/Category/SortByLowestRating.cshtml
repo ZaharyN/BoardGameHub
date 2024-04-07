@@ -1,0 +1,41 @@
+﻿@model IEnumerable<BoardgameActiveViewModel>
+
+@{
+	ViewData["Title"] = "Genre boardgames";
+	var models = Model.ToList();
+}
+
+
+
+
+<div class="container">
+	<div class="row">
+		<div class="col-xs-12">All boardgames</div>
+		<div class="col-xs-12">
+			<div>
+				<label for="sortSelect">Sort By:</label>
+				<select class="form-control" id="sortSelect" onchange="location = this.value;">
+					<option> <a asp-controller="Category" asp-action="SortByLowestRating"> Lowest Rating</a></option>
+					<option asp-controller="Category" asp-action="SortByHighestRating">Highest Rating</option>
+					<option asp-controller="Category" asp-action="SortByLowestDifficulty">Lowest Difficulty</option>
+					<option asp-controller="Category" asp-action="SortByHighestDifficulty">Highest Difficulty</option>
+				</select>
+			</div>
+		</div>
+		@foreach (var e in Model)
+		{
+			<div class="col-lg-3 col-xs-12">
+				<div class="card mb-3">
+					<img class="card-img-top" src="@e.CardImageUrl" alt="Card image cap">
+					<div class="card-body">
+						<h5 class="card-title">@e.Name</h5>
+						<p class="card-text">Appropriate Age: @e.AppropriateAge+</p>
+						<p class="card-text">Difficulty: @e.Difficulty</p>
+						<p class="card-text">Rating: @e.Rating</p>
+						<p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+					</div>
+				</div>
+			</div>
+		}
+	</div>
+</div>

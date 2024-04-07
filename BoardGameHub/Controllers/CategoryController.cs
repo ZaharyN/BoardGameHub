@@ -13,7 +13,21 @@ namespace BoardGameHub.Controllers
 			categoryService = _categoryService;
         }
 
-        public async Task<IActionResult> SortByLowestDifficulty()
+		public async Task<IActionResult> ViewAll()
+		{
+			var sorted = await categoryService.ViewAllGenresAsync();
+
+			return View(sorted);
+		}
+
+		public async Task<IActionResult> ViewAllGenresBoardgames()
+		{
+			var models = await categoryService.ViewAllGenresBoardgamesAsync();
+
+			return View(models);
+		}
+
+		public async Task<IActionResult> SortByLowestDifficulty()
 		{
 			var sorted = await categoryService.SortByLowestDifficultyAsync();
 

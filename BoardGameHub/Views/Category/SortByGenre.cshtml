@@ -1,0 +1,20 @@
+﻿@model IEnumerable<CategoryBoardgameViewModel>
+
+@{
+	ViewData["Title"] = "Genre boardgames";
+	var models = Model.ToList();
+}
+
+
+<h1>Genres</h1>
+
+@foreach (var boardgame in Model)
+{
+	<div class="col-lg-3 col-xs-12">
+		<div class="card mb-3">
+			<div class="card-body">
+				<h5 class="card-title">@boardgame.Name</h5>
+			</div>
+		</div>
+	</div>
+}

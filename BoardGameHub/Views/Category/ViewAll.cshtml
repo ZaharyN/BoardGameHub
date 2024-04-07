@@ -1,0 +1,30 @@
+﻿@model IEnumerable<BoardgameGenreViewModel>
+
+@{
+	ViewData["Title"] = "Browse by genre";
+	var models = Model.ToList();
+}
+
+
+<div class="container">
+	<div class="row">
+		<div class="col-xs-12 text-center"><h1 class="py-2">All Genres</h1></div>
+		<div class="col-xs-12">
+			<div class="card mb-3">
+				<div class="card-body text-center">
+					<a asp-area="" asp-controller="Category" asp-action="ViewAllGenresBoardgames"><h5 class="card-title">View all Boardgames</h5></a>
+				</div>
+			</div>
+		</div>
+		@foreach (var genre in Model)
+		{
+			<div class="col-lg-4 col-xs-12">
+				<div class="card mb-3">
+					<div class="card-body text-center">
+						<a asp-area="" asp-controller="Category" asp-action="sortByGenre" asp-route-id="@genre.Id"><h5 class="card-title">@genre.Name</h5></a>
+					</div>
+				</div>
+			</div>
+		}
+	</div>
+</div>
