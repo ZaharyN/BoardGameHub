@@ -1,5 +1,6 @@
 ﻿using BoardGameHub.Core.Contracts;
 using BoardGameHub.Core.Models.BoardgameViewModels;
+using BoardGameHub.Core.Models.CategoryModel;
 using BoardGameHub.Data.Data;
 using BoardGameHub.Data.Data.DataModels;
 using Microsoft.EntityFrameworkCore;
@@ -24,11 +25,11 @@ namespace BoardGameHub.Core.Services
                 {
                     Id = b.Id,
                     Name = b.Name,
-                    BoardgameGenres = b.BoardgamesGenres
-                        .Select(bg => new BoardgameGenreViewModel()
+                    BoardgameCategories = b.BoardgamesCategories
+                        .Select(bg => new CategoryViewModel()
                         {
-                            Id = bg.GenreId,
-                            Name = bg.Genre.Name
+                            Id = bg.CategoryId,
+                            Name = bg.Category.Name
                         })
                         .ToList(),
                     Rating = b.Rating,
@@ -43,17 +44,17 @@ namespace BoardGameHub.Core.Services
             return models;
         }
 
-        public async Task<IEnumerable<BoardgameGenreViewModel>> AllGenresAsync()
+        public async Task<IEnumerable<CategoryViewModel>> AllCategoriesAsync()
         {
-            IEnumerable<BoardgameGenreViewModel> genres = await context.Genres
-                .Select(g => new BoardgameGenreViewModel()
+            IEnumerable<CategoryViewModel> Categorys = await context.Categories
+                .Select(g => new CategoryViewModel()
                 {
                     Id = g.Id,
                     Name = g.Name
                 })
                 .ToListAsync();
 
-            return genres;
+            return Categorys;
         }
 
         public async Task<int> CreateAsync(BoardgameCreateFormModel model)
@@ -74,27 +75,27 @@ namespace BoardGameHub.Core.Services
                 IsUpcoming = model.IsUpcoming
             };
 
-            boardgame.BoardgamesGenres.Add(new BoardgameGenre()
+            boardgame.BoardgamesCategories.Add(new BoardgameCategory()
             {
                 BoardgameId = boardgame.Id,
-                GenreId = model.GenreId_1
+                CategoryId = model.CategoryId_1
             });
 
-            if (model.GenreId_2 != null)
+            if (model.CategoryId_2 != null)
             {
-                boardgame.BoardgamesGenres.Add(new BoardgameGenre()
+                boardgame.BoardgamesCategories.Add(new BoardgameCategory()
                 {
                     BoardgameId = boardgame.Id,
-                    GenreId = (int)model.GenreId_2
+                    CategoryId = (int)model.CategoryId_2
                 });
             }
 
-            if (model.GenreId_3 != null)
+            if (model.CategoryId_3 != null)
             {
-                boardgame.BoardgamesGenres.Add(new BoardgameGenre()
+                boardgame.BoardgamesCategories.Add(new BoardgameCategory()
                 {
                     BoardgameId = boardgame.Id,
-                    GenreId = (int)model.GenreId_3
+                    CategoryId = (int)model.CategoryId_3
                 });
             }
 
@@ -108,9 +109,9 @@ namespace BoardGameHub.Core.Services
         {
             BoardgameCreateFormModel model = new BoardgameCreateFormModel()
             {
-                Genres =
-                    await context.Genres.
-                    Select(g => new BoardgameGenreViewModel()
+                Categories =
+                    await context.Categories.
+                    Select(g => new CategoryViewModel()
                     {
                         Id = g.Id,
                         Name = g.Name
@@ -129,11 +130,11 @@ namespace BoardGameHub.Core.Services
             {
                 Id = boardgame.Id,
                 Name = boardgame.Name,
-                BoardgameGenres = boardgame.BoardgamesGenres
-                    .Select(bg => new BoardgameGenreViewModel()
+                BoardgameCategories = boardgame.BoardgamesCategories
+                    .Select(bg => new CategoryViewModel()
                     {
-                        Id = bg.GenreId,
-                        Name = bg.Genre.Name
+                        Id = bg.CategoryId,
+                        Name = bg.Category.Name
                     })
                     .ToList(),
                 Rating = boardgame.Rating,
@@ -158,7 +159,7 @@ namespace BoardGameHub.Core.Services
             {
                 Id = boardgame.Id,
                 Name = boardgame.Name,
-                Genres = await AllGenresAsync(),
+                Categories = await AllCategoriesAsync(),
                 Rating = boardgame.Rating,
                 AppropriateAge = boardgame.AppropriateAge,
                 AveragePlayingTime = boardgame.AveragePlayingTime,
@@ -172,14 +173,14 @@ namespace BoardGameHub.Core.Services
                 MaximumPlayersAllowedToPlay = boardgame.MaximumPlayersAllowedToPlay
             };
 
-            var boardgameGenres = boardgame.BoardgamesGenres.ToList();
+            var boardgameCategorys = boardgame.BoardgamesCategories.ToList();
 
-            model.GenreId_1 = boardgameGenres[0].GenreId;
-            model.GenreId_2 = boardgameGenres[1].GenreId;
+            model.CategoryId_1 = boardgameCategorys[0].CategoryId;
+            model.CategoryId_2 = boardgameCategorys[1].CategoryId;
 
-            if(boardgameGenres.Count > 2)
+            if(boardgameCategorys.Count > 2)
             {
-                model.GenreId_3 = boardgameGenres[2].GenreId;
+                model.CategoryId_3 = boardgameCategorys[2].CategoryId;
             }
 
             return model;
@@ -200,29 +201,29 @@ namespace BoardGameHub.Core.Services
             boardgame.MinimumPlayersAllowedToPlay = model.MinimumPlayersAllowedToPlay;
             boardgame.MaximumPlayersAllowedToPlay = model.MaximumPlayersAllowedToPlay;
 
-            context.BoardgamesGenres.RemoveRange(boardgame.BoardgamesGenres);
+            context.BoardgamesCategories.RemoveRange(boardgame.BoardgamesCategories);
 
-            if(boardgame.BoardgamesGenres.Count == 0)
+            if(boardgame.BoardgamesCategories.Count == 0)
             {
-                boardgame.BoardgamesGenres.AddRange(new BoardgameGenre[]
+                boardgame.BoardgamesCategories.AddRange(new BoardgameCategory[]
                 {
-                    new BoardgameGenre()
+                    new BoardgameCategory()
                     {
-                        GenreId = model.GenreId_1,
+                        CategoryId = model.CategoryId_1,
                         BoardgameId = boardgame.Id
                     },
-                    new BoardgameGenre()
+                    new BoardgameCategory()
                     {
-                        GenreId = model.GenreId_2,
+                        CategoryId = model.CategoryId_2,
                         BoardgameId = boardgame.Id
                     }
                 });
 
-                if(model.GenreId_3 != null)
+                if(model.CategoryId_3 != null)
                 {
-                    boardgame.BoardgamesGenres.Add(new BoardgameGenre()
+                    boardgame.BoardgamesCategories.Add(new BoardgameCategory()
                     {
-                        GenreId = (int)model.GenreId_3,
+                        CategoryId = (int)model.CategoryId_3,
                         BoardgameId = boardgame.Id
                     });
                 }
@@ -257,11 +258,11 @@ namespace BoardGameHub.Core.Services
                 {
                     Id = b.Id,
                     Name = b.Name,
-                    BoardgameGenres = b.BoardgamesGenres
-                        .Select(bg => new BoardgameGenreViewModel()
+                    BoardgameCategories = b.BoardgamesCategories
+                        .Select(bg => new CategoryViewModel()
                         {
-                            Id = bg.GenreId,
-                            Name = bg.Genre.Name
+                            Id = bg.CategoryId,
+                            Name = bg.Category.Name
                         })
                         .ToList(),
                     Rating = b.Rating,

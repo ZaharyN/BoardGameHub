@@ -1,4 +1,5 @@
 ﻿using BoardGameHub.Core.Models.BoardgameViewModels;
+using BoardGameHub.Core.Models.CategoryModel;
 using BoardGameHub.Data.Data.DataModels;
 
 namespace BoardGameHub.Core.Contracts
@@ -15,7 +16,7 @@ namespace BoardGameHub.Core.Contracts
         Task<BoardgameDeleteFormModel> GetDeleteFormAsync(Boardgame boardgame);
         Task DeleteConfirmed(Boardgame boardgame);
         Task<BoardgameDetailsViewModel> DetailsAsync(int id);
-        Task<IEnumerable<BoardgameGenreViewModel>> AllGenresAsync();
+        Task<IEnumerable<CategoryViewModel>> AllCategoriesAsync();
         Task<Boardgame> ExistsAsync(int id);
     }
 }

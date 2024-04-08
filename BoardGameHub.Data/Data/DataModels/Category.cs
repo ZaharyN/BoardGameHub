@@ -4,7 +4,7 @@ using static BoardGameHub.Data.Constants.DataConstants;
 
 namespace BoardGameHub.Data.Data.DataModels
 {
-    public class Genre
+    public class Category
     {
         [Key]
         public int Id { get; set; }
@@ -13,6 +13,6 @@ namespace BoardGameHub.Data.Data.DataModels
         [MaxLength(CategoryNameMaxLength)]
         public string Name { get; set; } = string.Empty;
 
-        public List<BoardgameGenre> BoardgamesGenres { get; set; } = null!;
+        public List<BoardgameCategory> BoardgamesCategories { get; set; } = null!;
     }
 }

@@ -55,7 +55,7 @@ namespace BoardGameHub.Controllers
         {
             if (!ModelState.IsValid)
             {
-                model.Genres = await boardgameService.AllGenresAsync();
+                model.Categories = await boardgameService.AllCategoriesAsync();
                 return View(model);
             }
 

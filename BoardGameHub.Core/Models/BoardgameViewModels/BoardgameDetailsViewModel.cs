@@ -1,4 +1,5 @@
-﻿using BoardGameHub.Data.Data.DataModels;
+﻿using BoardGameHub.Core.Models.CategoryModel;
+using BoardGameHub.Data.Data.DataModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace BoardGameHub.Core.Models.BoardgameViewModels
     {
 		public int Id { get; set; }
 		public string Name { get; set; } = string.Empty;
-		public List<BoardgameGenreViewModel> BoardgameGenres { get; set; } = null!;
+		public List<CategoryViewModel> BoardgameCategories { get; set; } = null!;
 		public double? Rating { get; set; }
 		public int AppropriateAge { get; set; }
 		public int AveragePlayingTime { get; set; }

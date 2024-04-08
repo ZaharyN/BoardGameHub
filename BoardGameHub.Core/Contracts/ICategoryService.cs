@@ -1,5 +1,5 @@
 ﻿using BoardGameHub.Core.Models.BoardgameViewModels;
-using BoardGameHub.Core.Models.CategoryViewModel;
+using BoardGameHub.Core.Models.CategoryModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace BoardGameHub.Core.Contracts
 {
-	public interface ICategoryService
+    public interface ICategoryService
 	{
 
-		Task<IEnumerable<BoardgameGenreViewModel>> ViewAllGenresAsync();
-		Task<IEnumerable<BoardgameActiveViewModel>> ViewAllGenresBoardgamesAsync();
-		Task<IEnumerable<BoardgameActiveViewModel>> SortByGenreAsync(int id);
+		Task<IEnumerable<CategoryViewModel>> ViewAllCategoriesAsync();
+		Task<IEnumerable<BoardgameActiveViewModel>> ViewAllCategoriesBoardgamesAsync();
+		Task<IEnumerable<BoardgameActiveViewModel>> SortByCategoryAsync(int id);
 		Task<IEnumerable<BoardgameActiveViewModel>> SortByLowestRatingAsync();
 		Task<IEnumerable<BoardgameActiveViewModel>> SortByHighestRatingAsync();
 		Task<IEnumerable<BoardgameActiveViewModel>> SortByLowestDifficultyAsync();

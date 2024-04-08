@@ -1,10 +1,12 @@
-﻿namespace BoardGameHub.Core.Models.BoardgameViewModels
+﻿using BoardGameHub.Core.Models.CategoryModel;
+
+namespace BoardGameHub.Core.Models.BoardgameViewModels
 {
-	public class BoardgameUpcomingViewModel
+    public class BoardgameUpcomingViewModel
     {
 		public int Id { get; set; }
 		public string Name { get; set; } = string.Empty;
-		public List<BoardgameGenreViewModel> BoardgameGenres { get; set; } = null!;
+		public List<CategoryViewModel> BoardgameCategories { get; set; } = null!;
 		public double? Rating { get; set; }
 		public int AppropriateAge { get; set; }
 		public double Difficulty { get; set; }

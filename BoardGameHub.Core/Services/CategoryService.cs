@@ -1,12 +1,12 @@
 ﻿using BoardGameHub.Core.Contracts;
 using BoardGameHub.Core.Models.BoardgameViewModels;
-using BoardGameHub.Core.Models.CategoryViewModel;
+using BoardGameHub.Core.Models.CategoryModel;
 using BoardGameHub.Data.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace BoardGameHub.Core.Services
 {
-	public class CategoryService : ICategoryService
+    public class CategoryService : ICategoryService
 	{
 		private readonly BoardGameHubDbContext context;
 
@@ -23,11 +23,11 @@ namespace BoardGameHub.Core.Services
 				{
 					Id = b.Id,
 					Name = b.Name,
-					BoardgameGenres = b.BoardgamesGenres
-						.Select(bg => new BoardgameGenreViewModel()
+					BoardgameCategories = b.BoardgamesCategories
+						.Select(bg => new CategoryViewModel()
 						{
-							Id = bg.GenreId,
-							Name = bg.Genre.Name
+							Id = bg.CategoryId,
+							Name = bg.Category.Name
 						})
 						.ToList(),
 					Rating = b.Rating,
@@ -50,11 +50,11 @@ namespace BoardGameHub.Core.Services
 				{
 					Id = b.Id,
 					Name = b.Name,
-					BoardgameGenres = b.BoardgamesGenres
-						.Select(bg => new BoardgameGenreViewModel()
+					BoardgameCategories = b.BoardgamesCategories
+						.Select(bg => new CategoryViewModel()
 						{
-							Id = bg.GenreId,
-							Name = bg.Genre.Name
+							Id = bg.CategoryId,
+							Name = bg.Category.Name
 						})
 						.ToList(),
 
@@ -70,21 +70,21 @@ namespace BoardGameHub.Core.Services
 			return sorted;
 		}
 
-		public async Task<IEnumerable<BoardgameActiveViewModel>> SortByGenreAsync(int id)
+		public async Task<IEnumerable<BoardgameActiveViewModel>> SortByCategoryAsync(int id)
 		{
 			var sorted = await context.Boardgames
-				.Where(b => b.BoardgamesGenres
-					.Any(bg => bg.GenreId == id))
+				.Where(b => b.BoardgamesCategories
+					.Any(bg => bg.CategoryId == id))
 				.AsNoTracking()
 				.Select(b => new BoardgameActiveViewModel()
 				{
 					Id = b.Id,
 					Name = b.Name,
-					BoardgameGenres = b.BoardgamesGenres
-						.Select(bg => new BoardgameGenreViewModel()
+					BoardgameCategories = b.BoardgamesCategories
+						.Select(bg => new CategoryViewModel()
 						{
-							Id = bg.GenreId,
-							Name = bg.Genre.Name
+							Id = bg.CategoryId,
+							Name = bg.Category.Name
 						})
 						.ToList(),
 
@@ -107,11 +107,11 @@ namespace BoardGameHub.Core.Services
 				{
 					Id = b.Id,
 					Name = b.Name,
-					BoardgameGenres = b.BoardgamesGenres
-						.Select(bg => new BoardgameGenreViewModel()
+					BoardgameCategories = b.BoardgamesCategories
+						.Select(bg => new CategoryViewModel()
 						{
-							Id = bg.GenreId,
-							Name = bg.Genre.Name
+							Id = bg.CategoryId,
+							Name = bg.Category.Name
 						})
 						.ToList(),
 
@@ -135,11 +135,11 @@ namespace BoardGameHub.Core.Services
 				{
 					Id = b.Id,
 					Name = b.Name,
-					BoardgameGenres = b.BoardgamesGenres
-						.Select(bg => new BoardgameGenreViewModel()
+					BoardgameCategories = b.BoardgamesCategories
+						.Select(bg => new CategoryViewModel()
 						{
-							Id = bg.GenreId,
-							Name = bg.Genre.Name
+							Id = bg.CategoryId,
+							Name = bg.Category.Name
 						})
 						.ToList(),
 
@@ -164,11 +164,11 @@ namespace BoardGameHub.Core.Services
 				{
 					Id = b.Id,
 					Name = b.Name,
-					BoardgameGenres = b.BoardgamesGenres
-						.Select(bg => new BoardgameGenreViewModel()
+					BoardgameCategories = b.BoardgamesCategories
+						.Select(bg => new CategoryViewModel()
 						{
-							Id = bg.GenreId,
-							Name = bg.Genre.Name
+							Id = bg.CategoryId,
+							Name = bg.Category.Name
 						})
 						.ToList(),
 
@@ -192,11 +192,11 @@ namespace BoardGameHub.Core.Services
 				{
 					Id = b.Id,
 					Name = b.Name,
-					BoardgameGenres = b.BoardgamesGenres
-						.Select(bg => new BoardgameGenreViewModel()
+					BoardgameCategories = b.BoardgamesCategories
+						.Select(bg => new CategoryViewModel()
 						{
-							Id = bg.GenreId,
-							Name = bg.Genre.Name
+							Id = bg.CategoryId,
+							Name = bg.Category.Name
 						})
 						.ToList(),
 
@@ -220,11 +220,11 @@ namespace BoardGameHub.Core.Services
 				{
 					Id = b.Id,
 					Name = b.Name,
-					BoardgameGenres = b.BoardgamesGenres
-						.Select(bg => new BoardgameGenreViewModel()
+					BoardgameCategories = b.BoardgamesCategories
+						.Select(bg => new CategoryViewModel()
 						{
-							Id = bg.GenreId,
-							Name = bg.Genre.Name
+							Id = bg.CategoryId,
+							Name = bg.Category.Name
 						})
 						.ToList(),
 
@@ -248,11 +248,11 @@ namespace BoardGameHub.Core.Services
 				{
 					Id = b.Id,
 					Name = b.Name,
-					BoardgameGenres = b.BoardgamesGenres
-						.Select(bg => new BoardgameGenreViewModel()
+					BoardgameCategories = b.BoardgamesCategories
+						.Select(bg => new CategoryViewModel()
 						{
-							Id = bg.GenreId,
-							Name = bg.Genre.Name
+							Id = bg.CategoryId,
+							Name = bg.Category.Name
 						})
 						.ToList(),
 
@@ -268,10 +268,10 @@ namespace BoardGameHub.Core.Services
 			return sorted;
 		}
 
-		public async Task<IEnumerable<BoardgameGenreViewModel>> ViewAllGenresAsync()
+		public async Task<IEnumerable<CategoryViewModel>> ViewAllCategoriesAsync()
 		{
-			var sorted = await context.Genres
-				.Select(g => new BoardgameGenreViewModel()
+			var sorted = await context.Categories
+				.Select(g => new CategoryViewModel()
 				{
 					Id = g.Id,
 					Name = g.Name
@@ -281,7 +281,7 @@ namespace BoardGameHub.Core.Services
 			return sorted;
 		}
 
-		public async Task<IEnumerable<BoardgameActiveViewModel>> ViewAllGenresBoardgamesAsync()
+		public async Task<IEnumerable<BoardgameActiveViewModel>> ViewAllCategoriesBoardgamesAsync()
 		{
 			IEnumerable<BoardgameActiveViewModel> models = await context.Boardgames
 				.AsNoTracking()
@@ -289,11 +289,11 @@ namespace BoardGameHub.Core.Services
 				{
 					Id = b.Id,
 					Name = b.Name,
-					BoardgameGenres = b.BoardgamesGenres
-						.Select(bg => new BoardgameGenreViewModel()
+					BoardgameCategories = b.BoardgamesCategories
+						.Select(bg => new CategoryViewModel()
 						{
-							Id = bg.GenreId,
-							Name = bg.Genre.Name
+							Id = bg.CategoryId,
+							Name = bg.Category.Name
 						})
 						.ToList(),
 					Rating = b.Rating,

@@ -15,14 +15,14 @@ namespace BoardGameHub.Controllers
 
 		public async Task<IActionResult> ViewAll()
 		{
-			var sorted = await categoryService.ViewAllGenresAsync();
+			var sorted = await categoryService.ViewAllCategoriesAsync();
 
 			return View(sorted);
 		}
 
 		public async Task<IActionResult> ViewAllGenresBoardgames()
 		{
-			var models = await categoryService.ViewAllGenresBoardgamesAsync();
+			var models = await categoryService.ViewAllCategoriesBoardgamesAsync();
 
 			return View(models);
 		}
@@ -41,9 +41,9 @@ namespace BoardGameHub.Controllers
 			return View(sorted);
 		}
 
-		public async Task<IActionResult> SortByGenre(int id)
+		public async Task<IActionResult> SortByCategory(int id)
 		{
-			var sorted = await categoryService.SortByGenreAsync(id);
+			var sorted = await categoryService.SortByCategoryAsync(id);
 
 			return View(sorted);
 		}

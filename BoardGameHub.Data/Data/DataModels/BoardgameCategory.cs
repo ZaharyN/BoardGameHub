@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace BoardGameHub.Data.Data.DataModels
 {
     
-    public class BoardgameGenre
+    public class BoardgameCategory
     {
         public Boardgame Boardgame { get; set; } = null!;
 
@@ -17,10 +17,10 @@ namespace BoardGameHub.Data.Data.DataModels
         [ForeignKey(nameof(Boardgame))]
         public int BoardgameId { get; set; }
 
-        [ForeignKey(nameof(GenreId))]
-        public Genre Genre { get; set; } = null!;
+        [ForeignKey(nameof(CategoryId))]
+        public Category Category { get; set; } = null!;
 
         [Required]
-        public int GenreId { get; set; }
+        public int CategoryId { get; set; }
     }
 }

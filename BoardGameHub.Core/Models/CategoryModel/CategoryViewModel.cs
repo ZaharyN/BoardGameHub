@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BoardGameHub.Core.Models.BoardgameViewModels
+namespace BoardGameHub.Core.Models.CategoryModel
 {
-    public class BoardgameGenreViewModel
+    public class CategoryViewModel
     {
         public int Id { get; set; }
         public string Name { get; set; } = string.Empty;

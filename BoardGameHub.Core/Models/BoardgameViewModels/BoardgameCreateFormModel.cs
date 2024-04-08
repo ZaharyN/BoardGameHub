@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using static BoardGameHub.Data.Constants.DataConstants;
 using static BoardGameHub.Core.Constants.MessageConstants;
+using BoardGameHub.Core.Models.CategoryModel;
 
 namespace BoardGameHub.Core.Models.BoardgameViewModels
 {
@@ -17,17 +18,17 @@ namespace BoardGameHub.Core.Models.BoardgameViewModels
         public string Name { get; set; } = string.Empty;
 
         [Required(ErrorMessage = RequiredMessage)]
-        [Display(Name = "Main genre")]
-        public int GenreId_1 { get; set; }
+        [Display(Name = "Main category")]
+        public int CategoryId_1 { get; set; }
 
-        [Display(Name= "Subgenre 1")]
-        public int? GenreId_2 { get; set; }
+        [Display(Name= "Subcategory 1")]
+        public int? CategoryId_2 { get; set; }
 
-        [Display(Name = "Subgenre 2")]
-        public int? GenreId_3 { get; set; }
+        [Display(Name = "Subcategory 2")]
+        public int? CategoryId_3 { get; set; }
 
-        public IEnumerable<BoardgameGenreViewModel> Genres { get; set; } =
-            new List<BoardgameGenreViewModel>();
+        public IEnumerable<CategoryViewModel> Categories { get; set; } =
+            new List<CategoryViewModel>();
 
         [Required(ErrorMessage = RequiredMessage)]
         [Range(BoardgameRatingMinValue, 
