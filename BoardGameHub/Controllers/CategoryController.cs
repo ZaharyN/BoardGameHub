@@ -20,7 +20,7 @@ namespace BoardGameHub.Controllers
 			return View(sorted);
 		}
 
-		public async Task<IActionResult> ViewAllGenresBoardgames()
+		public async Task<IActionResult> ViewAllCategoriesBoardgames()
 		{
 			var models = await categoryService.ViewAllCategoriesBoardgamesAsync();
 

@@ -5,4 +5,26 @@
 	var models = Model.ToList();
 }
 
-<h1>Coming soon games!</h1>
+<h1 class="text-center">Coming soon games</h1>
+<hr />
+
+
+<div class="container">
+	<div class="row">
+		@foreach (var e in Model)
+		{
+			<div class="col-lg-3 col-xs-12">
+				<div class="card mb-3">
+					<img class="card-img-top" src="@e.CardImageUrl" alt="Card image cap">
+					<div class="card-body">
+						<h5 class="card-title">@e.Name</h5>
+						<p class="card-text">Appropriate Age: @e.AppropriateAge+</p>
+						<p class="card-text">Difficulty: @e.Difficulty</p>
+						<p class="card-text">Rating: @e.Rating</p>
+						<p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+					</div>
+				</div>
+			</div>
+		}
+	</div>
+</div>
