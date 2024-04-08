@@ -9,7 +9,7 @@ namespace BoardGameHub.Core.Contracts
         Task<IEnumerable<BoardgameActiveViewModel>> ActiveAsync();
         Task<IEnumerable<BoardgameUpcomingViewModel>> UpcomingAsync();
         Task PromoteToActiveAsync(int id);
-        Task<int> CreateAsync(BoardgameCreateFormModel model);
+        Task<int> CreateAsync(BoardgameCreateFormModel form);
         Task<BoardgameCreateFormModel> GetCreateFormAsync();
         Task<BoardgameEditFormModel> GetEditFormAsync(Boardgame boardgame);
         Task EditAsync(BoardgameEditFormModel model, Boardgame boardgame);

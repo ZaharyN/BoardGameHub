@@ -62,9 +62,11 @@ namespace BoardGameHub.Data.Constants
         public const string ReservationTotalPriceMinValue = "10.00";
         public const string ReservationTotalPriceMaxValue = "900.00";
 
-        //Application user constants:
+        public const string ReservationDateTimeFormat = "dd/MM/yyyy HH:mm";
 
-        public const string ApplicationUserPhoneNumber = @"^(\+?359|0)?(87[0-9]{7}|88[789][0-9]{6}|89[0-9]{7}|98[0-9]{7})$";
+		//Application user constants:
+
+		public const string ApplicationUserPhoneNumber = @"^(\+?359|0)?(87[0-9]{7}|88[789][0-9]{6}|89[0-9]{7}|98[0-9]{7})$";
 
         public const int UserFirstNameMinLength = 2;
         public const int UserFirstNameMaxLength = 30;

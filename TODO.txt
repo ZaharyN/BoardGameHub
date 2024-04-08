@@ -1,1 +1,3 @@
-- Add "Promote to Active button in Upcoming view cards"
+- Add "Promote to Active" button in Upcoming view card
+- In HomePage we will have "Our prices" with prices listing
+- Custom error 404 and 502 pages
