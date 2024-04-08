@@ -15,11 +15,11 @@ namespace BoardGameHub.Core.Services
             context = _context;
         }
 
-		public async Task<IEnumerable<BoardgameActiveViewModel>> SortByLowestDifficultyAsync()
+		public async Task<IEnumerable<CategoryBoardgameViewModel>> SortByLowestDifficultyAsync()
 		{
 			var sorted = await context.Boardgames
 				.AsNoTracking()
-				.Select(b => new BoardgameActiveViewModel()
+				.Select(b => new CategoryBoardgameViewModel()
 				{
 					Id = b.Id,
 					Name = b.Name,
@@ -30,6 +30,8 @@ namespace BoardGameHub.Core.Services
 							Name = bg.Category.Name
 						})
 						.ToList(),
+					PriceInShop = b.PriceInShop,
+					AppropriateAge = b.AppropriateAge,
 					Rating = b.Rating,
 					Difficulty = b.Difficulty,
 					CardImageUrl = b.CardImageUrl,
@@ -42,11 +44,11 @@ namespace BoardGameHub.Core.Services
 			return sorted;
 		}
 
-		public async Task<IEnumerable<BoardgameActiveViewModel>> SortByHighestDifficultyAsync()
+		public async Task<IEnumerable<CategoryBoardgameViewModel>> SortByHighestDifficultyAsync()
 		{
 			var sorted = await context.Boardgames
 				.AsNoTracking()
-				.Select(b => new BoardgameActiveViewModel()
+				.Select(b => new CategoryBoardgameViewModel()
 				{
 					Id = b.Id,
 					Name = b.Name,
@@ -57,7 +59,8 @@ namespace BoardGameHub.Core.Services
 							Name = bg.Category.Name
 						})
 						.ToList(),
-
+					PriceInShop = b.PriceInShop,
+					AppropriateAge = b.AppropriateAge,
 					Rating = b.Rating,
 					Difficulty = b.Difficulty,
 					CardImageUrl = b.CardImageUrl,
@@ -70,13 +73,13 @@ namespace BoardGameHub.Core.Services
 			return sorted;
 		}
 
-		public async Task<IEnumerable<BoardgameActiveViewModel>> SortByCategoryAsync(int id)
+		public async Task<IEnumerable<CategoryBoardgameViewModel>> SortByCategoryAsync(int id)
 		{
 			var sorted = await context.Boardgames
 				.Where(b => b.BoardgamesCategories
 					.Any(bg => bg.CategoryId == id))
 				.AsNoTracking()
-				.Select(b => new BoardgameActiveViewModel()
+				.Select(b => new CategoryBoardgameViewModel()
 				{
 					Id = b.Id,
 					Name = b.Name,
@@ -87,7 +90,8 @@ namespace BoardGameHub.Core.Services
 							Name = bg.Category.Name
 						})
 						.ToList(),
-
+					PriceInShop = b.PriceInShop,
+					AppropriateAge = b.AppropriateAge,
 					Rating = b.Rating,
 					Difficulty = b.Difficulty,
 					CardImageUrl = b.CardImageUrl,
@@ -99,11 +103,11 @@ namespace BoardGameHub.Core.Services
 			return sorted;
 		}
 
-		public async Task<IEnumerable<BoardgameActiveViewModel>> SortByMinPlayersAsync()
+		public async Task<IEnumerable<CategoryBoardgameViewModel>> SortByMinPlayersAsync()
 		{
 			var sorted = await context.Boardgames
 				.AsNoTracking()
-				.Select(b => new BoardgameActiveViewModel()
+				.Select(b => new CategoryBoardgameViewModel()
 				{
 					Id = b.Id,
 					Name = b.Name,
@@ -114,7 +118,8 @@ namespace BoardGameHub.Core.Services
 							Name = bg.Category.Name
 						})
 						.ToList(),
-
+					PriceInShop = b.PriceInShop,
+					AppropriateAge = b.AppropriateAge,
 					Rating = b.Rating,
 					Difficulty = b.Difficulty,
 					CardImageUrl = b.CardImageUrl,
@@ -127,11 +132,11 @@ namespace BoardGameHub.Core.Services
 
 			return sorted;
 		}
-		public async Task<IEnumerable<BoardgameActiveViewModel>> SortByMaxPlayersAsync()
+		public async Task<IEnumerable<CategoryBoardgameViewModel>> SortByMaxPlayersAsync()
 		{
 			var sorted = await context.Boardgames
 				.AsNoTracking()
-				.Select(b => new BoardgameActiveViewModel()
+				.Select(b => new CategoryBoardgameViewModel()
 				{
 					Id = b.Id,
 					Name = b.Name,
@@ -142,7 +147,8 @@ namespace BoardGameHub.Core.Services
 							Name = bg.Category.Name
 						})
 						.ToList(),
-
+					PriceInShop = b.PriceInShop,
+					AppropriateAge = b.AppropriateAge,
 					Rating = b.Rating,
 					Difficulty = b.Difficulty,
 					CardImageUrl = b.CardImageUrl,
@@ -156,11 +162,11 @@ namespace BoardGameHub.Core.Services
 			return sorted;
 		}
 
-		public async Task<IEnumerable<BoardgameActiveViewModel>> SortByLowestPriceAsync()
+		public async Task<IEnumerable<CategoryBoardgameViewModel>> SortByLowestPriceAsync()
 		{
 			var sorted = await context.Boardgames
 				.AsNoTracking()
-				.Select(b => new BoardgameActiveViewModel()
+				.Select(b => new CategoryBoardgameViewModel()
 				{
 					Id = b.Id,
 					Name = b.Name,
@@ -171,24 +177,25 @@ namespace BoardGameHub.Core.Services
 							Name = bg.Category.Name
 						})
 						.ToList(),
-
+					PriceInShop = b.PriceInShop,
+					AppropriateAge = b.AppropriateAge,
 					Rating = b.Rating,
 					Difficulty = b.Difficulty,
 					CardImageUrl = b.CardImageUrl,
 					MinimumPlayersAllowedToPlay = b.MinimumPlayersAllowedToPlay,
 					MaximumPlayersAllowedToPlay = b.MaximumPlayersAllowedToPlay
 				})
-				//.OrderBy(b => b.PriceInShop)
+				.OrderBy(b => b.PriceInShop)
 				.ToListAsync();
 
 			return sorted;
 		}
 
-		public async Task<IEnumerable<BoardgameActiveViewModel>> SortByHighestPriceAsync()
+		public async Task<IEnumerable<CategoryBoardgameViewModel>> SortByHighestPriceAsync()
 		{
 			var sorted = await context.Boardgames
 				.AsNoTracking()
-				.Select(b => new BoardgameActiveViewModel()
+				.Select(b => new CategoryBoardgameViewModel()
 				{
 					Id = b.Id,
 					Name = b.Name,
@@ -199,24 +206,25 @@ namespace BoardGameHub.Core.Services
 							Name = bg.Category.Name
 						})
 						.ToList(),
-					
+					PriceInShop = b.PriceInShop,
+					AppropriateAge = b.AppropriateAge,
 					Rating = b.Rating,
 					Difficulty = b.Difficulty,
 					CardImageUrl = b.CardImageUrl,
 					MinimumPlayersAllowedToPlay = b.MinimumPlayersAllowedToPlay,
 					MaximumPlayersAllowedToPlay = b.MaximumPlayersAllowedToPlay
 				})
-				//.OrderByDescending(b => b.PriceInShop)
+				.OrderByDescending(b => b.PriceInShop)
 				.ToListAsync();
 
 			return sorted;
 		}
 
-		public async Task<IEnumerable<BoardgameActiveViewModel>> SortByLowestRatingAsync()
+		public async Task<IEnumerable<CategoryBoardgameViewModel>> SortByLowestRatingAsync()
 		{
 			var sorted = await context.Boardgames
 				.AsNoTracking()
-				.Select(b => new BoardgameActiveViewModel()
+				.Select(b => new CategoryBoardgameViewModel()
 				{
 					Id = b.Id,
 					Name = b.Name,
@@ -227,7 +235,8 @@ namespace BoardGameHub.Core.Services
 							Name = bg.Category.Name
 						})
 						.ToList(),
-
+					PriceInShop = b.PriceInShop,
+					AppropriateAge = b.AppropriateAge,
 					Rating = b.Rating,
 					Difficulty = b.Difficulty,
 					CardImageUrl = b.CardImageUrl,
@@ -240,11 +249,11 @@ namespace BoardGameHub.Core.Services
 			return sorted;
 		}
 
-		public async Task<IEnumerable<BoardgameActiveViewModel>> SortByHighestRatingAsync()
+		public async Task<IEnumerable<CategoryBoardgameViewModel>> SortByHighestRatingAsync()
 		{
 			var sorted = await context.Boardgames
 				.AsNoTracking()
-				.Select(b => new BoardgameActiveViewModel()
+				.Select(b => new CategoryBoardgameViewModel()
 				{
 					Id = b.Id,
 					Name = b.Name,
@@ -255,7 +264,8 @@ namespace BoardGameHub.Core.Services
 							Name = bg.Category.Name
 						})
 						.ToList(),
-
+					PriceInShop = b.PriceInShop,
+					AppropriateAge = b.AppropriateAge,
 					Rating = b.Rating,
 					Difficulty = b.Difficulty,
 					CardImageUrl = b.CardImageUrl,
@@ -281,11 +291,11 @@ namespace BoardGameHub.Core.Services
 			return sorted;
 		}
 
-		public async Task<IEnumerable<BoardgameActiveViewModel>> AllCategoriesBoardgamesAsync()
+		public async Task<IEnumerable<CategoryBoardgameViewModel>> AllCategoriesBoardgamesAsync()
 		{
-			IEnumerable<BoardgameActiveViewModel> models = await context.Boardgames
+			IEnumerable<CategoryBoardgameViewModel> models = await context.Boardgames
 				.AsNoTracking()
-				.Select(b => new BoardgameActiveViewModel()
+				.Select(b => new CategoryBoardgameViewModel()
 				{
 					Id = b.Id,
 					Name = b.Name,
@@ -296,6 +306,7 @@ namespace BoardGameHub.Core.Services
 							Name = bg.Category.Name
 						})
 						.ToList(),
+					PriceInShop = b.PriceInShop,
 					Rating = b.Rating,
 					AppropriateAge = b.AppropriateAge,
 					Difficulty = b.Difficulty,

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<BoardgameActiveViewModel>
+﻿@model IEnumerable<CategoryBoardgameViewModel>
 
 @{
 	ViewData["Title"] = "Category boardgames";
@@ -13,10 +13,14 @@
 				<label for="sortSelect">Sort By:</label>
 				<select class="form-control" id="sortSelect" onchange="location = this.value;">
 					<option value="" selected disabled hidden>Choose here</option>
-					<option value="SortByLowestRating">Lowest Rating</option>
-					<option value="SortByHighestRating">Highest Rating</option>
-					<option value="SortByLowestDifficulty">Lowest Difficulty</option>
-					<option value="SortByHighestDifficulty">Highest Difficulty</option>
+					<option value="SortByLowestRating">Lowest rating</option>
+					<option value="SortByHighestRating">Highest rating</option>
+					<option value="SortByLowestDifficulty">Lowest difficulty</option>
+					<option value="SortByHighestDifficulty">Highest difficulty</option>
+					<option value="SortByLowestPrice">Lowest price</option>
+					<option value="SortByHighestPrice">Highest price</option>
+					<option value="SortByMinPlayers">Minimum players allowed</option>
+					<option value="SortByMaxPlayers">Maximum players allowed</option>
 				</select>
 			</div>
 		</div>
@@ -30,7 +34,8 @@
 						<p class="card-text">Appropriate Age: @e.AppropriateAge+</p>
 						<p class="card-text">Difficulty: @e.Difficulty</p>
 						<p class="card-text">Rating: @e.Rating</p>
-						<p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+						<p class="card-text">Price in shop: @e.PriceInShop lv.</p>
+						<p class="card-text">Players: @e.MinimumPlayersAllowedToPlay - @e.MaximumPlayersAllowedToPlay</p>
 					</div>
 				</div>
 			</div>

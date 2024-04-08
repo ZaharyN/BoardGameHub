@@ -11,15 +11,15 @@ namespace BoardGameHub.Core.Contracts
     public interface ICategoryService
 	{
 		Task<IEnumerable<CategoryViewModel>> AllCategoriesAsync();
-		Task<IEnumerable<BoardgameActiveViewModel>> AllCategoriesBoardgamesAsync();
-		Task<IEnumerable<BoardgameActiveViewModel>> SortByCategoryAsync(int id);
-		Task<IEnumerable<BoardgameActiveViewModel>> SortByLowestRatingAsync();
-		Task<IEnumerable<BoardgameActiveViewModel>> SortByHighestRatingAsync();
-		Task<IEnumerable<BoardgameActiveViewModel>> SortByLowestDifficultyAsync();
-		Task<IEnumerable<BoardgameActiveViewModel>> SortByHighestDifficultyAsync();
-		Task<IEnumerable<BoardgameActiveViewModel>> SortByLowestPriceAsync();
-		Task<IEnumerable<BoardgameActiveViewModel>> SortByHighestPriceAsync();
-		Task<IEnumerable<BoardgameActiveViewModel>> SortByMinPlayersAsync();
-		Task<IEnumerable<BoardgameActiveViewModel>> SortByMaxPlayersAsync();
+		Task<IEnumerable<CategoryBoardgameViewModel>> AllCategoriesBoardgamesAsync();
+		Task<IEnumerable<CategoryBoardgameViewModel>> SortByCategoryAsync(int id);
+		Task<IEnumerable<CategoryBoardgameViewModel>> SortByLowestRatingAsync();
+		Task<IEnumerable<CategoryBoardgameViewModel>> SortByHighestRatingAsync();
+		Task<IEnumerable<CategoryBoardgameViewModel>> SortByLowestDifficultyAsync();
+		Task<IEnumerable<CategoryBoardgameViewModel>> SortByHighestDifficultyAsync();
+		Task<IEnumerable<CategoryBoardgameViewModel>> SortByLowestPriceAsync();
+		Task<IEnumerable<CategoryBoardgameViewModel>> SortByHighestPriceAsync();
+		Task<IEnumerable<CategoryBoardgameViewModel>> SortByMinPlayersAsync();
+		Task<IEnumerable<CategoryBoardgameViewModel>> SortByMaxPlayersAsync();
 	}
 }
