@@ -13,16 +13,16 @@ namespace BoardGameHub.Controllers
 			categoryService = _categoryService;
         }
 
-		public async Task<IActionResult> ViewAll()
+		public async Task<IActionResult> All()
 		{
-			var sorted = await categoryService.ViewAllCategoriesAsync();
+			var sorted = await categoryService.AllCategoriesAsync();
 
 			return View(sorted);
 		}
 
-		public async Task<IActionResult> ViewAllCategoriesBoardgames()
+		public async Task<IActionResult> AllCategoriesBoardgames()
 		{
-			var models = await categoryService.ViewAllCategoriesBoardgamesAsync();
+			var models = await categoryService.AllCategoriesBoardgamesAsync();
 
 			return View(models);
 		}

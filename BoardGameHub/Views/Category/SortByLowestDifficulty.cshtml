@@ -1,3 +1,42 @@
 ﻿@model IEnumerable<BoardgameActiveViewModel>
 
+@{
+	ViewData["Title"] = "Category boardgames";
+	var models = Model.ToList();
+}
+
+
+<div class="container">
+	<div class="row">
+		<div class="text-center col-xs-12">Sorted by lowest difficulty</div>
+		<div class="col-xs-12">
+			<div class="w-25 my-2 d-flex justify-content-end">
+				<label for="sortSelect">Sort By:</label>
+				<select class="form-control" id="sortSelect" onchange="location = this.value;">
+					<option value="" selected disabled hidden>Choose here</option>
+					<option value="SortByLowestRating">Lowest Rating</option>
+					<option value="SortByHighestRating">Highest Rating</option>
+					<option value="SortByLowestDifficulty">Lowest Difficulty</option>
+					<option value="SortByHighestDifficulty">Highest Difficulty</option>
+				</select>
+			</div>
+		</div>
+		@foreach (var e in Model)
+		{
+			<div class="col-lg-3 col-xs-12">
+				<div class="card mb-3">
+					<img class="card-img-top" src="@e.CardImageUrl" alt="Card image cap">
+					<div class="card-body">
+						<h5 class="card-title">@e.Name</h5>
+						<p class="card-text">Appropriate Age: @e.AppropriateAge+</p>
+						<p class="card-text">Difficulty: @e.Difficulty</p>
+						<p class="card-text">Rating: @e.Rating</p>
+						<p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+					</div>
+				</div>
+			</div>
+		}
+	</div>
+</div>
+
 

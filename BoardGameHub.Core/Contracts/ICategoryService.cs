@@ -10,9 +10,8 @@ namespace BoardGameHub.Core.Contracts
 {
     public interface ICategoryService
 	{
-
-		Task<IEnumerable<CategoryViewModel>> ViewAllCategoriesAsync();
-		Task<IEnumerable<BoardgameActiveViewModel>> ViewAllCategoriesBoardgamesAsync();
+		Task<IEnumerable<CategoryViewModel>> AllCategoriesAsync();
+		Task<IEnumerable<BoardgameActiveViewModel>> AllCategoriesBoardgamesAsync();
 		Task<IEnumerable<BoardgameActiveViewModel>> SortByCategoryAsync(int id);
 		Task<IEnumerable<BoardgameActiveViewModel>> SortByLowestRatingAsync();
 		Task<IEnumerable<BoardgameActiveViewModel>> SortByHighestRatingAsync();

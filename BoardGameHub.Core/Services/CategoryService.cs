@@ -199,7 +199,7 @@ namespace BoardGameHub.Core.Services
 							Name = bg.Category.Name
 						})
 						.ToList(),
-
+					
 					Rating = b.Rating,
 					Difficulty = b.Difficulty,
 					CardImageUrl = b.CardImageUrl,
@@ -268,7 +268,7 @@ namespace BoardGameHub.Core.Services
 			return sorted;
 		}
 
-		public async Task<IEnumerable<CategoryViewModel>> ViewAllCategoriesAsync()
+		public async Task<IEnumerable<CategoryViewModel>> AllCategoriesAsync()
 		{
 			var sorted = await context.Categories
 				.Select(g => new CategoryViewModel()
@@ -281,7 +281,7 @@ namespace BoardGameHub.Core.Services
 			return sorted;
 		}
 
-		public async Task<IEnumerable<BoardgameActiveViewModel>> ViewAllCategoriesBoardgamesAsync()
+		public async Task<IEnumerable<BoardgameActiveViewModel>> AllCategoriesBoardgamesAsync()
 		{
 			IEnumerable<BoardgameActiveViewModel> models = await context.Boardgames
 				.AsNoTracking()
