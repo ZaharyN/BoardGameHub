@@ -27,7 +27,7 @@ namespace BoardGameHub.Core.Services
 				.Select(b => new ReservationBoardgameViewModel()
 				{
 					Id = b.Id,
-					Name = b.Name
+					Name = b.Name,
 				})
 				.ToListAsync(),
 
@@ -36,8 +36,10 @@ namespace BoardGameHub.Core.Services
 					.Select(rp => new ReservationPlaceViewModel()
 					{
 						Id = rp.Id,
-						Name = rp.Name
-					}).ToListAsync()
+						Name = rp.Name,
+						PlaceTypeId = rp.PlaceTypeId,
+					})
+					.ToListAsync()
 			};
 
 			return form;
@@ -54,22 +56,44 @@ namespace BoardGameHub.Core.Services
 				throw new InvalidOperationException("Invalid date or time format");
 			}
 
+			// Initialize two lists here, search in the database and add them later;
+
 			Reservation reservation = new Reservation()
 			{
-				//Id = await LastReservationId() + 1,
-				//ReservationOwner = await GetUser(userId),
-				//ReservationOwnerId = userId,
-				//DateTime = dateTime,
-				//AdditionalComment = form.AdditionalComment != null ? 
-				//	form.AdditionalComment : null,
-				//ReservationPlaces = form.PlacesReserved
+				Id = await LastReservationId() + 1,
+				ReservationOwnerId = userId,
+				DateTime = dateTime,
+				AdditionalComment = form.AdditionalComment ?? null,
+				//ReservationPlaces = 
+				//form.PlacesReserved
 				//	.Select(pr => new ReservationPlace()
 				//	{
 				//		Id = pr.Id,
-				//		Name=pr.Name,
+				//		Name = pr.Name,
+				//		PlaceTypeId = pr.PlaceTypeId,
+				//		IsReserved = true,
 				//	})
-				
+				//	.ToList()
 			};
+
+			// this foreaches must go above
+			foreach (var place in reservation.ReservationPlaces)
+			{
+				place.ReservationId = reservation.Id;
+			}
+
+			foreach (var bg in form.BoardgamesReserved)
+			{
+				Boardgame? boardgame = await context.Boardgames
+					.FirstOrDefaultAsync(b => b.Id == bg.Id);
+
+				if(boardgame != null)
+				{
+					 reservation.BoardgamesReserved.Add(boardgame);
+				}
+			}
+			context.Reservations.Add(reservation);
+			await context.SaveChangesAsync();
 
 		}
 

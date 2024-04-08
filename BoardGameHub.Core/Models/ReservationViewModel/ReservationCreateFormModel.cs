@@ -29,6 +29,7 @@ namespace BoardGameHub.Core.Models.ReservationViewModel
         [StringLength(ReservationAdditionalCommentMaxValue)]
         public string? AdditionalComment { get; set; }
 
+
         public List<ReservationBoardgameViewModel> BoardgamesReserved { get; set; } = 
             new List<ReservationBoardgameViewModel>();
 

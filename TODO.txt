@@ -1,3 +1,17 @@
+Boardgame controller:
+
 - Add "Promote to Active" button in Upcoming view card
+- Add "Details" button to every boardgame in Active and Upcoming and in Categories pages
+- Add "Delete" button
+- Add "Edit" button 
+- Create "Details" page for every boardgame
+
+Home controller:
+- The whole home page
 - In HomePage we will have "Our prices" with prices listing
+
+Reservation controller:
+- 
+
+Other:
 - Custom error 404 and 502 pages
