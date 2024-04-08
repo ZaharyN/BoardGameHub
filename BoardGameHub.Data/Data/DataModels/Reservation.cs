@@ -14,7 +14,7 @@ namespace BoardGameHub.Data.Data.DataModels
 
         [Required]
         [ForeignKey(nameof(ReservationOwner))]
-        public string ReservationOwnerId { get; set; }
+        public string ReservationOwnerId { get; set; } = string.Empty;
 
         [Display(Name = "Date and time")]
         [Required]
@@ -23,14 +23,7 @@ namespace BoardGameHub.Data.Data.DataModels
         [MaxLength(ReservationAdditionalCommentMaxValue)]
         public string? AdditionalComment { get; set; }
 
-        [Required]
-        [Column(TypeName = "decimal(18,2)")]
-        [Range(typeof(decimal),
-            ReservationTotalPriceMinValue,
-            ReservationTotalPriceMaxValue)]
-        public decimal TotalPrice { get; set; }
-
-        [Required]
+		[Required]
         public List<ReservationPlace> ReservationPlaces { get; set; } = new List<ReservationPlace>();
 
         public List<Boardgame>? BoardgamesReserved { get; set; } = new List<Boardgame>();
