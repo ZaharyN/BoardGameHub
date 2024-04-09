@@ -108,16 +108,34 @@ namespace BoardGameHub.Core.Services
 			return model;
 		}
 
-		public Task<Reservation> GetDeleteFormAsync()
+		public async Task<ReservationDeleteFormModel> GetDeleteFormAsync(Reservation reservation)
 		{
-			throw new NotImplementedException();
+			var form = new ReservationDeleteFormModel()
+			{
+				Id= reservation.Id,
+				DateTime = reservation.DateTime
+			};
+
+			return form;
 		}
 
-		public Task<ReservationDeleteFormModel> DeleteConfirmedAsync()
+		public async Task DeleteConfirmedAsync(ReservationDeleteFormModel form)
 		{
-			throw new NotImplementedException();
-		}
+			Reservation reservation = await context.Reservations.FindAsync(form.Id);
 
+			foreach (var place in reservation.ReservationPlaces)
+			{
+				place.IsReserved = false;
+			}
+			foreach (var boardgame in reservation.BoardgamesReserved)
+			{
+				boardgame.IsReserved = false;
+			}
+
+			context.Reservations.Remove(reservation);
+			await context.SaveChangesAsync();
+
+		}
 		public async Task<int> LastReservationId()
 		{
 			Reservation? lastReservation = await context.Reservations
