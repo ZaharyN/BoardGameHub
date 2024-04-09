@@ -294,5 +294,25 @@ namespace BoardGameHub.Core.Services
 
             await context.SaveChangesAsync();
         }
-    }
+
+		public async Task<IEnumerable<Boardgame>> GetRandomBoardgames()
+		{
+            Random random = new();
+
+            return await context.Boardgames
+                .Where(b => b.IsUpcoming == false
+                && b.Id == random.Next(0, GetLastBoardgameId().Result))
+                .Take(5)
+                .ToListAsync();
+		}
+
+		public async Task<int> GetLastBoardgameId()
+		{
+            Boardgame lastBoardgameById = await context.Boardgames
+                .OrderBy(b => b.Id)
+                .LastAsync();
+
+            return lastBoardgameById.Id;
+		}
+	}
 }

@@ -18,5 +18,7 @@ namespace BoardGameHub.Core.Contracts
         Task<BoardgameDetailsViewModel> DetailsAsync(int id);
         Task<IEnumerable<CategoryViewModel>> AllCategoriesAsync();
         Task<Boardgame> ExistsAsync(int id);
+        Task<IEnumerable<Boardgame>> GetRandomBoardgames();
+        Task<int> GetLastBoardgameId();
     }
 }
