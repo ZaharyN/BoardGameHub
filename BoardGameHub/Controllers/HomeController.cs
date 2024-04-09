@@ -3,6 +3,7 @@ using BoardGameHub.Core.Models;
 using BoardGameHub.Data.Data.DataModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using System.Security.Claims;
 
 namespace BoardGameHub.Controllers
 {
@@ -33,7 +34,6 @@ namespace BoardGameHub.Controllers
         {
             return View();
         }
-
-
-    }
+		
+	}
 }

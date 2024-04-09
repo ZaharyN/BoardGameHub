@@ -1,6 +1,8 @@
 ﻿using BoardGameHub.Core.Contracts;
 using BoardGameHub.Data.Data;
 using BoardGameHub.Data.Data.DataModels;
+using Microsoft.AspNet.Identity;
+using System.Security.Claims;
 
 namespace BoardGameHub.Core.Services
 {
@@ -25,5 +27,6 @@ namespace BoardGameHub.Core.Services
 
 			return $"{user.FirstName} {user.LastName}";
 		}
+		
 	}
 }
