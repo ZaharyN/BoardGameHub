@@ -21,25 +21,9 @@ namespace BoardGameHub.Core.Services
 		{
 			var form = new ReservationCreateFormModel()
 			{
-				FreeBoardgames = await context.Boardgames
-				.Where(b => b.IsReserved == false
-				&& b.IsUpcoming == false)
-				.Select(b => new ReservationBoardgameViewModel()
-				{
-					Id = b.Id,
-					Name = b.Name,
-				})
-				.ToListAsync(),
+				FreeBoardgames = await GetAllFreeBoardgamesAsync(),
 
-				FreePlaces = await context.ReservationPlaces
-					.Where(rp => rp.IsReserved == false)
-					.Select(rp => new ReservationPlaceViewModel()
-					{
-						Id = rp.Id,
-						Name = rp.Name,
-						PlaceTypeId = rp.PlaceTypeId,
-					})
-					.ToListAsync()
+				FreePlaces = await GetAllFreeReservationPlacesAsync()
 			};
 
 			return form;
@@ -63,7 +47,7 @@ namespace BoardGameHub.Core.Services
 			{
 				ReservationPlace currentPlace = await context.ReservationPlaces.FindAsync(resPlace.Id);
 
-				if(resPlace != null)
+				if (resPlace != null)
 				{
 					places.Add(currentPlace);
 				}
@@ -73,7 +57,7 @@ namespace BoardGameHub.Core.Services
 			{
 				Boardgame currentBg = await context.Boardgames.FindAsync(gameReserved.Id);
 
-				if(currentBg != null)
+				if (currentBg != null)
 				{
 					games.Add(currentBg);
 				}
@@ -93,14 +77,35 @@ namespace BoardGameHub.Core.Services
 			await context.SaveChangesAsync();
 		}
 
-		public Task<IEnumerable<ReservationViewModel>> MyReservationsAsync(string id)
+		public async Task<IEnumerable<ReservationViewModel>> MyReservationsAsync(string id)
 		{
-			throw new NotImplementedException();
+			string userName = GetUser(id).Result.FirstName;
+
+			var reservations = await context.Reservations
+				.Where(r => r.ReservationOwnerId == id)
+				.Select(r => new ReservationViewModel()
+				{
+					Id = r.Id,
+					ReservationName = $"{userName}'s reservation",
+					DateTime = r.DateTime.ToString(ReservationDateTimeFormat)
+				})
+				.ToListAsync();
+
+			return reservations;
 		}
 
-		public Task<ReservationDetailsViewModel> ReservationDetailsAsync()
+		public async Task<ReservationDetailsViewModel> ReservationDetailsAsync(Reservation reservation)
 		{
-			throw new NotImplementedException();
+			var model = new ReservationDetailsViewModel()
+			{
+				Id = reservation.Id,
+				DateTime = reservation.DateTime.ToString(ReservationDateTimeFormat),
+				AdditionalComment = reservation.AdditionalComment ?? null,
+				PlacesReserved = reservation.ReservationPlaces,
+				BoardgamesReserved = reservation.BoardgamesReserved
+			};
+
+			return model;
 		}
 
 		public Task<Reservation> GetDeleteFormAsync()
@@ -128,5 +133,37 @@ namespace BoardGameHub.Core.Services
 
 			return user;
 		}
+
+		public async Task<List<ReservationBoardgameViewModel>> GetAllFreeBoardgamesAsync()
+		{
+			return await context.Boardgames
+				.Where(b => b.IsReserved == false
+				&& b.IsUpcoming == false)
+				.Select(b => new ReservationBoardgameViewModel()
+				{
+					Id = b.Id,
+					Name = b.Name,
+				})
+				.ToListAsync();
+		}
+
+		public async Task<List<ReservationPlaceViewModel>> GetAllFreeReservationPlacesAsync()
+		{
+			return await context.ReservationPlaces
+					.Where(rp => rp.IsReserved == false)
+					.Select(rp => new ReservationPlaceViewModel()
+					{
+						Id = rp.Id,
+						Name = rp.Name,
+						PlaceTypeId = rp.PlaceTypeId,
+					})
+					.ToListAsync();
+		}
+
+		public async Task<Reservation> GetReservationAsync(int id)
+		{
+			return await context.Reservations.FindAsync(id);
+		}
 	}
+
 }

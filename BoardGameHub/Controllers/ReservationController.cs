@@ -17,7 +17,11 @@ namespace BoardGameHub.Controllers
 
 		public async Task<IActionResult> MyReservations()
 		{
-			throw new NotImplementedException();
+			string userId = GetUser();
+
+			var reservations = await reservationService.MyReservationsAsync(userId);
+
+			return View(reservations);
 		}
 
         [HttpGet]
@@ -32,9 +36,39 @@ namespace BoardGameHub.Controllers
 		[HttpPost]
 		public async Task<IActionResult> Create(ReservationCreateFormModel form)
 		{
+			if (!ModelState.IsValid)
+			{
+				form.BoardgamesReserved = await reservationService.GetAllFreeBoardgamesAsync();
+				form.FreePlaces = await reservationService.GetAllFreeReservationPlacesAsync();
 
+				return View();
+			}
 
-			throw new NotImplementedException();	
+			string userId = GetUser();
+
+			await reservationService.CreateReservationAsync(form, userId);
+
+			return RedirectToAction(nameof(MyReservations));
+		}
+
+		[HttpGet]
+		public async Task<IActionResult> Details(int id)
+		{
+			var reservation = await reservationService.GetReservationAsync(id);
+
+			if(reservation == null)
+			{
+				return BadRequest();
+			}
+
+			var model = await reservationService.ReservationDetailsAsync(reservation);
+
+			return View(model);
+		}
+
+		private string GetUser()
+		{
+			return User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? string.Empty;
 		}
 	}
 }

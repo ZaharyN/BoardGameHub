@@ -1,10 +1,5 @@
 ﻿using BoardGameHub.Core.Models.ReservationViewModel;
 using BoardGameHub.Data.Data.DataModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BoardGameHub.Core.Contracts
 {
@@ -13,10 +8,13 @@ namespace BoardGameHub.Core.Contracts
 		Task<ReservationCreateFormModel> GetCreateReservationFormAsync();
 		Task CreateReservationAsync(ReservationCreateFormModel form, string userId);
 		Task<IEnumerable<ReservationViewModel>> MyReservationsAsync(string id);
-		Task<ReservationDetailsViewModel> ReservationDetailsAsync();
+		Task<ReservationDetailsViewModel> ReservationDetailsAsync(Reservation reservation);
 		Task<Reservation> GetDeleteFormAsync();
 		Task<ReservationDeleteFormModel> DeleteConfirmedAsync();
 		Task<int> LastReservationId();
 		Task<ApplicationUser> GetUser(string userId);
+		Task<List<ReservationBoardgameViewModel>> GetAllFreeBoardgamesAsync();
+		Task<List<ReservationPlaceViewModel>> GetAllFreeReservationPlacesAsync();
+		Task<Reservation> GetReservationAsync(int reservationId);
 	}
 }
