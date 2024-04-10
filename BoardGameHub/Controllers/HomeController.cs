@@ -19,8 +19,8 @@ namespace BoardGameHub.Controllers
         [HttpGet]
         public async Task<IActionResult> GetRandomBoardgames()
         {
-            IEnumerable<Boardgame> randomBoardgames = 
-                await boardgameService.GetRandomBoardgames();
+            IEnumerable<Boardgame> randomBoardgames 
+                = await boardgameService.GetRandomBoardgames();
 
             return View(randomBoardgames);
         }

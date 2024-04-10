@@ -13,5 +13,6 @@ namespace BoardGameHub.Core.Models.GameReviewViewModel
 		[StringLength(GameReviewMaxLength)]
 		public string ReviewText { get; set; } = string.Empty;
 
-	}
+        public int BoardgameId { get; set; }
+    }
 }
