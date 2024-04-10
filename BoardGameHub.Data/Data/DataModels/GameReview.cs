@@ -14,7 +14,7 @@ namespace BoardGameHub.Data.Data.DataModels
         public string ReviewText { get; set; } = string.Empty;
 
         [Required]
-        public DateTime Date { get; set; }
+        public string Date { get; set; } = string.Empty;
 
         [Required]
         public Boardgame Boardgame { get; set; } = null!;
