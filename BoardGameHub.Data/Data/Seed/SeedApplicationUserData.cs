@@ -1,12 +1,5 @@
 ﻿using BoardGameHub.Data.Data.DataModels;
-using Microsoft.AspNet.Identity;
 using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BoardGameHub.Data.Data.Seed
 {
@@ -45,7 +38,8 @@ namespace BoardGameHub.Data.Data.Seed
 				Email = "admin@mail.com",
 				NormalizedEmail = "admin@mail.com",
 				FirstName = "Zahary",
-				LastName = "Nyagolov"
+				LastName = "Nyagolov",
+				PhoneNumber = "0888888888"
 			};
 
 			AdminUser.PasswordHash = hasher.HashPassword(AdminUser, "123456z");

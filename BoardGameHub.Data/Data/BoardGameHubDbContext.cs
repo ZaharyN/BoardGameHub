@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BoardGameHub.Data.Data
 {
-    public class BoardGameHubDbContext : IdentityDbContext
+    public class BoardGameHubDbContext : IdentityDbContext<ApplicationUser>
     {
         public BoardGameHubDbContext(DbContextOptions<BoardGameHubDbContext> options)
             : base(options)

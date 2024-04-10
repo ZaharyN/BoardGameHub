@@ -4,11 +4,10 @@ using BoardGameHub.Data.Data;
 using BoardGameHub.Data.Data.DataModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using System.Runtime.CompilerServices;
 
 namespace BoardGameHub.Extensions
 {
-    public static class ServiceCollectionExtensions
+	public static class ServiceCollectionExtensions
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
@@ -16,6 +15,7 @@ namespace BoardGameHub.Extensions
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IReservationService, ReservationService>();
             services.AddScoped<IApplicationUserService, ApplicationUserService>();
+            services.AddScoped<IGameReviewService, GameReviewService>();
 
             return services;
         }
@@ -30,6 +30,7 @@ namespace BoardGameHub.Extensions
                 options.Password.RequireLowercase = true;
                 options.Password.RequireUppercase = false;
             })
+            .AddRoles<IdentityRole>()
             .AddEntityFrameworkStores<BoardGameHubDbContext>();
 
             return services;
