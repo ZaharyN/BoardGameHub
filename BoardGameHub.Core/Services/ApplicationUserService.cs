@@ -19,7 +19,7 @@ namespace BoardGameHub.Core.Services
 		{
 			ApplicationUser? user = await context.ApplicationUsers.FindAsync(id);
 
-			if(string.IsNullOrEmpty(user?.FirstName) 
+			if(string.IsNullOrEmpty(user.FirstName) 
 				|| string.IsNullOrEmpty(user.LastName))
 			{
 				return null;

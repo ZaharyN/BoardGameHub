@@ -73,5 +73,9 @@ namespace BoardGameHub.Data.Constants
 
         public const int UserLastNameMinLength = 2;
         public const int UserLastNameMaxLength = 30;
+
+        // Claim constants:
+
+        public const string UserFullNameClaim = "userFullName";
 	}
 }
