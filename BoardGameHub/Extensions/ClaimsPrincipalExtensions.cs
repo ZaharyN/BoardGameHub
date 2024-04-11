@@ -1,4 +1,6 @@
-﻿namespace System.Security.Claims
+﻿using static BoardGameHub.Data.Constants.DataConstants;
+
+namespace System.Security.Claims
 {
     public static class ClaimsPrincipalExtensions
     {
@@ -9,7 +11,7 @@
 
         public static bool IsAdmin(this ClaimsPrincipal user)
         {
-            return user.IsInRole("Administrator");
+            return user.IsInRole(AdminRole);
         }
     }
 }
