@@ -299,7 +299,7 @@ namespace BoardGameHub.Core.Services
 		{
 			Random random = new Random();
 
-			int skipper = random.Next(1, await context.Boardgames.CountAsync());
+			int skipper = random.Next(0, await context.Boardgames.CountAsync() - 3);
 
 			return await context.Boardgames
 				.Select(b => new BoardgameActiveViewModel()

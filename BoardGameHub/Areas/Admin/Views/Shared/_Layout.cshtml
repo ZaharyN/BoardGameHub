@@ -26,13 +26,14 @@
                                 Games
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="gamesDropdown">
-                                <li><a class="dropdown-item" asp-area="" asp-controller="Boardgame" asp-action="Active">Our Games</a></li>
-                                <li><a class="dropdown-item" asp-area="" asp-controller="Boardgame" asp-action="Upcoming">Comming soon</a></li>
+                                @* <li><a class="dropdown-item" asp-area="" asp-controller="Boardgame" asp-action="Active">Our Games</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Boardgame" asp-action="Upcoming">Comming soon</a></li> *@
+                                <li><a class="dropdown-item" asp-area="Admin" asp-controller="Boardgame" asp-action="Create">Add new boardgame</a></li>
                             </ul>
                             
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Category" asp-action="All">Browse</a>
+                            <a class="nav-link" asp-area="Admin" asp-controller="Category" asp-action="All">Browse</a>
                         </li>
                     </ul>
                     <partial name="_LoginPartial" />
@@ -49,7 +50,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; @DateTime.Today.Year - BoardGameHub - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; @DateTime.Today.Year - BoardGameHub - <span class="text-danger">This are is only for Administrator!</span>>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
