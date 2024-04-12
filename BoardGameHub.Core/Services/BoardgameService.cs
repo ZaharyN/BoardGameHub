@@ -126,6 +126,11 @@ namespace BoardGameHub.Core.Services
 		{
 			Boardgame boardgame = await ExistsAsync(id);
 
+			boardgame.BoardgamesCategories = await context.BoardgamesCategories
+												.Include(bg => bg.Category)
+												.Where(bg => bg.BoardgameId == id)
+												.ToListAsync();
+
 			BoardgameDetailsViewModel model = new BoardgameDetailsViewModel()
 			{
 				Id = boardgame.Id,

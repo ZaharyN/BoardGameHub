@@ -9,6 +9,7 @@ Boardgame controller:
 Home controller:
 - The whole home page
 - In HomePage we will have "Our prices" with prices listing
+- Prices method
 
 Reservation controller:
 - 
