@@ -295,24 +295,35 @@ namespace BoardGameHub.Core.Services
 			await context.SaveChangesAsync();
 		}
 
-		public async Task<IEnumerable<Boardgame>> GetRandomBoardgames()
+		public async Task<BoardgameActiveViewModel[]> GetRandomBoardgames()
 		{
-			Random random = new();
+			Random random = new Random();
+
+			int skipper = random.Next(1, await context.Boardgames.CountAsync());
 
 			return await context.Boardgames
-				.Where(b => b.IsUpcoming == false
-				&& b.Id == random.Next(1, GetLastBoardgameId().Result + 1))
-				.Take(5)
-				.ToListAsync();
-		}
-
-		public async Task<int> GetLastBoardgameId()
-		{
-			Boardgame lastBoardgameById = await context.Boardgames
-				.OrderBy(b => b.Id)
-				.LastAsync();
-
-			return lastBoardgameById.Id;
+				.Select(b => new BoardgameActiveViewModel()
+				{
+					Id = b.Id,
+					Name = b.Name,
+					BoardgameCategories = b.BoardgamesCategories
+						.Select(bg => new CategoryViewModel()
+						{
+							Id = bg.CategoryId,
+							Name = bg.Category.Name
+						})
+						.ToList(),
+					Rating = b.Rating,
+					AppropriateAge = b.AppropriateAge,
+					Difficulty = b.Difficulty,
+					CardImageUrl = b.CardImageUrl,
+					MinimumPlayersAllowedToPlay = b.MinimumPlayersAllowedToPlay,
+					MaximumPlayersAllowedToPlay = b.MaximumPlayersAllowedToPlay
+				})
+				.OrderBy(b => Guid.NewGuid())
+				.Skip(skipper)
+				.Take(3)
+				.ToArrayAsync();
 		}
 	}
 }

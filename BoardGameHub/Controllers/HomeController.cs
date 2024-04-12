@@ -1,5 +1,6 @@
 ﻿using BoardGameHub.Core.Contracts;
 using BoardGameHub.Core.Models;
+using BoardGameHub.Core.Models.BoardgameViewModels;
 using BoardGameHub.Data.Data.DataModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
@@ -16,19 +17,13 @@ namespace BoardGameHub.Controllers
             boardgameService = _boardgameService;
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetRandomBoardgames()
+        public async Task<IActionResult> Index()
         {
-            IEnumerable<Boardgame> randomBoardgames 
-                = await boardgameService.GetRandomBoardgames();
+			BoardgameActiveViewModel[] randomBoardgames
+				= await boardgameService.GetRandomBoardgames();
 
-            return View(randomBoardgames);
-        }
-
-        public IActionResult Index()
-        {
-            return View();
-        }
+			return View(randomBoardgames);
+		}
 
         public IActionResult Privacy()
         {
