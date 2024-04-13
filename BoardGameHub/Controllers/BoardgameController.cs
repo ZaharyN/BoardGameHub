@@ -36,28 +36,6 @@ namespace BoardGameHub.Controllers
 
 		
 
-		[HttpGet]
-        public async Task<IActionResult> Create()
-        {
-            BoardgameCreateFormModel model = await boardgameService.GetCreateFormAsync();
-
-            return View(model);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Create(BoardgameCreateFormModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                model.Categories = await boardgameService.AllCategoriesAsync();
-                return View(model);
-            }
-
-            int boardgameId = await boardgameService.CreateAsync(model);
-
-            return RedirectToAction(nameof(Details), new { id = boardgameId });
-        }
-
         [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> Details(int id)
