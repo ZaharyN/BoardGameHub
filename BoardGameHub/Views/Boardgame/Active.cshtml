@@ -21,21 +21,20 @@
 						<p class="card-text">Appropriate Age: @e.AppropriateAge+</p>
 						<p class="card-text">Difficulty: @e.Difficulty</p>
 						<p class="card-text">Rating: @e.Rating</p>
+						<a asp-area="" asp-controller="Boardgame" asp-action="Details" asp-route-id="@e.Id"
+						   class="btn btn-info mb-2 w-100 p-3 fw-bold">Details</a>
+						   @if(User.IsInRole(AdminRole))
+						{
+							<a class="btn btn-warning mb-2 w-100 p-3 fw-bold" asp-area="" asp-controller="Boardgame" asp-action="Edit" asp-route-id="@e.Id">Edit</a>
+							<a class="btn btn-danger mb-2 w-100 p-3 fw-bold" asp-area="" asp-controller="Boardgame" asp-action="Delete" asp-route-id="@e.Id">Delete</a>
+						}
 					</div>
 				</div>
 			</div>
 		}
 	</div>
 </div>
-<nav aria-label="Page navigation example">
-	<ul class="pagination">
-		<li class="page-item"><a class="page-link" href="#">Previous</a></li>
-		<li class="page-item"><a class="page-link" href="#">1</a></li>
-		<li class="page-item"><a class="page-link" href="#">2</a></li>
-		<li class="page-item"><a class="page-link" href="#">3</a></li>
-		<li class="page-item"><a class="page-link" href="#">Next</a></li>
-	</ul>
-</nav>
+
 
 
 

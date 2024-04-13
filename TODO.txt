@@ -1,10 +1,10 @@
 Boardgame controller:
 
-- Add "Promote to Active" button in Upcoming view card
-- Add "Details" button to every boardgame in Active and Upcoming and in Categories pages
-- Add "Delete" button
-- Add "Edit" button 
-- Create "Details" page for every boardgame
+- Fix "Details" page for every boardgame
+- Fix button's sizes
+- Fix button functionality
+- Create the whole "Details" page - add mroe further information and Game Reviews
+- Add "Leave a review" button in the Details page
 
 Home controller:
 - The whole home page
@@ -12,7 +12,15 @@ Home controller:
 - Prices method
 
 Reservation controller:
-- 
+- Add "My Reservations" view
+- Add Create form
+- Add Delete for Admin
 
 Other:
 - Custom error 404 and 502 pages
+- Fix when already logged in and start the app to get to the admin page
+- Add pagination 
+
+
+GameReviewController:
+- Everything

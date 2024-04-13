@@ -12,13 +12,7 @@ namespace BoardGameHub.Areas.Admin.Controllers
 			boardgameService = _boardgameService;
 		}
 
-		[HttpPost]
-		public async Task<IActionResult> ChangeGameStatus(int id)
-		{
-			await boardgameService.PromoteToActiveAsync(id);
-
-			return RedirectToAction("Active", "Boardgame");
-		}
+		
 
 		public async Task<IActionResult> ViewAll()
 		{
