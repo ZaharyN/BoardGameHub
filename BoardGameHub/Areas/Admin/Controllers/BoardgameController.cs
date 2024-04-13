@@ -19,5 +19,10 @@ namespace BoardGameHub.Areas.Admin.Controllers
 
 			return RedirectToAction("Active", "Boardgame");
 		}
+
+		public async Task<IActionResult> ViewAll()
+		{
+			return View();
+		}
 	}
 }
