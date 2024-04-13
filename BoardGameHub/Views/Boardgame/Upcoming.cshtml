@@ -20,9 +20,13 @@
 						<p class="card-text">Appropriate Age: @e.AppropriateAge+</p>
 						<p class="card-text">Difficulty: @e.Difficulty</p>
 						<p class="card-text">Rating: @e.Rating</p>
+						<a asp-area="" asp-controller="Boardgame" asp-action="Details" asp-route-id="@e.Id"
+						   class="btn btn-info mb-2 w-100 p-3 fw-bold">Details</a>
 						@if (User.IsInRole(AdminRole))
 						{
-							<a class="btn btn-success" asp-area="" asp-controller="Boardgame" asp-action="ChangeGameStatus" asp-route-id="@e.Id">Promote to Active</a>
+							<form class="input-group-sm " asp-area="Admin" asp-controller="Boardgame" asp-action="ChangeGameStatus" asp-route-id="@e.Id">
+								<input type="submit" value="Promote to Active" class="fs-6 btn btn-dark mb-3 w-100 p-3 fw-bold" />
+							</form>
 						}
 					</div>
 				</div>

@@ -34,13 +34,7 @@ namespace BoardGameHub.Controllers
             return View(models);
         }
 
-		[HttpPost]
-		public async Task<IActionResult> ChangeGameStatus(int id)
-		{
-			await boardgameService.PromoteToActiveAsync(id);
-
-			return RedirectToAction("Active", "Boardgame");
-		}
+		
 
 		[HttpGet]
         public async Task<IActionResult> Create()
