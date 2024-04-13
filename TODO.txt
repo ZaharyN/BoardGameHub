@@ -1,26 +1,41 @@
 Boardgame controller:
 
-- Fix "Details" page for every boardgame
+- Add more things to "Details" page for every boardgame like this: https://www.ozone.bg/product/gloomhaven/
+- Add star rating?
 - Fix button's sizes
 - Fix button functionality
-- Create the whole "Details" page - add mroe further information and Game Reviews
+- Fix Edit button and create form for it
+- Fix button delete
 - Add "Leave a review" button in the Details page
 
 Home controller:
 - The whole home page
 - In HomePage we will have "Our prices" with prices listing
 - Prices method
+- Get a few images for the prices page
 
 Reservation controller:
 - Add "My Reservations" view
 - Add Create form
 - Add Delete for Admin
+- Search for ".NET Cron job"?
+- make admin method to free the tables
 
 Other:
 - Custom error 404 and 502 pages
-- Fix when already logged in and start the app to get to the admin page
 - Add pagination 
 
 
 GameReviewController:
 - Everything
+
+AdminController:
+- Idea for homepage view
+- In the home page add links for all the controllers. 
+- Ticket to ride details image broken
+ Get new Catan details image
+
+Help from Paca:
+- Help with the footer
+- Price page
+- Details page finish up

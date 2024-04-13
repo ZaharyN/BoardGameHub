@@ -1,9 +1,7 @@
-﻿using BoardGameHub.Data.Data.DataModels;
+﻿using BoardGameHub.Core.Models.CategoryModel;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using static BoardGameHub.Data.Constants.DataConstants;
 using static BoardGameHub.Core.Constants.MessageConstants;
-using BoardGameHub.Core.Models.CategoryModel;
+using static BoardGameHub.Data.Constants.DataConstants;
 
 namespace BoardGameHub.Core.Models.BoardgameViewModels
 {
@@ -34,6 +32,7 @@ namespace BoardGameHub.Core.Models.BoardgameViewModels
         [Range(BoardgameRatingMinValue, 
             BoardgameRatingMaxValue, 
             ErrorMessage = ValueMessage)]
+        [RegularExpression(@"\d+\.\d{2}")]
         public double? Rating { get; set; }
 
         [Required(ErrorMessage = RequiredMessage)]

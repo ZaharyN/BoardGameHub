@@ -10,7 +10,7 @@ namespace BoardGameHub.Data.Constants
     {
         //Boardgame constants:
 
-        public const int BoardgameNameMaxLength = 200;
+        public const int BoardgameNameMaxLength = 100;
         public const int BoardgameNameMinLength = 1;
 
         public const int BoardGameDescriptionMaxLength = 1500;

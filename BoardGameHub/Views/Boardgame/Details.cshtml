@@ -1,29 +1,61 @@
 ﻿@model BoardgameDetailsViewModel
 
 @{
-    ViewBag.Title = "Boardgame Details";
+	ViewBag.Title = "Boardgame Details";
 }
 
 <section class="py-5">
-    <div class="container px-4 px-lg-5 my-5">
-        <div class="row gx-4 gx-lg-5 align-items-center">
-            <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="@Model.CardImageUrl" alt="Card image cap" /></div>
-            <div class="col-md-6">
-                <div class="small mb-1">SKU: BST-498</div>
-                <h1 class="display-5 fw-bolder">@Model.Name</h1>
-                <div class="fs-5 mb-5">
-                    @* <span class="text-decoration-line-through">$45.00</span> *@
-                    <span>@Model.PriceInShop</span>
-                </div>
-                <p class="lead">@Model.Description</p>
-                <div class="d-flex">
-                    <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />
-                    <button class="btn btn-outline-dark flex-shrink-0" type="button">
-                        <i class="bi-cart-fill me-1"></i>
-                        Add to cart
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
+	<div class="container">
+		<div class="row gx-4 gx-lg-5">
+			<div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" style="height:400px; width:auto" src="@Model.CardImageUrl" alt="Card image cap" /></div>
+			<div class="col-md-6">
+				<div class="h-100 d-flex flex-column justify-content-between">
+					<div>
+						<h1 class="display-5 fw-bolder">@Model.Name</h1>
+						<div class="fs-5">
+							<span>Price in shop: @Model.PriceInShop lv.</span>
+						</div>
+						<div class="d-flex align-items-center">
+							<span class="mr-2">Rating:</span>
+							<div class="star-rating">
+								@for (int i = 0; i < 5; i++)
+								{
+									if (i < Model.Rating)
+									{
+										<span>★</span>
+									}
+									else
+									{
+										<span>☆</span>
+									}
+								}
+							</div>
+						</div>
+					</div>
+					<div class="d-flex">
+						<div class="d-flex flex-column w-50 fs-5 ">
+							<span class="mb-2">Difficulty:</span>
+							<span class="mb-2">Average playing time:</span>
+							<span class="mb-2">Players:</span>
+							<span class="mb-2">Appropriate age:</span>
+						</div>
+						<div class="d-flex flex-column w-50 fs-5">
+							<span class="mb-2">@Model.Difficulty</span>
+							<span class="mb-2">@Model.AveragePlayingTime</span>
+							<span class="mb-2">@Model.MinimumPlayersAllowedToPlay - @Model.MaximumPlayersAllowedToPlay</span>
+							<span class="mb-2">@Model.AppropriateAge</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-12">
+				<div class="mt-5 w-100">
+					<h3 clas="text-center py-2">Full Description</h3>
+					<p class="mb-4">  @Model.Description</p>
+				</div>
+				<img class="w-100 h-auto" src="@Model.DetailsImageUrl" />
+			</div>
+		</div>
+	</div>
+
 </section>
