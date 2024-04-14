@@ -7,9 +7,9 @@ namespace BoardGameHub.Core.Models.GameReviewViewModel
 {
 	public class GameReviewCreateFormModel
 	{
-		public int Id { get; set; }
+		public string BoardgameName { get; set; } = string.Empty;
 
-		[Required]
+        [Required]
 		[StringLength(GameReviewMaxLength)]
 		public string ReviewText { get; set; } = string.Empty;
 

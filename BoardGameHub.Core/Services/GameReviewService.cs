@@ -21,35 +21,44 @@ namespace BoardGameHub.Core.Services
 
 		public async Task<GameReviewCreateFormModel> GetCreateFormAsync(int boardgameId)
 		{
+			Boardgame boardgame = await boardgameservice.ExistsAsync(boardgameId);
+
 			GameReviewCreateFormModel form = new GameReviewCreateFormModel()
 			{
-				BoardgameId = boardgameId
+				BoardgameId = boardgameId,
+				BoardgameName = boardgame.Name
 			};
 
 			return form;
 		}
 
-		public async Task CreateAsync(GameReviewCreateFormModel form, string userId)
+		public async Task CreateAsync(GameReviewCreateFormModel form,int boardgameId, string userId)
 		{
 			GameReview gameReview = new GameReview()
 			{
-				Id = await GetLastGameReviewId(form.BoardgameId) + 1,
 				ReviewText = form.ReviewText,
 				Date = DateTime.Now.ToString(ReservationDateTimeFormat),
-				BoardGameId = form.BoardgameId,
+				BoardGameId = boardgameId,
 				ReviewOwnerId = userId
 			};
+
+			if(gameReview != null)
+			{
+				context.GameReviews.Add(gameReview);
+			}
 
 			Boardgame boardgame = await boardgameservice.ExistsAsync(form.BoardgameId);
 
 			if (boardgame != null)
 			{
 				boardgame.GameReviews.Add(gameReview);
-				await context.SaveChangesAsync();
 			}
-		}
+			
+            await context.SaveChangesAsync();
 
-		public async Task<int> GetLastGameReviewId(int boardgameId)
+        }
+
+        public async Task<int> GetLastGameReviewId(int boardgameId)
 		{
 			Boardgame boardgame = await boardgameservice.ExistsAsync(boardgameId);
 
@@ -62,5 +71,12 @@ namespace BoardGameHub.Core.Services
 
 			return lastGameReviewById.Id;
 		}
-	}
+
+        public async Task<bool> UserHasComment(string userId, int boardgameId)
+        {
+            return context.GameReviews
+                .Any(gr => gr.BoardGameId == boardgameId
+                && gr.ReviewOwnerId == userId);
+        }
+    }
 }

@@ -6,7 +6,8 @@ namespace BoardGameHub.Core.Contracts
 	public interface IGameReviewService
 	{
 		Task<GameReviewCreateFormModel> GetCreateFormAsync(int boardgameId);
-		Task CreateAsync(GameReviewCreateFormModel form, string userId);
+		Task CreateAsync(GameReviewCreateFormModel form, int boardgameId, string userId);
 		Task<int> GetLastGameReviewId(int boardgameId);
-	}
+		Task<bool> UserHasComment(string userId, int boardgameId);
+    }
 }

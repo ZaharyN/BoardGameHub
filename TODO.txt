@@ -1,17 +1,16 @@
 Boardgame controller:
-
-- Add more things to "Details" page for every boardgame like this: https://www.ozone.bg/product/gloomhaven/
-- Add star rating?
-- Fix button functionality
+- Fix Create functionality
+- In the create form try to upload a photo
 - Fix Edit button and create form for it
-- Fix button delete
-- Add "Leave a review" button in the Details page
-- Make rating integer type
+- Fix Delete button and the form
 
 Home controller:
 - In HomePage we will have "Our prices" with prices listing
 - Prices method
-- Get a few images for the prices page
+- In the home page add links for all the controllers? 
+
+Categories controller:
+- Fix Sort by selector to be the same in every page
 
 Reservation controller:
 - Add "My Reservations" view
@@ -24,15 +23,16 @@ Other:
 - Add pagination 
 
 GameReviewController:
-- Everything
+- How to show error message "User has already commented this boardgame!"
 
 AdminController:
-- Idea for homepage view
-- In the home page add links for all the controllers. 
-- Ticket to ride details image broken
- Get new Catan details image
+- Idea for homepage view 
+
 
 Help from Paca:
 - Help with the footer
 - Price page
 - Details page finish up
+
+
+Best game I have ever played. Highly recommend!
