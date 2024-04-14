@@ -1,12 +1,23 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using BoardGameHub.Core.Contracts;
+using BoardGameHub.Core.Models.PlaceTypeViewModel;
+using Microsoft.AspNetCore.Mvc;
 
 namespace BoardGameHub.Controllers
 {
     public class PlaceTypeController : Controller
     {
-        public IActionResult ViewAll()
+        private readonly IPlaceTypeService placeTypeService;
+
+        public PlaceTypeController(IPlaceTypeService _placeTypeService)
         {
-            return View();
+            placeTypeService = _placeTypeService;
+        }
+
+        public async Task<IActionResult> ViewAll()
+        {
+            IEnumerable<PlaceTypeViewModel> models = await placeTypeService.GetAllAsync();
+
+            return View(models);
         }
     }
 }

@@ -1,9 +1,9 @@
-﻿using BoardGameHub.Core.Models.PriceViewModel;
+﻿using BoardGameHub.Core.Models.PlaceTypeViewModel;
 
 namespace BoardGameHub.Core.Contracts
 {
     public interface IPlaceTypeService
     {
-        Task<PlaceTypeViewModel> GetAllAsync();
+        Task<IEnumerable<PlaceTypeViewModel>> GetAllAsync();
     }
 }

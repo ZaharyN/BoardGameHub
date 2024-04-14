@@ -1,4 +1,4 @@
-﻿namespace BoardGameHub.Core.Models.PriceViewModel
+﻿namespace BoardGameHub.Core.Models.PlaceTypeViewModel
 {
     public class PlaceTypeViewModel
     {
