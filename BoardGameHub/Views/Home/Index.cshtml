@@ -35,7 +35,8 @@
 				<div class="bg-black text-center h-100 project">
 					<div class="d-flex h-100">
 						<div class="project-text w-100 my-auto text-center text-lg-left">
-							<h4 class="text-white">Vast collection</h4>
+							@* <h4 class="text-white">Vast collection</h4> *@
+							<a asp-area="" asp-controller="Boardgame" asp-action="Upcoming" class="btn btn-primary">Vast collection</a>
 							<p class="mb-0 text-white-50">We always make sure to stay up to date, so we bring you every month one of the newest boardgames released on the market!</p>
 						</div>
 					</div>
@@ -50,7 +51,9 @@
 					<div class="d-flex h-100">
 						<div class="project-text w-100 my-auto text-center text-lg-right">
 							<h4 class="text-white">Make a reservation!</h4>
-							<p class="mb-0 text-white-50">We have limited space so hurry up and make your reservation. Check our prices here!</p>
+							<p class="mb-0 text-white-50">
+								We have limited space so hurry up and make your reservation. Check our prices
+								<a asp-area="" asp-controller="PlaceType" asp-action="All" class="btn btn-primary">here!</a>
 						</div>
 					</div>
 				</div>
@@ -68,17 +71,17 @@
 		<div class="carousel-inner">
 			<div class="carousel-item active">
 				<div class="w-100 d-flex justify-content-center align-items-center">
-					<img class="d-block w-50" src="@models[0].CardImageUrl" alt="First slide"/>
+					<img class="d-block w-50" src="@models[0].CardImageUrl" alt="First slide" />
 				</div>
 			</div>
 			<div class="carousel-item">
 				<div class="w-100 d-flex justify-content-center align-items-center">
-					<img class="d-block w-50" src="@models[1].CardImageUrl" alt="Second slide"/>
+					<img class="d-block w-50" src="@models[1].CardImageUrl" alt="Second slide" />
 				</div>
 			</div>
 			<div class="carousel-item">
 				<div class="w-100 d-flex justify-content-center align-items-center">
-					<img class="d-block w-50" src="@models[2].CardImageUrl" alt="Third slide"/>
+					<img class="d-block w-50" src="@models[2].CardImageUrl" alt="Third slide" />
 				</div>
 			</div>
 		</div>

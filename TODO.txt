@@ -6,11 +6,10 @@ Boardgame controller:
 
 Home controller:
 - In HomePage we will have "Our prices" with prices listing
-- Prices method
-- In the home page add links for all the controllers? 
 
 Categories controller:
 - Fix Sort by selector to be the same in every page
+- How  can I remember the chosen category and display it on the next page?
 
 Reservation controller:
 - Add "My Reservations" view

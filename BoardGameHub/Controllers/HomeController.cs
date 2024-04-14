@@ -19,11 +19,6 @@ namespace BoardGameHub.Controllers
 
         public async Task<IActionResult> Index()
         {
-            //if (User.IsAdmin())
-            //{
-            //    return RedirectToAction("ViewAll", "Boardgame", new { area = "Admin" });
-            //}
-
 			BoardgameActiveViewModel[] randomBoardgames
 				= await boardgameService.GetRandomBoardgames();
 

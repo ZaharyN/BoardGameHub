@@ -22,6 +22,14 @@
 		<li class="nav-item">
 			<a class="nav-link text-dark" asp-area="Identity" title="Manage">Hello @userName!</a>
 		</li>
+		@if (User.IsAdmin())
+		{
+			<li class="nav-item">
+				<form class="form-inline h-100 " asp-area="Admin" asp-controller="Home" asp-action="Index">
+					<button type="submit" class="nav-link btn btn-link text-dark h-100 p-2">Admin area</button>
+				</form>
+			</li>
+		}
 		<li class="nav-item">
 			<form class="form-inline h-100 " asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="/Identity/Account/Login">
 				<button type="submit" class="nav-link btn btn-link text-dark h-100 p-2">Logout</button>

@@ -1,13 +1,11 @@
 ﻿using BoardGameHub.Core.Contracts;
 using BoardGameHub.Core.Models.BoardgameViewModels;
 using BoardGameHub.Data.Data.DataModels;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BoardGameHub.Controllers
 {
-    [Authorize]
-    public class BoardgameController : Controller
+	public class BoardgameController : Controller
     {
         private readonly IBoardgameService boardgameService;
 
@@ -16,7 +14,6 @@ namespace BoardGameHub.Controllers
             boardgameService = _boardgameService;
         }
 
-        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> Active()
         {
@@ -25,7 +22,6 @@ namespace BoardGameHub.Controllers
             return View(models);
         }
 
-        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> Upcoming()
         {
@@ -34,7 +30,6 @@ namespace BoardGameHub.Controllers
             return View(models);
         }
 
-        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> Details(int id)
         {
