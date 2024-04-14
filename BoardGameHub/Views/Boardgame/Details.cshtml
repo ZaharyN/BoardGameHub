@@ -41,9 +41,9 @@
 						</div>
 						<div class="d-flex flex-column w-50 fs-5">
 							<span class="mb-2">@Model.Difficulty</span>
-							<span class="mb-2">@Model.AveragePlayingTime</span>
-							<span class="mb-2">@Model.MinimumPlayersAllowedToPlay - @Model.MaximumPlayersAllowedToPlay</span>
-							<span class="mb-2">@Model.AppropriateAge</span>
+							<span class="mb-2">@Model.AveragePlayingTime min</span>
+							<span class="mb-2">@Model.MinimumPlayersAllowedToPlay - @Model.MaximumPlayersAllowedToPlay players</span>
+							<span class="mb-2">@Model.AppropriateAge+</span>
 						</div>
 					</div>
 				</div>
@@ -56,6 +56,7 @@
 				<img class="w-100 h-auto" src="@Model.DetailsImageUrl" />
 			</div>
 		</div>
+		<a asp-area="" asp-controller="GameReview" asp-action="Add" asp-route-id="@Model.Id" class="btn btn-danger mt-2 mb-2 w-100 p-3 fw-bold">Leave a review</a>
 	</div>
-
 </section>
+
