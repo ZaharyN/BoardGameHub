@@ -34,8 +34,6 @@ namespace BoardGameHub.Controllers
             return View(models);
         }
 
-		
-
         [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> Details(int id)

@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BoardGameHub.Extensions
 {
-	public static class ServiceCollectionExtensions
+    public static class ServiceCollectionExtensions
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
@@ -16,6 +16,7 @@ namespace BoardGameHub.Extensions
             services.AddScoped<IReservationService, ReservationService>();
             services.AddScoped<IApplicationUserService, ApplicationUserService>();
             services.AddScoped<IGameReviewService, GameReviewService>();
+            services.AddScoped<IPlaceTypeService, PlaceTypeService>();
 
             return services;
         }

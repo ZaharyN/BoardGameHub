@@ -13,15 +13,12 @@ namespace BoardGameHub.Controllers
     {
         private readonly IBoardgameService boardgameService;
         private readonly IGameReviewService gamereviewService;
-        private readonly BoardGameHubDbContext context;
 
         public GameReviewController(IBoardgameService _boardgameService,
-            IGameReviewService _gamereviewService,
-            BoardGameHubDbContext _context)
+            IGameReviewService _gamereviewService)
         {
             boardgameService = _boardgameService;
             gamereviewService = _gamereviewService;
-            context = _context;
         }
 
         [HttpGet]
