@@ -24,6 +24,7 @@ Other:
 
 GameReviewController:
 - How to show error message "User has already commented this boardgame!"
+- Add some reviews to the games
 
 AdminController:
 - Idea for homepage view 

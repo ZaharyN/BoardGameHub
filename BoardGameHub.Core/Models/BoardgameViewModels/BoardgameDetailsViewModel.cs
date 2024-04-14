@@ -24,6 +24,6 @@ namespace BoardGameHub.Core.Models.BoardgameViewModels
 		public decimal PriceInShop { get; set; }
 		public int MinimumPlayersAllowedToPlay { get; set; }
 		public int MaximumPlayersAllowedToPlay { get; set; }
-		public List<GameReview>? GameReviews { get; set; } = new List<GameReview>();
+		public List<GameReview> GameReviews { get; set; } = new List<GameReview>();
 	}
 }

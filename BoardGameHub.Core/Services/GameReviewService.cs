@@ -47,7 +47,7 @@ namespace BoardGameHub.Core.Services
 				context.GameReviews.Add(gameReview);
 			}
 
-			Boardgame boardgame = await boardgameservice.ExistsAsync(form.BoardgameId);
+			Boardgame boardgame = await boardgameservice.ExistsAsync(gameReview.BoardGameId);
 
 			if (boardgame != null)
 			{

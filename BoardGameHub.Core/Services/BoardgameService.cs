@@ -127,9 +127,13 @@ namespace BoardGameHub.Core.Services
 			Boardgame boardgame = await ExistsAsync(id);
 
 			boardgame.BoardgamesCategories = await context.BoardgamesCategories
-												.Include(bg => bg.Category)
-												.Where(bg => bg.BoardgameId == id)
-												.ToListAsync();
+				.Include(bg => bg.Category)
+				.Where(bg => bg.BoardgameId == id)
+				.ToListAsync();
+
+			boardgame.GameReviews = await context.GameReviews
+				.Where(gr => gr.BoardGameId == id)
+				.ToListAsync();
 
 			BoardgameDetailsViewModel model = new BoardgameDetailsViewModel()
 			{
@@ -152,7 +156,8 @@ namespace BoardGameHub.Core.Services
 				YearPublished = boardgame.YearPublished,
 				PriceInShop = boardgame.PriceInShop,
 				MinimumPlayersAllowedToPlay = boardgame.MinimumPlayersAllowedToPlay,
-				MaximumPlayersAllowedToPlay = boardgame.MaximumPlayersAllowedToPlay
+				MaximumPlayersAllowedToPlay = boardgame.MaximumPlayersAllowedToPlay,
+				GameReviews = boardgame.GameReviews
 			};
 
 			return model;
