@@ -7,13 +7,23 @@
 
 <h1>Games by genre:</h1>
 
-@foreach (var boardgame in Model)
-{
-	<div class="col-lg-3 col-xs-12">
-		<div class="card mb-3">
-			<div class="card-body">
-				<h5 class="card-title">@boardgame.Name</h5>
+<div class="container">
+	<div class="row">
+		@foreach (var boardgame in Model)
+		{
+			<div class="col-lg-3 col-xs-12">
+				<div class="card mb-3">
+					<img class="card-img-top" src="@boardgame.CardImageUrl" alt="Card image cap">
+					<div class="card-body">
+						<h5 class="card-title">@boardgame.Name</h5>
+						<p class="card-text">Appropriate Age: @boardgame.AppropriateAge+</p>
+						<p class="card-text">Difficulty: @boardgame.Difficulty</p>
+						<p class="card-text">Rating: @boardgame.Rating</p>
+						<a asp-area="" asp-controller="Boardgame" asp-action="Details" asp-route-id="@boardgame.Id"
+						   class="btn btn-info mb-2 w-100 p-3 fw-bold">Details</a>
+					</div>
+				</div>
 			</div>
-		</div>
+		}
 	</div>
-}
+</div>

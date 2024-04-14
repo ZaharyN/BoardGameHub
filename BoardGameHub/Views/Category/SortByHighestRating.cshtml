@@ -9,8 +9,8 @@
 <div class="container">
 	<div class="row">
 		<div class="text-center col-xs-12">Sorted by highest rating</div>
-		<div class="col-xs-12">
-			<div class="w-25 my-2 d-flex justify-content-end">
+		<div class="col-xs-12 d-flex justify-content-end">
+			<div class="w-50 my-3">
 				<label for="sortSelect">Sort By:</label>
 				<select class="form-control" id="sortSelect" onchange="location = this.value;">
 					<option value="" selected disabled hidden>Choose here</option>
@@ -37,6 +37,8 @@
 						<p class="card-text">Rating: @e.Rating</p>
 						<p class="card-text">Price in shop: @e.PriceInShop lv.</p>
 						<p class="card-text">Players: @e.MinimumPlayersAllowedToPlay - @e.MaximumPlayersAllowedToPlay</p>
+						<a asp-area="" asp-controller="Boardgame" asp-action="Details" asp-route-id="@e.Id"
+						   class="btn btn-info mb-2 w-100 p-3 fw-bold">Details</a>
 					</div>
 				</div>
 			</div>
