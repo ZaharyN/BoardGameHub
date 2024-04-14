@@ -11,7 +11,7 @@ namespace BoardGameHub.Core.Models.CategoryModel
 		public int Id { get; set; }
 		public string Name { get; set; } = string.Empty;
 		public List<CategoryViewModel> BoardgameCategories { get; set; } = null!;
-		public double? Rating { get; set; }
+		public int Rating { get; set; }
         public decimal PriceInShop { get; set; }
         public int AppropriateAge { get; set; }
 		public double Difficulty { get; set; }

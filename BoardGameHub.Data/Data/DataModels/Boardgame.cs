@@ -15,8 +15,7 @@ namespace BoardGameHub.Data.Data.DataModels
 
         public List<BoardgameCategory> BoardgamesCategories{ get; set; } = null!;
 
-        [Range(BoardgameRatingMinValue, BoardgameRatingMaxValue)]
-        public double? Rating { get; set; }
+        public int Rating { get; set; }
 
         [Required]
         public int AppropriateAge { get; set; }

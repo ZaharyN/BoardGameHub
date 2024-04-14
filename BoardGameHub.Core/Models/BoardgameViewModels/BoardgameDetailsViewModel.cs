@@ -13,7 +13,7 @@ namespace BoardGameHub.Core.Models.BoardgameViewModels
 		public int Id { get; set; }
 		public string Name { get; set; } = string.Empty;
 		public List<CategoryViewModel> BoardgameCategories { get; set; } = null!;
-		public double? Rating { get; set; }
+		public int Rating { get; set; }
 		public int AppropriateAge { get; set; }
 		public int AveragePlayingTime { get; set; }
 		public string Description { get; set; } = string.Empty;

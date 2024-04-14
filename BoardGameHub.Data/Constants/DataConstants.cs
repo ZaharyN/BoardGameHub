@@ -28,8 +28,8 @@ namespace BoardGameHub.Data.Constants
         public const int BoardGameMaximumPlayersMinValue = 2;
         public const int BoardGameMaximumPlayersMaxValue = 20;
 
-        public const double BoardgameRatingMinValue = 0.00;
-        public const double BoardgameRatingMaxValue = 5.00;
+        public const double BoardgameRatingMinValue = 0;
+        public const double BoardgameRatingMaxValue = 5;
 
         public const double BoardgameDifficultyMinValue = 0.00;
         public const double BoardgameDifficultyMaxValue = 5.00;

@@ -32,8 +32,7 @@ namespace BoardGameHub.Core.Models.BoardgameViewModels
         [Range(BoardgameRatingMinValue, 
             BoardgameRatingMaxValue, 
             ErrorMessage = ValueMessage)]
-        [RegularExpression(@"\d+\.\d{2}")]
-        public double? Rating { get; set; }
+        public int Rating { get; set; }
 
         [Required(ErrorMessage = RequiredMessage)]
         [Range(BoardgameAppropriateAgeMinValue,
