@@ -41,7 +41,7 @@ namespace BoardGameHub.Areas.Admin.Controllers
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> Create([FromForm]BoardgameCreateFormModel form)
+		public async Task<IActionResult> Create([FromForm] BoardgameCreateFormModel form)
 		{
 			if (!ModelState.IsValid)
 			{
@@ -56,7 +56,7 @@ namespace BoardGameHub.Areas.Admin.Controllers
 
 			int boardgameId = await boardgameService.CreateAsync(form);
 
-			return RedirectToAction("Details","Boardgame", new { id = boardgameId });
+			return RedirectToAction("Details", "Boardgame", new { area = "", id = boardgameId });
 		}
 	}
 }

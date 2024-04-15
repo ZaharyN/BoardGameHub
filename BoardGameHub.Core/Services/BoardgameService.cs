@@ -84,8 +84,8 @@ namespace BoardGameHub.Core.Services
 					MaximumPlayersAllowedToPlay = form.MaximumPlayersAllowedToPlay,
 					IsUpcoming = form.IsUpcoming,
 					BoardgamesCategories = boardgameCategories,
-					CardImageUrl = cardImageDirectory,
-					DetailsImageUrl = detailsImageDirectory,
+					CardImageUrl = $"/assets/games/{cardImageDirectory}",
+					DetailsImageUrl = $"/assets/games/{detailsImageDirectory}",
 					IsReserved = false
 				};
 
@@ -342,7 +342,7 @@ namespace BoardGameHub.Core.Services
 
 		public async Task<string> UploadImage(IFormFile image)
 		{
-			string uploadsFolder = Path.Combine(webHost.ContentRootPath, "assets", "games");
+			string uploadsFolder = Path.Combine(new string[] {"wwwroot", "assets", "games"});
 
 			if (!Directory.Exists(uploadsFolder))
 			{

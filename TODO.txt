@@ -20,6 +20,7 @@ Reservation controller:
 Other:
 - Custom error 404 and 502 pages
 - Add pagination 
+- Fix when clicking on the userName 
 
 GameReviewController:
 - How to show error message "User has already commented this boardgame!"
