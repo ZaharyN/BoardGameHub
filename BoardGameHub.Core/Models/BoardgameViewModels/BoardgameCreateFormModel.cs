@@ -1,4 +1,5 @@
 ﻿using BoardGameHub.Core.Models.CategoryModel;
+using Microsoft.AspNetCore.Http;
 using System.ComponentModel.DataAnnotations;
 using static BoardGameHub.Core.Constants.MessageConstants;
 using static BoardGameHub.Data.Constants.DataConstants;
@@ -7,8 +8,6 @@ namespace BoardGameHub.Core.Models.BoardgameViewModels
 {
     public class BoardgameCreateFormModel
     {
-        public int Id { get; set; }
-
         [Required(ErrorMessage = RequiredMessage)]
         [StringLength(BoardgameNameMaxLength,
             MinimumLength = BoardgameNameMinLength,
@@ -16,14 +15,9 @@ namespace BoardGameHub.Core.Models.BoardgameViewModels
         public string Name { get; set; } = string.Empty;
 
         [Required(ErrorMessage = RequiredMessage)]
-        [Display(Name = "Main category")]
-        public int CategoryId_1 { get; set; }
-
-        [Display(Name= "Subcategory 1")]
-        public int? CategoryId_2 { get; set; }
-
-        [Display(Name = "Subcategory 2")]
-        public int? CategoryId_3 { get; set; }
+        [Display(Name = "Categories")]
+        public List<int> SelectedCategoriesId { get; set; } 
+            = new List<int>(); 
 
         public IEnumerable<CategoryViewModel> Categories { get; set; } =
             new List<CategoryViewModel>();
@@ -38,9 +32,13 @@ namespace BoardGameHub.Core.Models.BoardgameViewModels
         [Range(BoardgameAppropriateAgeMinValue,
             BoardgameAppropriateAgeMaxValue,
             ErrorMessage = ValueMessage)]
+        [Display(Name= "Appropriate age")]
         public int AppropriateAge { get; set; }
 
         [Required(ErrorMessage = RequiredMessage)]
+        [Range(BoardgameAveragePlayingTimeMinValue,
+            BoardgameAveragePlayingTimeMaxValue,
+            ErrorMessage = ValueMessage)]
         [Display(Name = "Average playing time")]
         public int AveragePlayingTime { get; set; }
 
@@ -56,9 +54,8 @@ namespace BoardGameHub.Core.Models.BoardgameViewModels
             ErrorMessage = ValueMessage)]
         public double Difficulty { get; set; }
 
-        public string? CardImageUrl { get; set; } = string.Empty;
-
-        public string? DetailsImageUrl { get; set; } = string.Empty;
+        public IFormFile? CardImage { get; set; }
+        public IFormFile? DetailsImage { get; set; }
 
         [Required]
         [Display(Name = "Year published")]
@@ -72,6 +69,7 @@ namespace BoardGameHub.Core.Models.BoardgameViewModels
             BoardGamePriceInShopMinValue,
             BoardGamePriceInShopMaxValue,
             ErrorMessage = ValueMessage)]
+        [Display(Name = "Price in shop")]
         public decimal PriceInShop { get; set; }
 
         [Display(Name = "Minimum players")]

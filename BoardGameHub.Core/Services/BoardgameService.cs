@@ -3,6 +3,8 @@ using BoardGameHub.Core.Models.BoardgameViewModels;
 using BoardGameHub.Core.Models.CategoryModel;
 using BoardGameHub.Data.Data;
 using BoardGameHub.Data.Data.DataModels;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 
 namespace BoardGameHub.Core.Services
@@ -10,14 +12,18 @@ namespace BoardGameHub.Core.Services
 	public class BoardgameService : IBoardgameService
 	{
 		private readonly BoardGameHubDbContext context;
+		private IWebHostEnvironment webHost;
 
-		public BoardgameService(BoardGameHubDbContext _context)
+		public BoardgameService(BoardGameHubDbContext _context,
+			IWebHostEnvironment _webHost)
 		{
 			context = _context;
+			webHost = _webHost;
 		}
 
 		public async Task<IEnumerable<BoardgameActiveViewModel>> ActiveAsync()
 		{
+
 			IEnumerable<BoardgameActiveViewModel> models = await context.Boardgames
 				.Where(b => b.IsUpcoming == false)
 				.AsNoTracking()
@@ -57,46 +63,44 @@ namespace BoardGameHub.Core.Services
 			return Categorys;
 		}
 
-		public async Task<int> CreateAsync(BoardgameCreateFormModel model)
+		public async Task<int> CreateAsync(BoardgameCreateFormModel form)
 		{
-			var boardgame = new Boardgame()
-			{
-				Id = model.Id,
-				Name = model.Name,
-				Rating = model.Rating,
-				AppropriateAge = model.AppropriateAge,
-				AveragePlayingTime = model.AveragePlayingTime,
-				Description = model.Description,
-				Difficulty = model.Difficulty,
-				YearPublished = model.YearPublished,
-				PriceInShop = model.PriceInShop,
-				MinimumPlayersAllowedToPlay = model.MinimumPlayersAllowedToPlay,
-				MaximumPlayersAllowedToPlay = model.MaximumPlayersAllowedToPlay,
-				IsUpcoming = model.IsUpcoming
-			};
+			string cardImageDirectory = await UploadImage(form.CardImage);
+			string detailsImageDirectory = await UploadImage(form.DetailsImage);
 
-			boardgame.BoardgamesCategories.Add(new BoardgameCategory()
-			{
-				BoardgameId = boardgame.Id,
-				CategoryId = model.CategoryId_1
-			});
+			List<BoardgameCategory> boardgameCategories = new List<BoardgameCategory>();
 
-			if (model.CategoryId_2 != null)
-			{
-				boardgame.BoardgamesCategories.Add(new BoardgameCategory()
+				var boardgame = new Boardgame()
 				{
-					BoardgameId = boardgame.Id,
-					CategoryId = (int)model.CategoryId_2
-				});
-			}
+					Name = form.Name,
+					Rating = form.Rating,
+					AppropriateAge = form.AppropriateAge,
+					AveragePlayingTime = form.AveragePlayingTime,
+					Description = form.Description,
+					Difficulty = form.Difficulty,
+					YearPublished = form.YearPublished,
+					PriceInShop = form.PriceInShop,
+					MinimumPlayersAllowedToPlay = form.MinimumPlayersAllowedToPlay,
+					MaximumPlayersAllowedToPlay = form.MaximumPlayersAllowedToPlay,
+					IsUpcoming = form.IsUpcoming,
+					BoardgamesCategories = boardgameCategories,
+					CardImageUrl = cardImageDirectory,
+					DetailsImageUrl = detailsImageDirectory,
+					IsReserved = false
+				};
 
-			if (model.CategoryId_3 != null)
+			foreach (int selectedCategoryId in form.SelectedCategoriesId)
 			{
-				boardgame.BoardgamesCategories.Add(new BoardgameCategory()
+				Category category = await context.Categories.FindAsync(selectedCategoryId);
+
+				if (category != null)
 				{
-					BoardgameId = boardgame.Id,
-					CategoryId = (int)model.CategoryId_3
-				});
+					boardgame.BoardgamesCategories.Add(new BoardgameCategory
+					{
+						CategoryId = category.Id,
+						BoardgameId = boardgame.Id
+					});
+				}
 			}
 
 			context.Boardgames.Add(boardgame);
@@ -334,6 +338,26 @@ namespace BoardGameHub.Core.Services
 				.Skip(skipper)
 				.Take(3)
 				.ToArrayAsync();
+		}
+
+		public async Task<string> UploadImage(IFormFile image)
+		{
+			string uploadsFolder = Path.Combine(webHost.WebRootPath, "/assets/games");
+
+			if (!Directory.Exists(uploadsFolder))
+			{
+				Directory.CreateDirectory(uploadsFolder);
+			}
+
+			string imageName = Path.GetFileName(image.FileName);
+			string cardSavePath = Path.Combine(uploadsFolder, imageName);
+
+			using (FileStream stream = new FileStream(cardSavePath, FileMode.Create))
+			{
+				await image.CopyToAsync(stream);
+			}
+
+			return imageName;
 		}
 	}
 }

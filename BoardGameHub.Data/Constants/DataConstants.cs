@@ -22,7 +22,7 @@ namespace BoardGameHub.Data.Constants
         public const int BoardGameYearMinValue = 1980;
         public const int BoardGameYearMaxValue = 2024;
 
-        public const int BoardGameMinimumPlayersMinValue = 2;
+        public const int BoardGameMinimumPlayersMinValue = 1;
         public const int BoardGameMinimumPlayersMaxValue = 4;
 
         public const int BoardGameMaximumPlayersMinValue = 2;
@@ -36,6 +36,9 @@ namespace BoardGameHub.Data.Constants
 
         public const int BoardgameAppropriateAgeMinValue = 0;
         public const int BoardgameAppropriateAgeMaxValue = 18;
+
+        public const int BoardgameAveragePlayingTimeMinValue = 0;
+        public const int BoardgameAveragePlayingTimeMaxValue = 180;
 
         //Category constants:
 

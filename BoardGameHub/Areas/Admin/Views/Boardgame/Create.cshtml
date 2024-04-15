@@ -1,90 +1,118 @@
 ﻿@model BoardgameCreateFormModel
 
 <div class="row">
-    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
-        <form method="post">
-            <div class="form-group">
-                <label asp-for="Name"></label>
-                <input asp-for="Name" class="form-control" placeholder="Name...">
-                <span asp-validation-for="Name" class="small text-danger"></span>
-            </div>
-            
-            <div class="form-group">
-                <label asp-for="Rating"></label>
-                <input asp-for="Rating" class="form-control">
-                <span asp-validation-for="Rating" class="small text-danger"></span>
-            </div>
+	<div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+		<form method="post" enctype="multipart/form-data">
+			<div class="form-group">
+				<label asp-for="Name"></label>
+				<input asp-for="Name" class="form-control" placeholder="Name...">
+				<span asp-validation-for="Name" class="small text-danger"></span>
+			</div>
 
-            <div class="form-group">
-                <label asp-for="AppropriateAge"></label>
-                <input asp-for="AppropriateAge" class="form-control" placeholder="Age above...">
-                <span asp-validation-for="AppropriateAge" class="small text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="AveragePlayingTime"></label>
-                <input asp-for="AveragePlayingTime" class="form-control">
-                <span asp-validation-for="AveragePlayingTime" class="small text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CategoryId_1"></label>
-                <select asp-for="CategoryId_1" class="form-control" multiple>
-                    @foreach (var category in Model.Categories)
-                    {
-                        <option value="@category.Id">@category.Name</option>
-                    }
-                </select>
-                <span asp-validation-for="CategoryId_1" class="small text-danger"></span>
-            </div>
+			<div class="form-group">
+				<label asp-for="Rating"></label>
+				<input asp-for="Rating" class="form-control">
+				<span asp-validation-for="Rating" class="small text-danger"></span>
+			</div>
 
-            <div class="form-group">
-                <label asp-for="Description"></label>
-                <textarea asp-for="Description" rows="4" class="form-control" placeholder="Description..."> </textarea>
-                <span asp-validation-for="Description" class="small text-danger"></span>
-            </div>
+			<div class="form-group">
+				<label asp-for="AppropriateAge"></label>
+				<input asp-for="AppropriateAge" class="form-control" placeholder="Age above...">
+				<span asp-validation-for="AppropriateAge" class="small text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="AveragePlayingTime"></label>
+				<input asp-for="AveragePlayingTime" class="form-control">
+				<span asp-validation-for="AveragePlayingTime" class="small text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="SelectedCategoriesId"></label>
+				<select asp-for="SelectedCategoriesId" class="form-control" multiple>
+					@foreach (var category in Model.Categories)
+					{
+						<option value="@category.Id">@category.Name</option>
+					}
+				</select>
+				<span asp-validation-for="SelectedCategoriesId" class="small text-danger"></span>
+			</div>
 
-            <div class="form-group">
-                <label asp-for="Difficulty"></label>
-                <input asp-for="Difficulty" class="form-control">
-                <span asp-validation-for="Difficulty" class="small text-danger"></span>
-            </div>
+			<div class="form-group">
+				<label asp-for="Description"></label>
+				<textarea asp-for="Description" rows="4" class="form-control" placeholder="Description..."> </textarea>
+				<span asp-validation-for="Description" class="small text-danger"></span>
+			</div>
 
-            <div class="form-group">
-                <label asp-for="YearPublished"></label>
-                <input asp-for="YearPublished" class="form-control">
-                <span asp-validation-for="YearPublished" class="small text-danger"></span>
-            </div>
+			<div class="form-group">
+				<label asp-for="Difficulty"></label>
+				<input asp-for="Difficulty" class="form-control">
+				<span asp-validation-for="Difficulty" class="small text-danger"></span>
+			</div>
 
-            <div class="form-group">
-                <label asp-for="PriceInShop"></label>
-                <input asp-for="PriceInShop" class="form-control">
-                <span asp-validation-for="PriceInShop" class="small text-danger"></span>
-            </div>
+			<div class="form-group">
+				<label asp-for="YearPublished"></label>
+				<input asp-for="YearPublished" class="form-control">
+				<span asp-validation-for="YearPublished" class="small text-danger"></span>
+			</div>
 
-            <div class="form-group">
-                <label asp-for="MinimumPlayersAllowedToPlay"></label>
-                <input asp-for="MinimumPlayersAllowedToPlay" class="form-control">
-                <span asp-validation-for="MinimumPlayersAllowedToPlay" class="small text-danger"></span>
-            </div>
+			<div class="form-group">
+				<label asp-for="PriceInShop"></label>
+				<input asp-for="PriceInShop" class="form-control">
+				<span asp-validation-for="PriceInShop" class="small text-danger"></span>
+			</div>
 
-            <div class="form-group">
-                <label asp-for="MaximumPlayersAllowedToPlay"></label>
-                <input asp-for="MaximumPlayersAllowedToPlay" class="form-control">
-                <span asp-validation-for="MaximumPlayersAllowedToPlay" class="small text-danger"></span>
-            </div>
+			<div class="form-group">
+				<label asp-for="MinimumPlayersAllowedToPlay"></label>
+				<input asp-for="MinimumPlayersAllowedToPlay" class="form-control">
+				<span asp-validation-for="MinimumPlayersAllowedToPlay" class="small text-danger"></span>
+			</div>
 
-            <div class="form-check">
-                <label asp-for="IsUpcoming" class="form-check-label" for="IsUpcoming"></label>
-                <input asp-for="IsUpcoming" class="form-check-input" type="checkbox" value="" id="IsUpcoming">
-                <span asp-validation-for="IsUpcoming" class="small text-danger"></span>
-            </div>
+			<div class="form-group">
+				<label asp-for="MaximumPlayersAllowedToPlay"></label>
+				<input asp-for="MaximumPlayersAllowedToPlay" class="form-control">
+				<span asp-validation-for="MaximumPlayersAllowedToPlay" class="small text-danger"></span>
+			</div>
 
-            <div class="text-center">
-                <input class="btn btn-primary mt-3" type="submit" value="Save" />
-            </div>
-        </form>
-    </div>
+			<div class="form-check">
+				<label asp-for="IsUpcoming" class="form-check-label" for="IsUpcoming"></label>
+				<input asp-for="IsUpcoming" class="form-check-input" type="checkbox" value="" id="IsUpcoming">
+				<span asp-validation-for="IsUpcoming" class="small text-danger"></span>
+			</div>
+
+			<div class="col-4 mt-3">
+				<label asp-for="CardImage">Card image</label>
+				@* <form method="post" enctype="multipart/form-data" asp-area="Admin" asp-controller="Boardgame" asp-action="Create"> *@
+					<div class="mb-3">
+						<input type="file" name="cardImage" class="form-control" />
+					</div>
+					@* <div class="mb-3">
+						<input type="submit" value="Upload File" class="btn btn-primary" />
+					</div> *@
+					<span class="text-success">
+					</span>
+				@* </form> *@
+			</div>
+
+			<div class="col-4">
+				<label asp-for="DetailsImage">Details image</label>
+				@* <form method="post" enctype="multipart/form-data" asp-area="Admin" asp-controller="Boardgame" asp-action="Create"> *@
+					<div class="mb-3">
+						<input type="file" name="detailsImage" class="form-control" />
+					</div>
+					@* <div class="mb-3">
+						<input type="submit" value="Upload File" class="btn btn-primary" />
+					</div> *@
+					<span class="text-success">
+					</span>
+				@* </form> *@
+			</div>
+
+			<div class="text-center">
+				<input class="btn btn-primary mt-3" type="submit" value="Save" />
+			</div>
+		</form>
+	</div>
 </div>
 
 @section Scripts {
-    <partial name="_ValidationScriptsPartial" />
+	<partial name="_ValidationScriptsPartial" />
 }

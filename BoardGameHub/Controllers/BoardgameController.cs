@@ -9,7 +9,7 @@ namespace BoardGameHub.Controllers
     {
         private readonly IBoardgameService boardgameService;
 
-        public BoardgameController(IBoardgameService _boardgameService)
+        public BoardgameController( IBoardgameService _boardgameService)
         {
             boardgameService = _boardgameService;
         }

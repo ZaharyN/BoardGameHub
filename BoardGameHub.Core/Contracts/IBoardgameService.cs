@@ -1,6 +1,7 @@
 ﻿using BoardGameHub.Core.Models.BoardgameViewModels;
 using BoardGameHub.Core.Models.CategoryModel;
 using BoardGameHub.Data.Data.DataModels;
+using Microsoft.AspNetCore.Http;
 
 namespace BoardGameHub.Core.Contracts
 {
@@ -19,5 +20,6 @@ namespace BoardGameHub.Core.Contracts
         Task<IEnumerable<CategoryViewModel>> AllCategoriesAsync();
         Task<Boardgame> ExistsAsync(int id);
         Task<BoardgameActiveViewModel[]> GetRandomBoardgames();
+        Task<string> UploadImage(IFormFile image);
     }
 }
