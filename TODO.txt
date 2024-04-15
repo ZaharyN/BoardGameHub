@@ -1,11 +1,8 @@
 Boardgame controller:
-- Fix Create functionality
-- In the create form try to upload a photo
-- Fix Edit button and create form for it
-- Fix Delete button and the form
+- Fix Edit button and create form for it - edit the photo and delete the previous ones
+- Fix Delete button and the form - delete the boardgame + boardgameCategories + all the uploaded photos
 
 Home controller:
-- In HomePage we will have "Our prices" with prices listing
 
 Categories controller:
 - Fix Sort by selector to be the same in every page
@@ -21,6 +18,9 @@ Other:
 - Custom error 404 and 502 pages
 - Add pagination 
 - Fix when clicking on the userName 
+- Add validations and error handling
+- Add AntiforgeryKey
+- Tests!
 
 GameReviewController:
 - How to show error message "User has already commented this boardgame!"
@@ -34,3 +34,4 @@ Help from Paca:
 - Help with the footer
 - Price page
 - Details page finish up
+- How  can I remember the chosen category and display it on the next page?

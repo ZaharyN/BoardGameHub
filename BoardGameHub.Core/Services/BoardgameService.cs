@@ -187,16 +187,6 @@ namespace BoardGameHub.Core.Services
 				MaximumPlayersAllowedToPlay = boardgame.MaximumPlayersAllowedToPlay
 			};
 
-			var boardgameCategorys = boardgame.BoardgamesCategories.ToList();
-
-			model.CategoryId_1 = boardgameCategorys[0].CategoryId;
-			model.CategoryId_2 = boardgameCategorys[1].CategoryId;
-
-			if (boardgameCategorys.Count > 2)
-			{
-				model.CategoryId_3 = boardgameCategorys[2].CategoryId;
-			}
-
 			return model;
 		}
 
@@ -216,32 +206,6 @@ namespace BoardGameHub.Core.Services
 			boardgame.MaximumPlayersAllowedToPlay = model.MaximumPlayersAllowedToPlay;
 
 			context.BoardgamesCategories.RemoveRange(boardgame.BoardgamesCategories);
-
-			if (boardgame.BoardgamesCategories.Count == 0)
-			{
-				boardgame.BoardgamesCategories.AddRange(new BoardgameCategory[]
-				{
-					new BoardgameCategory()
-					{
-						CategoryId = model.CategoryId_1,
-						BoardgameId = boardgame.Id
-					},
-					new BoardgameCategory()
-					{
-						CategoryId = model.CategoryId_2,
-						BoardgameId = boardgame.Id
-					}
-				});
-
-				if (model.CategoryId_3 != null)
-				{
-					boardgame.BoardgamesCategories.Add(new BoardgameCategory()
-					{
-						CategoryId = (int)model.CategoryId_3,
-						BoardgameId = boardgame.Id
-					});
-				}
-			}
 
 			await context.SaveChangesAsync();
 		}

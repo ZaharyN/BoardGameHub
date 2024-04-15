@@ -1,5 +1,6 @@
 ﻿using BoardGameHub.Core.Contracts;
 using BoardGameHub.Core.Models.BoardgameViewModels;
+using BoardGameHub.Data.Data.DataModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
@@ -48,6 +49,36 @@ namespace BoardGameHub.Areas.Admin.Controllers
 			int boardgameId = await boardgameService.CreateAsync(form);
 
 			return RedirectToAction("Details", "Boardgame", new { area = "", id = boardgameId });
+		}
+
+		[HttpGet]
+		public async Task<IActionResult> Edit(int id)
+		{
+			Boardgame boardgame = await boardgameService.ExistsAsync(id);
+
+			if (boardgame == null)
+			{
+				return NotFound();
+			}
+
+			BoardgameEditFormModel model = await boardgameService.GetEditFormAsync(boardgame);
+
+			return View(model);
+		}
+
+		[HttpPost]
+		public async Task<IActionResult> Edit(int id, BoardgameEditFormModel model)
+		{
+			Boardgame boardgame = await boardgameService.ExistsAsync(id);
+
+			if (boardgame == null)
+			{
+				return NotFound();
+			}
+
+			await boardgameService.EditAsync(model, boardgame);
+
+			return RedirectToAction("Details", "Boardgame", new { area = "", id });
 		}
 	}
 }

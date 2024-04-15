@@ -15,16 +15,7 @@ namespace BoardGameHub.Core.Models.BoardgameViewModels
             ErrorMessage = LengthMessage)]
         public string Name { get; set; } = string.Empty;
 
-        [Required(ErrorMessage = RequiredMessage)]
-        [Display(Name = "Main category")]
-        public int CategoryId_1 { get; set; }
-
-        [Required(ErrorMessage = RequiredMessage)]
-        [Display(Name = "Subcategory 1")]
-        public int CategoryId_2 { get; set; }
-
-        [Display(Name = "Subcategory 2")]
-        public int? CategoryId_3 { get; set; }
+        public List<int> NewCategoriesId { get; set; } = new List<int>();
 
         public IEnumerable<CategoryViewModel> Categories { get; set; } =
             new List<CategoryViewModel>();
@@ -42,6 +33,9 @@ namespace BoardGameHub.Core.Models.BoardgameViewModels
         public int AppropriateAge { get; set; }
 
         [Required(ErrorMessage = RequiredMessage)]
+        [Range(BoardgameAveragePlayingTimeMinValue,
+            BoardgameAveragePlayingTimeMaxValue,
+            ErrorMessage = ValueMessage)]
         [Display(Name = "Average playing time")]
         public int AveragePlayingTime { get; set; }
 
