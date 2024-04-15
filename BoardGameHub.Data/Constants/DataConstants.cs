@@ -38,7 +38,7 @@ namespace BoardGameHub.Data.Constants
         public const int BoardgameAppropriateAgeMaxValue = 18;
 
         public const int BoardgameAveragePlayingTimeMinValue = 0;
-        public const int BoardgameAveragePlayingTimeMaxValue = 180;
+        public const int BoardgameAveragePlayingTimeMaxValue = 360;
 
         //Category constants:
 

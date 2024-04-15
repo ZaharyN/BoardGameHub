@@ -54,33 +54,9 @@ namespace BoardGameHub.Areas.Admin.Controllers
 				return Unauthorized();
 			}
 
-			//string uploadsFolder = Path.Combine(webHostEnvironment.WebRootPath, "/assets/games");
-
-			//if (!Directory.Exists(uploadsFolder))
-			//{
-			//	Directory.CreateDirectory(uploadsFolder);
-			//}
-
-			//string cardImageName = Path.GetFileName(form.CardImage.FileName);
-			//string cardSavePath = Path.Combine(uploadsFolder, cardImageName);
-
-			//using (FileStream stream = new FileStream(cardSavePath, FileMode.Create))
-			//{
-			//	await cardImage.CopyToAsync(stream);
-			//}
-
-			//string detailsImageName = Path.GetFileName(detailsImage.FileName);
-			//string detailsSavePath = Path.Combine(uploadsFolder, detailsImageName);
-
-			//using (FileStream stream = new FileStream(detailsSavePath, FileMode.Create))
-			//{
-			//	await detailsImage.CopyToAsync(stream);
-			//};
-
-
 			int boardgameId = await boardgameService.CreateAsync(form);
 
-			return RedirectToAction(nameof(form), new { id = boardgameId });
+			return RedirectToAction("Details","Boardgame", new { id = boardgameId });
 		}
 	}
 }

@@ -342,7 +342,7 @@ namespace BoardGameHub.Core.Services
 
 		public async Task<string> UploadImage(IFormFile image)
 		{
-			string uploadsFolder = Path.Combine(webHost.WebRootPath, "/assets/games");
+			string uploadsFolder = Path.Combine(webHost.ContentRootPath, "assets", "games");
 
 			if (!Directory.Exists(uploadsFolder))
 			{
