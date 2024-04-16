@@ -2,6 +2,7 @@
 using BoardGameHub.Core.Models.BoardgameViewModels;
 using BoardGameHub.Data.Data.DataModels;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Security.Claims;
 
 namespace BoardGameHub.Areas.Admin.Controllers
@@ -10,8 +11,7 @@ namespace BoardGameHub.Areas.Admin.Controllers
 	{
 		private readonly IBoardgameService boardgameService;
 
-		public BoardgameController(IBoardgameService _boardgameService,
-			 IWebHostEnvironment _webHostEnvironment)
+		public BoardgameController(IBoardgameService _boardgameService)
 		{
 			boardgameService = _boardgameService;
 		}
@@ -61,13 +61,28 @@ namespace BoardGameHub.Areas.Admin.Controllers
 				return NotFound();
 			}
 
-			BoardgameEditFormModel model = await boardgameService.GetEditFormAsync(boardgame);
+			BoardgameEditFormModel form = await boardgameService.GetEditFormAsync(boardgame);
 
-			return View(model);
+			return View(form);
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> Edit(int id, BoardgameEditFormModel model)
+		public async Task<IActionResult> Edit(BoardgameEditFormModel form)
+		{
+			Boardgame boardgame = await boardgameService.ExistsAsync(form.Id);
+
+			if (boardgame == null)
+			{
+				return NotFound();
+			}
+
+			await boardgameService.EditAsync(form, boardgame);
+
+			return RedirectToAction("Details", "Boardgame", new { area = "", id = form.Id });
+		}
+
+		[HttpGet]
+		public async Task<IActionResult> Delete(int id)
 		{
 			Boardgame boardgame = await boardgameService.ExistsAsync(id);
 
@@ -76,9 +91,24 @@ namespace BoardGameHub.Areas.Admin.Controllers
 				return NotFound();
 			}
 
-			await boardgameService.EditAsync(model, boardgame);
+			BoardgameDeleteFormModel model = await boardgameService.GetDeleteFormAsync(boardgame);
 
-			return RedirectToAction("Details", "Boardgame", new { area = "", id });
+			return View(model);
+		}
+
+		[HttpPost]
+		public async Task<IActionResult> DeleteConfirmed(int id)
+		{
+			Boardgame boardgame = await boardgameService.ExistsAsync(id);
+
+			if (boardgame == null)
+			{
+				return NotFound();
+			}
+
+			await boardgameService.DeleteConfirmed(boardgame);
+
+			return RedirectToAction("Active", "Boardgame", new { area = "" });
 		}
 	}
 }

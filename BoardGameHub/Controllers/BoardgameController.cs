@@ -45,34 +45,6 @@ namespace BoardGameHub.Controllers
 
         
 
-        [HttpGet]
-        public async Task<IActionResult> Delete(int id)
-        {
-            Boardgame boardgame = await boardgameService.ExistsAsync(id);
-
-            if (boardgame == null)
-            {
-                return NotFound();
-            }
-
-            BoardgameDeleteFormModel model = await boardgameService.GetDeleteFormAsync(boardgame);
-
-            return View(model);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            Boardgame boardgame = await boardgameService.ExistsAsync(id);
-
-            if (boardgame == null)
-            {
-                return NotFound();
-            }
-
-            await boardgameService.DeleteConfirmed(boardgame);
-
-            return RedirectToAction(nameof(Active));
-        }
+        
     }
 }

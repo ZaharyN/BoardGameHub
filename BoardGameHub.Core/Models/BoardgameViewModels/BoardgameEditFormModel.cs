@@ -51,10 +51,6 @@ namespace BoardGameHub.Core.Models.BoardgameViewModels
             ErrorMessage = ValueMessage)]
         public double Difficulty { get; set; }
 
-        public string? CardImageUrl { get; set; } = string.Empty;
-
-        public string? DetailsImageUrl { get; set; } = string.Empty;
-
         [Required]
         [Display(Name = "Year published")]
         [Range(BoardGameYearMinValue,
@@ -82,5 +78,8 @@ namespace BoardGameHub.Core.Models.BoardgameViewModels
             BoardGameMaximumPlayersMaxValue,
             ErrorMessage = ValueMessage)]
         public int MaximumPlayersAllowedToPlay { get; set; }
+
+        [Required]
+        public bool IsUpcoming { get; set; }
     }
 }

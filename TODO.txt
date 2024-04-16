@@ -1,11 +1,8 @@
 Boardgame controller:
-- Fix Edit button and create form for it - edit the photo and delete the previous ones
 - Fix Delete button and the form - delete the boardgame + boardgameCategories + all the uploaded photos
-
-Home controller:
+- In the edit form, how to display the current categories and if the person does not choose new ones, the old ones stay?
 
 Categories controller:
-- Fix Sort by selector to be the same in every page
 - How  can I remember the chosen category and display it on the next page?
 
 Reservation controller:
@@ -15,6 +12,7 @@ Reservation controller:
 - Make admin method to free the tables
 
 Other:
+- How to add new lines in the html description texts
 - Custom error 404 and 502 pages
 - Add pagination 
 - Fix when clicking on the userName 

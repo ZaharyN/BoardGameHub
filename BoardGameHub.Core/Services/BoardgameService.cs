@@ -12,13 +12,10 @@ namespace BoardGameHub.Core.Services
 	public class BoardgameService : IBoardgameService
 	{
 		private readonly BoardGameHubDbContext context;
-		private IWebHostEnvironment webHost;
 
-		public BoardgameService(BoardGameHubDbContext _context,
-			IWebHostEnvironment _webHost)
+		public BoardgameService(BoardGameHubDbContext _context)
 		{
 			context = _context;
-			webHost = _webHost;
 		}
 
 		public async Task<IEnumerable<BoardgameActiveViewModel>> ActiveAsync()
@@ -179,12 +176,11 @@ namespace BoardGameHub.Core.Services
 				AveragePlayingTime = boardgame.AveragePlayingTime,
 				Description = boardgame.Description,
 				Difficulty = boardgame.Difficulty,
-				CardImageUrl = boardgame.CardImageUrl,
-				DetailsImageUrl = boardgame.DetailsImageUrl,
 				YearPublished = boardgame.YearPublished,
 				PriceInShop = boardgame.PriceInShop,
 				MinimumPlayersAllowedToPlay = boardgame.MinimumPlayersAllowedToPlay,
-				MaximumPlayersAllowedToPlay = boardgame.MaximumPlayersAllowedToPlay
+				MaximumPlayersAllowedToPlay = boardgame.MaximumPlayersAllowedToPlay,
+				IsUpcoming = boardgame.IsUpcoming
 			};
 
 			return model;
@@ -198,14 +194,25 @@ namespace BoardGameHub.Core.Services
 			boardgame.AveragePlayingTime = model.AveragePlayingTime;
 			boardgame.Description = model.Description;
 			boardgame.Difficulty = model.Difficulty;
-			boardgame.CardImageUrl = model.CardImageUrl;
-			boardgame.DetailsImageUrl = model.DetailsImageUrl;
 			boardgame.YearPublished = model.YearPublished;
 			boardgame.PriceInShop = model.PriceInShop;
 			boardgame.MinimumPlayersAllowedToPlay = model.MinimumPlayersAllowedToPlay;
 			boardgame.MaximumPlayersAllowedToPlay = model.MaximumPlayersAllowedToPlay;
+			boardgame.IsUpcoming = model.IsUpcoming;
 
-			context.BoardgamesCategories.RemoveRange(boardgame.BoardgamesCategories);
+			List<BoardgameCategory> bgCategories = await context.BoardgamesCategories
+					.Where(bg => bg.BoardgameId == boardgame.Id)
+					.ToListAsync();
+			context.BoardgamesCategories.RemoveRange(bgCategories);
+
+			foreach (var categoryId in model.NewCategoriesId)
+			{
+				boardgame.BoardgamesCategories.Add(new BoardgameCategory
+				{
+					BoardgameId = boardgame.Id,
+					CategoryId = categoryId
+				});
+			}
 
 			await context.SaveChangesAsync();
 		}

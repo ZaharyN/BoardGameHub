@@ -104,7 +104,7 @@ namespace BoardGameHub.Areas.Identity.Pages.Account
 
                     if(await _userManager.IsInRoleAsync(user, AdminRole))
                     {
-                        return RedirectToAction("ViewAll","Boardgame", new {area = "Admin"});
+                        return RedirectToAction("Index","Home", new {area = "Admin"});
                     }
 
                     return LocalRedirect(returnUrl);
