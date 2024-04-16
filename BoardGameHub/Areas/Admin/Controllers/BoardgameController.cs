@@ -97,16 +97,21 @@ namespace BoardGameHub.Areas.Admin.Controllers
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> DeleteConfirmed(int id)
+		public async Task<IActionResult> DeleteConfirmed(BoardgameDeleteFormModel form)
 		{
-			Boardgame boardgame = await boardgameService.ExistsAsync(id);
+			Boardgame boardgame = await boardgameService.ExistsAsync(form.Id);
 
 			if (boardgame == null)
 			{
 				return NotFound();
 			}
 
-			await boardgameService.DeleteConfirmed(boardgame);
+            if (!User.IsAdmin())
+            {
+                return Unauthorized();
+            }
+
+            await boardgameService.DeleteConfirmed(boardgame);
 
 			return RedirectToAction("Active", "Boardgame", new { area = "" });
 		}
