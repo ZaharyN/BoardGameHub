@@ -19,11 +19,11 @@ namespace BoardGameHub.Controllers
         }
 
 		[HttpGet]
-		public async Task<IActionResult> MyReservations()
+		public async Task<IActionResult> Mine()
 		{
 			string userId = GetUser();
 
-			var reservations = await reservationService.MyReservationsAsync(userId);
+			var reservations = await reservationService.MineAsync(userId);
 
 			return View(reservations);
 		}
@@ -75,7 +75,7 @@ namespace BoardGameHub.Controllers
 
 			await reservationService.CreateReservationAsync(form, userId, dateTime);
 
-			return RedirectToAction(nameof(MyReservations));
+			return RedirectToAction(nameof(Mine));
 		}
 
 		[HttpGet]
@@ -123,7 +123,7 @@ namespace BoardGameHub.Controllers
 
 			await reservationService.DeleteConfirmedAsync(form);
 
-			return RedirectToAction(nameof(MyReservations));
+			return RedirectToAction(nameof(Mine));
 		}
 
 		private string GetUser()

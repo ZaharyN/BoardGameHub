@@ -79,7 +79,7 @@ namespace BoardGameHub.Core.Services
 			await context.SaveChangesAsync();
 		}
 
-		public async Task<IEnumerable<ReservationViewModel>> MyReservationsAsync(string id)
+		public async Task<IEnumerable<ReservationViewModel>> MineAsync(string id)
 		{
 			string userName = GetUser(id).Result.FirstName;
 
@@ -88,6 +88,7 @@ namespace BoardGameHub.Core.Services
 				.Select(r => new ReservationViewModel()
 				{
 					Id = r.Id,
+					ReservationImage = "/assets/Reservation/Reservation_image.jpg",
 					ReservationName = $"{userName}'s reservation",
 					DateTime = r.DateTime.ToString(ReservationDateTimeFormat)
 				})
