@@ -393,8 +393,8 @@ namespace BoardGameHub.Data.Data.Seed
                 Description = "Exploding Kittens is a kitty-powered version of Russian Roulette. Players take turns drawing cards until someone draws an exploding kitten and loses the game. The deck is made up of cards that let you avoid exploding by peeking at cards before you draw, forcing your opponent to draw multiple cards, or shuffling the deck.\r\n\r\nThe game gets more and more intense with each card you draw because fewer cards left in the deck means a greater chance of drawing the kitten and exploding in a fiery ball of feline hyperbole.",
 
                 Difficulty = 1,
-                CardImageUrl = "/assets/games/Exlpoding_Kittens_card.jpg",
-                DetailsImageUrl = "/assets/games/Exlpoding_Kittens_details.jpg",
+                CardImageUrl = "/assets/games/Exploding_Kittens_card.jpg",
+                DetailsImageUrl = "/assets/games/Exploding_Kittens_details.jpg",
                 YearPublished = 2015,
                 PriceInShop = 45.00M,
                 MinimumPlayersAllowedToPlay = 2,

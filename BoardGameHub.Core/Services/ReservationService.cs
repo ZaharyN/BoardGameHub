@@ -29,49 +29,51 @@ namespace BoardGameHub.Core.Services
 			return form;
 		}
 
-		public async Task CreateReservationAsync(ReservationCreateFormModel form, string userId)
+		public async Task CreateReservationAsync(ReservationCreateFormModel form, string userId, DateTime dateTime)
 		{
-			if (!DateTime.TryParseExact(form.DateTime,
-				ReservationDateTimeFormat,
-				CultureInfo.InvariantCulture,
-				DateTimeStyles.None,
-				out DateTime dateTime))
+			List<ReservationPlace> placesReserved = new List<ReservationPlace>();
+			List<Boardgame> gamesReserved = new List<Boardgame>();
+
+			foreach (var resPlaceId in form.PlacesReserved)
 			{
-				throw new InvalidOperationException("Invalid date or time format");
-			}
+				ReservationPlace currentPlace = await context.ReservationPlaces.FindAsync(resPlaceId);
 
-			List<ReservationPlace> places = new List<ReservationPlace>();
-			List<Boardgame> games = new List<Boardgame>();
-
-			foreach (var resPlace in form.PlacesReserved)
-			{
-				ReservationPlace currentPlace = await context.ReservationPlaces.FindAsync(resPlace.Id);
-
-				if (resPlace != null)
+				if (currentPlace != null)
 				{
-					places.Add(currentPlace);
+					placesReserved.Add(currentPlace);
 				}
 			}
 
-			foreach (var gameReserved in form.BoardgamesReserved)
+			foreach (var gameReservedId in form.BoardgamesReserved)
 			{
-				Boardgame currentBg = await context.Boardgames.FindAsync(gameReserved.Id);
+				Boardgame currentBg = await context.Boardgames.FindAsync(gameReservedId);
 
 				if (currentBg != null)
 				{
-					games.Add(currentBg);
+					gamesReserved.Add(currentBg);
 				}
 			}
 
 			Reservation reservation = new Reservation()
 			{
-				Id = await LastReservationId() + 1,
 				ReservationOwnerId = userId,
 				DateTime = dateTime,
-				AdditionalComment = form.AdditionalComment ?? null,
-				ReservationPlaces = places,
-				BoardgamesReserved = games
+				AdditionalComment = form.AdditionalComment,
+				ReservationPlaces = placesReserved,
+				BoardgamesReserved = gamesReserved
 			};
+
+			foreach (var resPlace in reservation.ReservationPlaces)
+			{
+				resPlace.IsReserved = true;
+				resPlace.ReservationId = reservation.Id;
+			}
+
+			foreach (var resBoardgame in reservation.BoardgamesReserved)
+			{
+				resBoardgame.IsReserved = true;
+				resBoardgame.ReservationId = reservation.Id;
+			}
 
 			context.Reservations.Add(reservation);
 			await context.SaveChangesAsync();
@@ -157,6 +159,7 @@ namespace BoardGameHub.Core.Services
 			return await context.Boardgames
 				.Where(b => b.IsReserved == false
 				&& b.IsUpcoming == false)
+				.AsNoTracking()
 				.Select(b => new ReservationBoardgameViewModel()
 				{
 					Id = b.Id,
@@ -168,12 +171,13 @@ namespace BoardGameHub.Core.Services
 		public async Task<List<ReservationPlaceViewModel>> GetAllFreeReservationPlacesAsync()
 		{
 			return await context.ReservationPlaces
+					.Include(rp => rp.PlaceType)
+					.AsNoTracking()
 					.Where(rp => rp.IsReserved == false)
 					.Select(rp => new ReservationPlaceViewModel()
 					{
 						Id = rp.Id,
 						Name = rp.Name,
-						PlaceTypeId = rp.PlaceTypeId,
 					})
 					.ToListAsync();
 		}
@@ -181,6 +185,13 @@ namespace BoardGameHub.Core.Services
 		public async Task<Reservation> GetReservationAsync(int id)
 		{
 			return await context.Reservations.FindAsync(id);
+		}
+
+		public async Task<bool> UserHasReservation(string userId, DateTime dateTime)
+		{
+			return await context.Reservations
+				.AnyAsync(r => r.ReservationOwnerId == userId
+				&& r.DateTime.Day == dateTime.Day);
 		}
 	}
 

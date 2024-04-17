@@ -2,7 +2,10 @@
 using BoardGameHub.Core.Models.ReservationViewModel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Globalization;
+using System.Runtime.Serialization;
 using System.Security.Claims;
+using static BoardGameHub.Data.Constants.DataConstants;
 
 namespace BoardGameHub.Controllers
 {
@@ -37,17 +40,40 @@ namespace BoardGameHub.Controllers
 		[HttpPost]
 		public async Task<IActionResult> Create(ReservationCreateFormModel form)
 		{
-			if (!ModelState.IsValid)
-			{
-				form.BoardgamesReserved = await reservationService.GetAllFreeBoardgamesAsync();
+            if (!DateTime.TryParseExact(form.DateTime,
+                ReservationDateTimeFormat,
+                CultureInfo.InvariantCulture,
+                DateTimeStyles.None,
+                out DateTime dateTime))
+            {
+				ModelState.AddModelError(form.DateTime, $"Invalid date! Format must be: {ReservationDateTimeFormat}");
+
+				form.FreeBoardgames = await reservationService.GetAllFreeBoardgamesAsync();
 				form.FreePlaces = await reservationService.GetAllFreeReservationPlacesAsync();
 
-				return View();
+				return View(form);
+			}
+
+            if (!ModelState.IsValid)
+			{
+				form.FreeBoardgames = await reservationService.GetAllFreeBoardgamesAsync();
+				form.FreePlaces = await reservationService.GetAllFreeReservationPlacesAsync();
+
+				return View(form);
 			}
 
 			string userId = GetUser();
 
-			await reservationService.CreateReservationAsync(form, userId);
+			if(await reservationService.UserHasReservation(userId, dateTime))
+			{
+				ModelState.AddModelError(form.DateTime, $"Invalid date! Format must be: {ReservationDateTimeFormat}");
+
+				form.FreeBoardgames = await reservationService.GetAllFreeBoardgamesAsync();
+				form.FreePlaces = await reservationService.GetAllFreeReservationPlacesAsync();
+				return View(form);
+			}
+
+			await reservationService.CreateReservationAsync(form, userId, dateTime);
 
 			return RedirectToAction(nameof(MyReservations));
 		}

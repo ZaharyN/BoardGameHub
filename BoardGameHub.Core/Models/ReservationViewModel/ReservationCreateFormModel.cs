@@ -13,28 +13,27 @@ namespace BoardGameHub.Core.Models.ReservationViewModel
             ErrorMessage = LengthMessage)]
         public string FirstName { get; set; } = string.Empty;
 
-        [Required]
+		[Required(ErrorMessage = RequiredMessage)]
 		[StringLength(UserLastNameMaxLength,
 			MinimumLength = UserLastNameMinLength,
 			ErrorMessage = LengthMessage)]
 		public string LastName { get; set; } = string.Empty;
 
-        [Required]
-        [RegularExpression(ApplicationUserPhoneNumber)]
+		[Required(ErrorMessage = RequiredMessage)]
+		[RegularExpression(ApplicationUserPhoneNumber)]
         public string? PhoneNumber { get; set; } = string.Empty;
 
-        [Required]
-        public string DateTime { get; set; } = string.Empty;
+		[Required(ErrorMessage = RequiredMessage)]
+		public string DateTime { get; set; } = string.Empty;
 
         [StringLength(ReservationAdditionalCommentMaxValue)]
         public string? AdditionalComment { get; set; }
 
+        public List<int> BoardgamesReserved { get; set; } = 
+            new List<int>();
 
-        public List<ReservationBoardgameViewModel> BoardgamesReserved { get; set; } = 
-            new List<ReservationBoardgameViewModel>();
-
-        [Required]
-        public List<ReservationPlaceViewModel> PlacesReserved { get; set; } = new List<ReservationPlaceViewModel>();
+		[Required(ErrorMessage = RequiredMessage)]
+		public List<int> PlacesReserved { get; set; } = new List<int>();
 
         public List<ReservationBoardgameViewModel> FreeBoardgames { get; set; } = 
             new List<ReservationBoardgameViewModel>();

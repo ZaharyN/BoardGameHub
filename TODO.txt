@@ -1,15 +1,9 @@
-Boardgame controller:
-- Fix Delete button and the form - delete the boardgame + boardgameCategories + all the uploaded photos
-- In the edit form, how to display the current categories and if the person does not choose new ones, the old ones stay?
-
-Categories controller:
-- How  can I remember the chosen category and display it on the next page?
-
 Reservation controller:
 - Add "My Reservations" view
-- Add Create form
 - Add Delete for Admin
 - Make admin method to free the tables
+- Admin can Edit reservations
+- Make so the ModelState error visualises
 
 Other:
 - How to add new lines in the html description texts
@@ -32,4 +26,12 @@ Help from Paca:
 - Help with the footer
 - Price page
 - Details page finish up
+- How  can I remember the chosen category and display it on the next page?
+
+Additional questions:
+
+Boardgame controller:
+- In the edit form, how to display the current categories and if the person does not choose new ones, the old ones stay?
+
+Categories controller:
 - How  can I remember the chosen category and display it on the next page?
