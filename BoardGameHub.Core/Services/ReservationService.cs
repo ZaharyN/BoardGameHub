@@ -31,18 +31,7 @@ namespace BoardGameHub.Core.Services
 
 		public async Task CreateReservationAsync(ReservationCreateFormModel form, string userId, DateTime dateTime)
 		{
-			List<ReservationPlace> placesReserved = new List<ReservationPlace>();
-
-			foreach (var resPlaceId in form.PlacesReserved)
-			{
-				ReservationPlace currentPlace = await context.ReservationPlaces.FindAsync(resPlaceId);
-
-				if (currentPlace != null)
-				{
-					placesReserved.Add(currentPlace);
-				}
-			}
-
+			ReservationPlace? placeReserved = await context.ReservationPlaces.FindAsync(form.PlaceReservedId);
 			Boardgame? boardgameReserved = await context.Boardgames.FindAsync(form.BoardgameReservedId);
 
 			Reservation reservation = new Reservation()
@@ -50,20 +39,18 @@ namespace BoardGameHub.Core.Services
 				ReservationOwnerId = userId,
 				DateTime = dateTime,
 				AdditionalComment = form.AdditionalComment,
-				ReservationPlaces = placesReserved,
+				ReservationPlace = placeReserved,
 				BoardgameReservedId = boardgameReserved.Id,
 				BoardgameReserved = boardgameReserved
 			};
 
-			foreach (var resPlace in reservation.ReservationPlaces)
-			{
-				resPlace.IsReserved = true;
-				resPlace.ReservationId = reservation.Id;
-			}
+			placeReserved.IsReserved = true;
+			placeReserved.ReservationId = reservation.Id;
 
 			if(boardgameReserved != null)
 			{
 				boardgameReserved.IsReserved = true;
+				boardgameReserved.ReservationId = reservation.Id;
 			}
 
 			context.Reservations.Add(reservation);
@@ -94,8 +81,9 @@ namespace BoardGameHub.Core.Services
 			{
 				Id = reservation.Id,
 				DateTime = reservation.DateTime.ToString(ReservationDateTimeFormat),
-				AdditionalComment = reservation.AdditionalComment ?? null,
-				PlacesReserved = reservation.ReservationPlaces,
+				AdditionalComment = reservation.AdditionalComment,
+				PhoneNumber = reservation.PhoneNumber,
+				PlaceReservedName = reservation.ReservationPlace.Name,
 				BoardgameReservedName = reservation.BoardgameReserved.Name
 			};
 
@@ -117,31 +105,18 @@ namespace BoardGameHub.Core.Services
 		{
 			Reservation reservation = await context.Reservations.FindAsync(form.Id);
 
-			foreach (var place in reservation.ReservationPlaces)
-			{
-				place.IsReserved = false;
-			}
+			reservation.ReservationPlace.IsReserved = false;
+			reservation.ReservationPlace.ReservationId = null;
 
 			Boardgame? boardgameReserved = await context.Boardgames.FindAsync(reservation.BoardgameReservedId);
 
-			if(boardgameReserved != null)
-			{
-				boardgameReserved.IsReserved = false;
-			}
+			boardgameReserved.IsReserved = false;
+			boardgameReserved.ReservationId = null;
 
 			context.Reservations.Remove(reservation);
 			await context.SaveChangesAsync();
 
 		}
-		public async Task<int> LastReservationId()
-		{
-			Reservation? lastReservation = await context.Reservations
-				.OrderBy(r => r.Id)
-				.LastOrDefaultAsync();
-
-			return lastReservation == null ? 0 : lastReservation.Id;
-		}
-
 		public async Task<ApplicationUser> GetUser(string id)
 		{
 			var user = await context.ApplicationUsers.FirstOrDefaultAsync(u => u.Id == id);

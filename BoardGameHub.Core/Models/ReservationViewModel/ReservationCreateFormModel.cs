@@ -28,11 +28,10 @@ namespace BoardGameHub.Core.Models.ReservationViewModel
 
         [StringLength(ReservationAdditionalCommentMaxValue)]
         public string? AdditionalComment { get; set; }
-
         public int? BoardgameReservedId { get; set; }
 
 		[Required(ErrorMessage = RequiredMessage)]
-		public List<int> PlacesReserved { get; set; } = new List<int>();
+		public int PlaceReservedId { get; set; } 
 
         public List<ReservationBoardgameViewModel> FreeBoardgames { get; set; } = 
             new List<ReservationBoardgameViewModel>();
