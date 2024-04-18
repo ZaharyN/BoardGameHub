@@ -13,12 +13,6 @@ namespace BoardGameHub.Data.Data.Configuration
         {
             SeedReservationPlaceData data = new SeedReservationPlaceData();
 
-            //builder
-            //    .HasOne(rp => rp.Reservation)
-            //    .WithOne(r => r.ReservationPlace)
-            //        .HasForeignKey<Reservation>(r => r.ReservationPlaceId)
-            //    .IsRequired(false);
-
 			builder.HasData(new ReservationPlace[]
             {
                 data.SmallTable1,

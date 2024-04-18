@@ -75,12 +75,16 @@ namespace BoardGameHub.Core.Services
 			return reservations;
 		}
 
-		public async Task<ReservationDetailsViewModel> ReservationDetailsAsync(Reservation reservation)
+		public async Task<ReservationDetailsViewModel> ReservationDetailsAsync(Reservation reservation, string userId)
 		{
+			string userName = GetUser(userId).Result.FirstName;
+
 			var model = new ReservationDetailsViewModel()
 			{
 				Id = reservation.Id,
-				DateTime = reservation.DateTime.ToString(ReservationDateTimeFormat),
+				ReservationName = $"{userName}' reservation",
+				ReservationImage = "/assets/Reservation/Reservation_image.jpg",
+                DateTime = reservation.DateTime.ToString(ReservationDateTimeFormat),
 				AdditionalComment = reservation.AdditionalComment,
 				PhoneNumber = reservation.PhoneNumber,
 				PlaceReservedName = reservation.ReservationPlace.Name,

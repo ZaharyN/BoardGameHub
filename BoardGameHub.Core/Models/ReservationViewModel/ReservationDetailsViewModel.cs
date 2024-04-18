@@ -10,7 +10,9 @@ namespace BoardGameHub.Core.Models.ReservationViewModel
 	public class ReservationDetailsViewModel
 	{
         public int Id { get; set; }
+        public string ReservationName { get; set; } = string.Empty;
         public string DateTime { get; set; } = string.Empty;
+        public string ReservationImage { get; set; } = string.Empty;
         public string? AdditionalComment { get; set; }
         public string? PhoneNumber { get; set; }
         public string PlaceReservedName { get; set; } = string.Empty;

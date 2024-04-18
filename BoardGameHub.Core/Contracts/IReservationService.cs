@@ -8,7 +8,7 @@ namespace BoardGameHub.Core.Contracts
 		Task<ReservationCreateFormModel> GetCreateReservationFormAsync();
 		Task CreateReservationAsync(ReservationCreateFormModel form, string userId, DateTime date);
 		Task<IEnumerable<ReservationViewModel>> MineAsync(string id);
-		Task<ReservationDetailsViewModel> ReservationDetailsAsync(Reservation reservation);
+		Task<ReservationDetailsViewModel> ReservationDetailsAsync(Reservation reservation, string userId);
 		Task<ReservationDeleteFormModel> GetDeleteFormAsync(Reservation reservation);
 		Task DeleteConfirmedAsync(ReservationDeleteFormModel form);
 		Task<ApplicationUser> GetUser(string userId);

@@ -96,7 +96,9 @@ namespace BoardGameHub.Controllers
 				return BadRequest();
 			}
 
-			var model = await reservationService.ReservationDetailsAsync(reservation);
+			string userId = GetUser();
+
+			var model = await reservationService.ReservationDetailsAsync(reservation, userId);
 
 			return View(model);
 		}
