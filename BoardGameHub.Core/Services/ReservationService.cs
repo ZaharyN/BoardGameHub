@@ -32,7 +32,6 @@ namespace BoardGameHub.Core.Services
 		public async Task CreateReservationAsync(ReservationCreateFormModel form, string userId, DateTime dateTime)
 		{
 			List<ReservationPlace> placesReserved = new List<ReservationPlace>();
-			List<Boardgame> gamesReserved = new List<Boardgame>();
 
 			foreach (var resPlaceId in form.PlacesReserved)
 			{
@@ -44,15 +43,7 @@ namespace BoardGameHub.Core.Services
 				}
 			}
 
-			foreach (var gameReservedId in form.BoardgamesReserved)
-			{
-				Boardgame currentBg = await context.Boardgames.FindAsync(gameReservedId);
-
-				if (currentBg != null)
-				{
-					gamesReserved.Add(currentBg);
-				}
-			}
+			Boardgame? boardgameReserved = await context.Boardgames.FindAsync(form.BoardgameReservedId);
 
 			Reservation reservation = new Reservation()
 			{
@@ -60,7 +51,8 @@ namespace BoardGameHub.Core.Services
 				DateTime = dateTime,
 				AdditionalComment = form.AdditionalComment,
 				ReservationPlaces = placesReserved,
-				BoardgamesReserved = gamesReserved
+				BoardgameReservedId = boardgameReserved.Id,
+				BoardgameReserved = boardgameReserved
 			};
 
 			foreach (var resPlace in reservation.ReservationPlaces)
@@ -69,10 +61,9 @@ namespace BoardGameHub.Core.Services
 				resPlace.ReservationId = reservation.Id;
 			}
 
-			foreach (var resBoardgame in reservation.BoardgamesReserved)
+			if(boardgameReserved != null)
 			{
-				resBoardgame.IsReserved = true;
-				resBoardgame.ReservationId = reservation.Id;
+				boardgameReserved.IsReserved = true;
 			}
 
 			context.Reservations.Add(reservation);
@@ -105,7 +96,7 @@ namespace BoardGameHub.Core.Services
 				DateTime = reservation.DateTime.ToString(ReservationDateTimeFormat),
 				AdditionalComment = reservation.AdditionalComment ?? null,
 				PlacesReserved = reservation.ReservationPlaces,
-				BoardgamesReserved = reservation.BoardgamesReserved
+				BoardgameReservedName = reservation.BoardgameReserved.Name
 			};
 
 			return model;
@@ -130,9 +121,12 @@ namespace BoardGameHub.Core.Services
 			{
 				place.IsReserved = false;
 			}
-			foreach (var boardgame in reservation.BoardgamesReserved)
+
+			Boardgame? boardgameReserved = await context.Boardgames.FindAsync(reservation.BoardgameReservedId);
+
+			if(boardgameReserved != null)
 			{
-				boardgame.IsReserved = false;
+				boardgameReserved.IsReserved = false;
 			}
 
 			context.Reservations.Remove(reservation);

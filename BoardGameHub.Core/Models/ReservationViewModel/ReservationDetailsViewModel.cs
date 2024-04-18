@@ -11,8 +11,8 @@ namespace BoardGameHub.Core.Models.ReservationViewModel
 	{
         public int Id { get; set; }
         public string DateTime { get; set; } = string.Empty;
-        public string AdditionalComment { get; set; } = string.Empty;
+        public string? AdditionalComment { get; set; }
         public List<ReservationPlace> PlacesReserved { get; set; } = new List<ReservationPlace>();
-        public List<Boardgame> BoardgamesReserved { get; set; } = new List<Boardgame>();
+        public string? BoardgameReservedName { get; set; } 
     }
 }

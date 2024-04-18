@@ -31,14 +31,14 @@
 				<span asp-validation-for="AdditionalComment" class="small text-danger"></span>
 			</div>
 			<div class="form-group">
-				<label asp-for="BoardgamesReserved"></label>
-				<select asp-for="BoardgamesReserved" class="form-control" multiple>
+				<label asp-for="BoardgameReservedId"></label>
+				<select asp-for="BoardgameReservedId" class="form-control" multiple>
 					@foreach (var boardgame in Model.FreeBoardgames)
 					{
 						<option value="@boardgame.Id">@boardgame.Name</option>
 					}
 				</select>
-				<span asp-validation-for="BoardgamesReserved" class="small text-danger"></span>
+				<span asp-validation-for="BoardgameReservedId" class="small text-danger"></span>
 			</div>
 			<div class="form-group">
 				<label asp-for="PlacesReserved"></label>

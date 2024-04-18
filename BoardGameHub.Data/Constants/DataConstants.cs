@@ -65,7 +65,7 @@ namespace BoardGameHub.Data.Constants
         public const string ReservationTotalPriceMinValue = "10.00";
         public const string ReservationTotalPriceMaxValue = "900.00";
 
-        public const string ReservationDateTimeFormat = "dd/MM/yyyy HH:mm";
+        public const string ReservationDateTimeFormat = "dd-MM-yyyy HH:mm";
 
 		//Application user constants:
 

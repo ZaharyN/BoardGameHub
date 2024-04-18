@@ -26,6 +26,8 @@ namespace BoardGameHub.Data.Data.DataModels
 		[Required]
         public List<ReservationPlace> ReservationPlaces { get; set; } = new List<ReservationPlace>();
 
-        public List<Boardgame>? BoardgamesReserved { get; set; } = new List<Boardgame>();
+		[ForeignKey(nameof(BoardgameReserved))]
+		public int? BoardgameReservedId { get; set; }
+        public Boardgame? BoardgameReserved { get; set; }
     }
 }

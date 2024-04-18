@@ -2,7 +2,7 @@ Reservation controller:
 - Add "My Reservations" view
 - Add Delete for Admin
 - Make admin method to free the tables
-- Admin can Edit reservations
+- Admin can Edit reservations - time 
 - Make so the ModelState error visualises
 
 Other:
@@ -18,9 +18,8 @@ GameReviewController:
 - How to show error message "User has already commented this boardgame!"
 - Add some reviews to the games
 
-AdminController:
-- Idea for homepage view 
-
+Admin controller:
+ - Home view
 
 Help from Paca:
 - Help with the footer
