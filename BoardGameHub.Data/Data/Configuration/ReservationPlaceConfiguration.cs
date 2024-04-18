@@ -2,6 +2,8 @@
 using BoardGameHub.Data.Data.Seed;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System.Reflection.Emit;
+using System;
 
 namespace BoardGameHub.Data.Data.Configuration
 {
@@ -11,7 +13,13 @@ namespace BoardGameHub.Data.Data.Configuration
         {
             SeedReservationPlaceData data = new SeedReservationPlaceData();
 
-            builder.HasData(new ReservationPlace[]
+            //builder
+            //    .HasOne(rp => rp.Reservation)
+            //    .WithOne(r => r.ReservationPlace)
+            //        .HasForeignKey<Reservation>(r => r.ReservationPlaceId)
+            //    .IsRequired(false);
+
+			builder.HasData(new ReservationPlace[]
             {
                 data.SmallTable1,
                 data.SmallTable2,

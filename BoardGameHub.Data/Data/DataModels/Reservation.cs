@@ -23,10 +23,17 @@ namespace BoardGameHub.Data.Data.DataModels
         [MaxLength(ReservationAdditionalCommentMaxValue)]
         public string? AdditionalComment { get; set; }
 
-		[Required]
-        public List<ReservationPlace> ReservationPlaces { get; set; } = new List<ReservationPlace>();
+        [RegularExpression(ApplicationUserPhoneNumber)]
+        public string? PhoneNumber {  get; set; }
 
-		[ForeignKey(nameof(BoardgameReserved))]
+        [Required]
+        public ReservationPlace ReservationPlace { get; set; } = null!;
+
+        [Required]
+        [ForeignKey(nameof(ReservationPlace))]
+        public int ReservationPlaceId { get; set; }
+
+        [ForeignKey(nameof(BoardgameReserved))]
 		public int? BoardgameReservedId { get; set; }
         public Boardgame? BoardgameReserved { get; set; }
     }
