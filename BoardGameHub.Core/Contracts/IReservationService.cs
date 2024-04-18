@@ -11,7 +11,6 @@ namespace BoardGameHub.Core.Contracts
 		Task<ReservationDetailsViewModel> ReservationDetailsAsync(Reservation reservation);
 		Task<ReservationDeleteFormModel> GetDeleteFormAsync(Reservation reservation);
 		Task DeleteConfirmedAsync(ReservationDeleteFormModel form);
-		Task<int> LastReservationId();
 		Task<ApplicationUser> GetUser(string userId);
 		Task<List<ReservationBoardgameViewModel>> GetAllFreeBoardgamesAsync();
 		Task<List<ReservationPlaceViewModel>> GetAllFreeReservationPlacesAsync();

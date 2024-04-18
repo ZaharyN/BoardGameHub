@@ -31,8 +31,9 @@
 				<span asp-validation-for="AdditionalComment" class="small text-danger"></span>
 			</div>
 			<div class="form-group">
-				<label asp-for="BoardgameReservedId"></label>
-				<select asp-for="BoardgameReservedId" class="form-control" multiple>
+				<label asp-for="BoardgameReservedId">Select Boardgame</label>
+				<select asp-for="BoardgameReservedId" class="form-control">
+					<option disabled selected value="">Choose...</option>
 					@foreach (var boardgame in Model.FreeBoardgames)
 					{
 						<option value="@boardgame.Id">@boardgame.Name</option>
@@ -41,14 +42,15 @@
 				<span asp-validation-for="BoardgameReservedId" class="small text-danger"></span>
 			</div>
 			<div class="form-group">
-				<label asp-for="PlacesReserved"></label>
-				<select asp-for="PlacesReserved" class="form-control" multiple>
+				<label asp-for="PlaceReservedId"></label>
+				<select asp-for="PlaceReservedId" class="form-control">
+					<option disabled selected value="">Choose place...</option>
 					@foreach (var place in Model.FreePlaces)
 					{
 						<option value="@place.Id">@place.Name</option>
 					}
 				</select>
-				<span asp-validation-for="PlacesReserved" class="small text-danger"></span>
+				<span asp-validation-for="PlaceReservedId" class="small text-danger"></span>
 			</div>
 			<div class="text-center">
 				<input class="btn btn-primary mt-3" type="submit" value="Save" />
