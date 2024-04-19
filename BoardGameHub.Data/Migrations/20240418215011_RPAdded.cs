@@ -18,8 +18,7 @@ namespace BoardGameHub.Data.Migrations
                 name: "ReservationPlaceId",
                 table: "Reservations",
                 type: "int",
-                nullable: true,
-                defaultValue: 0);
+                nullable: false);
 
             migrationBuilder.UpdateData(
                 table: "AspNetUsers",

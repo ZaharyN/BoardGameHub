@@ -4,6 +4,7 @@ using BoardGameHub.Data.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BoardGameHub.Data.Migrations
 {
     [DbContext(typeof(BoardGameHubDbContext))]
-    partial class BoardGameHubDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240419072630_FixReservationPlaceId")]
+    partial class FixReservationPlaceId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -102,7 +104,7 @@ namespace BoardGameHub.Data.Migrations
                         {
                             Id = "1b572cdb-ca30-43a0-8718-12df99d66c45",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ee8eecf3-14f2-45bb-8779-56d9bf1e1e8c",
+                            ConcurrencyStamp = "486ffee7-c3d2-403a-968c-75b7d15e4e76",
                             Email = "user@mail.com",
                             EmailConfirmed = false,
                             FirstName = "Ivan",
@@ -110,10 +112,10 @@ namespace BoardGameHub.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "user@mail.com",
                             NormalizedUserName = "user@mail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEGmADaZBIuajkQR+n6uJibRjDIcoePKjYOqiFIXHwc91CXTGEfro/D0Hwgl/+P5cfA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEHGilUkHBX1EILvidX7rNR06OwdVmeAlFN+dR6wfALH/IlYjrpLuQ5TyobHd6612eg==",
                             PhoneNumber = "0898888888",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "bb3fbea3-2e3d-42b1-8cfe-657744b626f8",
+                            SecurityStamp = "29bae0f5-c38f-473c-96c2-f96fc2019649",
                             TwoFactorEnabled = false,
                             UserName = "user@mail.com"
                         },
@@ -121,7 +123,7 @@ namespace BoardGameHub.Data.Migrations
                         {
                             Id = "014d16f4-b47d-45fa-98a5-0cb40aa950c5",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "85d5f9a1-edbc-4fcb-8e34-6a390eed8d95",
+                            ConcurrencyStamp = "c9d3d8f5-4cdc-49f1-9a4d-fd3021b61370",
                             Email = "admin@mail.com",
                             EmailConfirmed = false,
                             FirstName = "Zahary",
@@ -129,10 +131,10 @@ namespace BoardGameHub.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "admin@mail.com",
                             NormalizedUserName = "admin@mail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAELwBJTO0sMTPQqmssshQgSYsOhbvAb/jPpUMcBvOWNBFO3Py18dy8LBpxswtbB5AnA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJP0Aq8D6rXE3hrfaobFidzhtyU6jg1UuzqhWoJt2MnUtOrGp0bEg6k3KGTenF56UA==",
                             PhoneNumber = "0888888888",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "37166d6e-baa6-4a68-9f2a-c45ca4245077",
+                            SecurityStamp = "575078aa-a1f8-4206-8a0a-ad0723309280",
                             TwoFactorEnabled = false,
                             UserName = "admin@mail.com"
                         });
@@ -1149,9 +1151,14 @@ namespace BoardGameHub.Data.Migrations
                     b.Property<int>("PlaceTypeId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("ReservationId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("PlaceTypeId");
+
+                    b.HasIndex("ReservationId");
 
                     b.ToTable("ReservationPlaces");
 
@@ -1480,7 +1487,13 @@ namespace BoardGameHub.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("BoardGameHub.Data.Data.DataModels.Reservation", "Reservation")
+                        .WithMany()
+                        .HasForeignKey("ReservationId");
+
                     b.Navigation("PlaceType");
+
+                    b.Navigation("Reservation");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

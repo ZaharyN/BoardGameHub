@@ -39,13 +39,13 @@ namespace BoardGameHub.Core.Services
 				ReservationOwnerId = userId,
 				DateTime = dateTime,
 				AdditionalComment = form.AdditionalComment,
-				ReservationPlace = placeReserved,
+				PhoneNumber = form.PhoneNumber,
+				ReservationPlaceId = placeReserved.Id,
 				BoardgameReservedId = boardgameReserved.Id,
-				BoardgameReserved = boardgameReserved
 			};
+			context.Reservations.Add(reservation);
 
 			placeReserved.IsReserved = true;
-			placeReserved.ReservationId = reservation.Id;
 
 			if(boardgameReserved != null)
 			{
@@ -53,7 +53,6 @@ namespace BoardGameHub.Core.Services
 				boardgameReserved.ReservationId = reservation.Id;
 			}
 
-			context.Reservations.Add(reservation);
 			await context.SaveChangesAsync();
 		}
 
@@ -110,7 +109,6 @@ namespace BoardGameHub.Core.Services
 			Reservation reservation = await context.Reservations.FindAsync(form.Id);
 
 			reservation.ReservationPlace.IsReserved = false;
-			reservation.ReservationPlace.ReservationId = null;
 
 			Boardgame? boardgameReserved = await context.Boardgames.FindAsync(reservation.BoardgameReservedId);
 
