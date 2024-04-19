@@ -5,6 +5,7 @@ using BoardGameHub.Data.Data.DataModels;
 using Microsoft.EntityFrameworkCore;
 using System.Globalization;
 using static BoardGameHub.Data.Constants.DataConstants;
+using static BoardGameHub.Core.Constants.OtherConstants;
 
 namespace BoardGameHub.Core.Services
 {
@@ -68,7 +69,7 @@ namespace BoardGameHub.Core.Services
 				.Select(r => new ReservationViewModel()
 				{
 					Id = r.Id,
-					ReservationImage = "/assets/Reservation/Reservation_image.jpg",
+					ReservationImage = ReservationImagePath,
 					ReservationName = $"{userName}'s reservation",
 					DateTime = r.DateTime.ToString(ReservationDateTimeFormat)
 				})
@@ -87,7 +88,7 @@ namespace BoardGameHub.Core.Services
 			{
 				Id = reservation.Id,
 				ReservationName = $"{userName}' reservation",
-				ReservationImage = "/assets/Reservation/Reservation_image.jpg",
+				ReservationImage = ReservationImagePath,
 				DateTime = reservation.DateTime.ToString(ReservationDateTimeFormat),
 				AdditionalComment = reservation.AdditionalComment,
 				PhoneNumber = reservation.PhoneNumber,
@@ -174,14 +175,22 @@ namespace BoardGameHub.Core.Services
 				&& r.DateTime.Day == dateTime.Day);
 		}
 
-		public async Task<int> GetLastReservationId()
+		public async Task<IEnumerable<ReservationViewModel>> GetAllAsync()
 		{
-			var lastReservation = await context.Reservations
-				.OrderBy(r => r.Id)
-				.LastAsync();
-
-			return lastReservation.Id;
+			return await context.Reservations
+				.Include(r => r.ReservationOwner)
+				.AsNoTracking()
+                .OrderBy(r => r.DateTime)
+                .Select(r => new ReservationViewModel()
+				{
+					Id = r.Id,
+					ReservationImage = ReservationImagePath,
+					ReservationName = $"{r.ReservationOwner.FirstName}' name",
+					DateTime = r.DateTime.ToString(ReservationDateTimeFormat)
+				})
+				.ToListAsync();
 		}
-	}
 
+
+	}
 }
