@@ -16,5 +16,6 @@ namespace BoardGameHub.Core.Contracts
 		Task<List<ReservationPlaceViewModel>> GetAllFreeReservationPlacesAsync();
 		Task<Reservation> GetReservationAsync(int reservationId);
 		Task<bool> UserHasReservation(string userId, DateTime date);
+		Task<int> GetLastReservationId();
 	}
 }

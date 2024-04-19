@@ -32,6 +32,7 @@ namespace BoardGameHub.Core.Services
 		public async Task CreateReservationAsync(ReservationCreateFormModel form, string userId, DateTime dateTime)
 		{
 			ReservationPlace? placeReserved = await context.ReservationPlaces.FindAsync(form.PlaceReservedId);
+
 			Boardgame? boardgameReserved = await context.Boardgames.FindAsync(form.BoardgameReservedId);
 
 			Reservation reservation = new Reservation()
@@ -43,11 +44,13 @@ namespace BoardGameHub.Core.Services
 				ReservationPlaceId = placeReserved.Id,
 				BoardgameReservedId = boardgameReserved.Id,
 			};
-			context.Reservations.Add(reservation);
+			await context.Reservations.AddAsync(reservation);
+			await context.SaveChangesAsync();
 
 			placeReserved.IsReserved = true;
+			placeReserved.ReservationId = reservation.Id;
 
-			if(boardgameReserved != null)
+			if (boardgameReserved != null)
 			{
 				boardgameReserved.IsReserved = true;
 				boardgameReserved.ReservationId = reservation.Id;
@@ -78,12 +81,14 @@ namespace BoardGameHub.Core.Services
 		{
 			string userName = GetUser(userId).Result.FirstName;
 
+
+
 			var model = new ReservationDetailsViewModel()
 			{
 				Id = reservation.Id,
 				ReservationName = $"{userName}' reservation",
 				ReservationImage = "/assets/Reservation/Reservation_image.jpg",
-                DateTime = reservation.DateTime.ToString(ReservationDateTimeFormat),
+				DateTime = reservation.DateTime.ToString(ReservationDateTimeFormat),
 				AdditionalComment = reservation.AdditionalComment,
 				PhoneNumber = reservation.PhoneNumber,
 				PlaceReservedName = reservation.ReservationPlace.Name,
@@ -97,7 +102,7 @@ namespace BoardGameHub.Core.Services
 		{
 			var form = new ReservationDeleteFormModel()
 			{
-				Id= reservation.Id,
+				Id = reservation.Id,
 				DateTime = reservation.DateTime
 			};
 
@@ -156,7 +161,10 @@ namespace BoardGameHub.Core.Services
 
 		public async Task<Reservation> GetReservationAsync(int id)
 		{
-			return await context.Reservations.FindAsync(id);
+			return await context.Reservations
+				.Include(r => r.BoardgameReserved)
+				.Include(r => r.ReservationPlace)
+				.FirstOrDefaultAsync(r => r.Id == id);
 		}
 
 		public async Task<bool> UserHasReservation(string userId, DateTime dateTime)
@@ -164,6 +172,15 @@ namespace BoardGameHub.Core.Services
 			return await context.Reservations
 				.AnyAsync(r => r.ReservationOwnerId == userId
 				&& r.DateTime.Day == dateTime.Day);
+		}
+
+		public async Task<int> GetLastReservationId()
+		{
+			var lastReservation = await context.Reservations
+				.OrderBy(r => r.Id)
+				.LastAsync();
+
+			return lastReservation.Id;
 		}
 	}
 

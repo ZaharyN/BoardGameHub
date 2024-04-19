@@ -100,7 +100,7 @@ namespace BoardGameHub.Core.Services
 				}
 			}
 
-			context.Boardgames.Add(boardgame);
+			await context.Boardgames.AddAsync(boardgame);
 			await context.SaveChangesAsync();
 
 			return boardgame.Id;
