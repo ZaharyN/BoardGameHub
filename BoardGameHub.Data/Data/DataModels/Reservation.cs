@@ -36,5 +36,6 @@ namespace BoardGameHub.Data.Data.DataModels
         [ForeignKey(nameof(BoardgameReserved))]
 		public int? BoardgameReservedId { get; set; }
         public Boardgame? BoardgameReserved { get; set; }
+        public bool IsExpired { get; set; }
     }
 }
