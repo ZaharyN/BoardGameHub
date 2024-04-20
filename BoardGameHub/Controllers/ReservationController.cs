@@ -103,39 +103,6 @@ namespace BoardGameHub.Controllers
 			return View(model);
 		}
 
-		[HttpGet]
-		public async Task<IActionResult> Delete(int id)
-		{
-			var reservation = await reservationService.GetReservationAsync(id);
-
-			if (reservation == null)
-			{
-				return BadRequest();
-			}
-
-			var form = await reservationService.GetDeleteFormAsync(reservation);
-
-			return View(form);
-		}
-
-		[HttpPost]
-		public async Task<IActionResult> DeleteConfirmed(ReservationDeleteFormModel form)
-		{
-			if (form == null)
-			{
-				return BadRequest();
-			}
-			
-			if(await reservationService.GetReservationAsync(form.Id) == null)
-			{
-				return NotFound();
-			}
-
-			await reservationService.DeleteConfirmedAsync(form);
-
-			return RedirectToAction(nameof(Mine));
-		}
-
 		private string GetUser()
 		{
 			return User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? string.Empty;

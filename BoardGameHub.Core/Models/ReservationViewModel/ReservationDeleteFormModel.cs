@@ -9,6 +9,7 @@ namespace BoardGameHub.Core.Models.ReservationViewModel
 	public class ReservationDeleteFormModel
 	{
         public int Id { get; set; }
+        public string ReservationName { get; set; } = string.Empty;
         public DateTime DateTime { get; set; }
     }
 }

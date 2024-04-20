@@ -86,5 +86,33 @@ namespace BoardGameHub.Areas.Admin.Controllers
 
 			return RedirectToAction("Details", "Reservation", new { area = "", id = form.Id });
 		}
+
+		[HttpGet]
+		public async Task<IActionResult> Delete(int id)
+		{
+			var reservation = await reservationService.GetReservationAsync(id);
+
+			if (reservation == null)
+			{
+				return BadRequest();
+			}
+
+			var form = await reservationService.GetDeleteFormAsync(reservation);
+
+			return View(form);
+		}
+
+		[HttpPost]
+		public async Task<IActionResult> DeleteConfirmed(ReservationDeleteFormModel form)
+		{
+			if (form == null)
+			{
+				return BadRequest();
+			}
+
+			await reservationService.DeleteConfirmedAsync(form);
+
+			return RedirectToAction(nameof(All));
+		}
 	}
 }

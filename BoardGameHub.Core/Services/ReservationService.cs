@@ -166,6 +166,7 @@ namespace BoardGameHub.Core.Services
 			var form = new ReservationDeleteFormModel()
 			{
 				Id = reservation.Id,
+				ReservationName = $"{reservation.ReservationOwner.FirstName}'s reservation",
 				DateTime = reservation.DateTime
 			};
 
@@ -174,18 +175,21 @@ namespace BoardGameHub.Core.Services
 
 		public async Task DeleteConfirmedAsync(ReservationDeleteFormModel form)
 		{
-			Reservation reservation = await context.Reservations.FindAsync(form.Id);
+			Reservation reservation = await GetReservationAsync(form.Id);
 
 			reservation.ReservationPlace.IsReserved = false;
+			reservation.ReservationPlace.ReservationId = null;
 
 			Boardgame? boardgameReserved = await context.Boardgames.FindAsync(reservation.BoardgameReservedId);
 
-			boardgameReserved.IsReserved = false;
-			boardgameReserved.ReservationId = null;
+			if(boardgameReserved != null)
+			{
+                boardgameReserved.IsReserved = false;
+                boardgameReserved.ReservationId = null;
+            }
 
 			context.Reservations.Remove(reservation);
 			await context.SaveChangesAsync();
-
 		}
 		public async Task<ApplicationUser> GetUser(string id)
 		{
