@@ -1,5 +1,7 @@
 Reservation controller:
 
+- Reservation name is the current name
+- Add additional comment
 - Add Delete for Admin
 - Make admin method to free the tables
 - Make so the ModelState error visualises

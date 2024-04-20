@@ -87,7 +87,7 @@ namespace BoardGameHub.Core.Services
 			var model = new ReservationDetailsViewModel()
 			{
 				Id = reservation.Id,
-				ReservationName = $"{userName}' reservation",
+				ReservationName = $"{reservation.ReservationOwner.FirstName}'s reservation",
 				ReservationImage = ReservationImagePath,
 				DateTime = reservation.DateTime.ToString(ReservationDateTimeFormat),
 				AdditionalComment = reservation.AdditionalComment,
@@ -136,17 +136,6 @@ namespace BoardGameHub.Core.Services
 			reservation.BoardgameReservedId = form.BoardgameReservedId;
 			reservation.ReservationPlaceId = form.PlaceReservedId;
 
-			var newBoardgame = await context.Boardgames.FirstOrDefaultAsync(b => b.Id == reservation.BoardgameReservedId);
-			if(newBoardgame != null)
-			{
-				newBoardgame.IsReserved = true;
-				newBoardgame.ReservationId = reservation.Id;
-			}
-
-			var newPlace = await context.ReservationPlaces.FindAsync(reservation.ReservationPlaceId);
-			newPlace.IsReserved = true;
-			newPlace.ReservationId = reservation.Id;
-
 			if (oldBoardgameId is not null)
 			{
 				Boardgame oldBoardgame = await context.Boardgames.FindAsync(oldBoardgameId);
@@ -157,6 +146,17 @@ namespace BoardGameHub.Core.Services
 			var oldPlace = await context.ReservationPlaces.FindAsync(oldPlaceReservedId);
 			oldPlace.IsReserved = false;
 			oldPlace.ReservationId = null;
+
+			var newBoardgame = await context.Boardgames.FirstOrDefaultAsync(b => b.Id == reservation.BoardgameReservedId);
+			if(newBoardgame != null)
+			{
+				newBoardgame.IsReserved = true;
+				newBoardgame.ReservationId = reservation.Id;
+			}
+
+			var newPlace = await context.ReservationPlaces.FindAsync(reservation.ReservationPlaceId);
+			newPlace.IsReserved = true;
+			newPlace.ReservationId = reservation.Id;
 
 			await context.SaveChangesAsync();
 		}
@@ -248,12 +248,10 @@ namespace BoardGameHub.Core.Services
 				{
 					Id = r.Id,
 					ReservationImage = ReservationImagePath,
-					ReservationName = $"{r.ReservationOwner.FirstName}' name",
+					ReservationName = $"{r.ReservationOwner.FirstName}'s reservation",
 					DateTime = r.DateTime.ToString(ReservationDateTimeFormat)
 				})
 				.ToListAsync();
 		}
-
-        
     }
 }
