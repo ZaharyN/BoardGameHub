@@ -1,5 +1,10 @@
 ﻿using BoardGameHub.Core.Contracts;
+using BoardGameHub.Core.Models.ReservationViewModel;
+using BoardGameHub.Data.Data.DataModels;
 using Microsoft.AspNetCore.Mvc;
+using System.Globalization;
+using System.Security.Claims;
+using static BoardGameHub.Data.Constants.DataConstants;
 
 namespace BoardGameHub.Areas.Admin.Controllers
 {
@@ -7,7 +12,8 @@ namespace BoardGameHub.Areas.Admin.Controllers
 	{
 		private readonly IReservationService reservationService;
 
-        public ReservationController(IReservationService _reservationService)
+        public ReservationController(IReservationService _reservationService,
+			IBoardgameService _boardgameService)
         {
             reservationService = _reservationService;
         }
@@ -18,6 +24,67 @@ namespace BoardGameHub.Areas.Admin.Controllers
 			var reservations = await reservationService.GetAllAsync();
 
 			return View(reservations);
+		}
+
+		[HttpGet]
+		public async Task<IActionResult> Edit(int id)
+		{
+			if (!User.IsAdmin())
+			{
+				return Unauthorized();
+			}
+
+			if (await reservationService.GetReservationAsync(id) == null)
+			{
+				return BadRequest();
+			}
+
+			var form = await reservationService.GetEditFormAsync(id);
+
+			if(form == null)
+			{
+				return BadRequest();
+			}
+
+			return View(form);
+		}
+
+		[HttpPost]
+		public async Task<IActionResult> Edit(ReservationEditFormModel form)
+		{
+			if (!DateTime.TryParseExact(form.DateTime,
+				ReservationDateTimeFormat,
+				CultureInfo.InvariantCulture,
+				DateTimeStyles.None,
+				out DateTime dateTime))
+			{
+				ModelState.AddModelError(form.DateTime, $"Invalid date! Format must be: {ReservationDateTimeFormat}");
+				form.FreeBoardgames = await reservationService.GetAllFreeBoardgamesAsync();
+				form.FreePlaces = await reservationService.GetAllFreeReservationPlacesAsync();
+
+				return View(form);
+			}
+
+			if (dateTime <= DateTime.Now)
+			{
+				ModelState.AddModelError(form.DateTime, $"Invalid date! Date must be after {DateTime.Now.ToString(ReservationDateTimeFormat)}");
+
+				form.FreeBoardgames = await reservationService.GetAllFreeBoardgamesAsync();
+				form.FreePlaces = await reservationService.GetAllFreeReservationPlacesAsync();
+
+				return View(form);
+			}
+			if (!ModelState.IsValid)
+			{
+				form.FreeBoardgames = await reservationService.GetAllFreeBoardgamesAsync();
+				form.FreePlaces = await reservationService.GetAllFreeReservationPlacesAsync();
+
+				return View(form);
+			}
+
+			await reservationService.EditAsync(form, dateTime);
+
+			return RedirectToAction("Details", "Reservation", new { area = "", id = form.Id });
 		}
 	}
 }

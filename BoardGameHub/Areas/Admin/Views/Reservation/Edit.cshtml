@@ -1,0 +1,64 @@
+﻿@model ReservationEditFormModel
+
+<div class="row">
+	<div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+		<form method="post" enctype="multipart/form-data">
+			<div class="form-group">
+				<label asp-for="FirstName"></label>
+				<input asp-for="FirstName" class="form-control" placeholder="FirstName...">
+				<span asp-validation-for="FirstName" class="small text-danger"></span>
+			</div>
+
+			<div class="form-group">
+				<label asp-for="LastName"></label>
+				<input asp-for="LastName" class="form-control" placeholder="Last Name...">
+				<span asp-validation-for="LastName" class="small text-danger"></span>
+			</div>
+
+			<div class="form-group">
+				<label asp-for="PhoneNumber"></label>
+				<input asp-for="PhoneNumber" class="form-control" placeholder="+359 888 888888">
+				<span asp-validation-for="PhoneNumber" class="small text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="DateTime"></label>
+				<input asp-for="DateTime" class="form-control" aria-required="true" value="@DateTime.Now.ToString(ReservationDateTimeFormat)">
+				<span asp-validation-for="DateTime" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="AdditionalComment"></label>
+				<textarea asp-for="AdditionalComment" rows="4" class="form-control" placeholder="optional"> </textarea>
+				<span asp-validation-for="AdditionalComment" class="small text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="BoardgameReservedId">Select Boardgame</label>
+				<select asp-for="BoardgameReservedId" class="form-control">
+					<option value="">@Model.BoardgameReservedName</option>
+					@foreach (var boardgame in Model.FreeBoardgames)
+					{
+						<option value="@boardgame.Id">@boardgame.Name</option>
+					}
+				</select>
+				<span asp-validation-for="BoardgameReservedId" class="small text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="PlaceReservedId"></label>
+				<select asp-for="PlaceReservedId" class="form-control">
+					<option value="">@Model.PlaceReservedName</option>
+					@foreach (var place in Model.FreePlaces)
+					{
+						<option value="@place.Id">@place.Name</option>
+					}
+				</select>
+				<span asp-validation-for="PlaceReservedId" class="small text-danger"></span>
+			</div>
+			<div class="text-center">
+				<input class="btn btn-primary mt-3" type="submit" value="Save" />
+			</div>
+		</form>
+	</div>
+</div>
+
+@section Scripts {
+	<partial name="_ValidationScriptsPartial" />
+}

@@ -21,5 +21,9 @@ namespace BoardGameHub.Data.Data.DataModels
 
         [Required]
         public bool IsReserved { get; set; }
+
+        [ForeignKey(nameof(Reservation))]
+        public int? ReservationId { get; set; }
+        public Reservation? Reservation { get; set; }
     }
 }

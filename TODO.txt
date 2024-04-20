@@ -1,9 +1,9 @@
 Reservation controller:
-- Add "My Reservations" view
+
 - Add Delete for Admin
 - Make admin method to free the tables
-- Admin can Edit reservations - time 
 - Make so the ModelState error visualises
+- Fix reservation details button - if it is user Back To My Res, if it is admin back to All reservaions
 
 Other:
 - How to add new lines in the html description texts
@@ -13,13 +13,18 @@ Other:
 - Add validations and error handling
 - Add AntiforgeryKey
 - Tests!
+- partial views for categories
 
 GameReviewController:
 - How to show error message "User has already commented this boardgame!"
 - Add some reviews to the games
 
 Admin controller:
- - Home view
+Home page - Four buttons: 
+	= Boargames - Redirect to public interface Active boardgames
+	= Categories - Redirect to browse page
+	= All reservations - View All 
+	= Free tables - Get All reservation with past date so the admin can free the tables and the boardgames
 
 Help from Paca:
 - Help with the footer

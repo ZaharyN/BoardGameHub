@@ -43,8 +43,9 @@ namespace BoardGameHub.Core.Services
 				AdditionalComment = form.AdditionalComment,
 				PhoneNumber = form.PhoneNumber,
 				ReservationPlaceId = placeReserved.Id,
-				BoardgameReservedId = boardgameReserved.Id,
+				BoardgameReservedId = boardgameReserved?.Id is null ? null : boardgameReserved.Id   
 			};
+
 			await context.Reservations.AddAsync(reservation);
 			await context.SaveChangesAsync();
 
@@ -65,7 +66,8 @@ namespace BoardGameHub.Core.Services
 			string userName = GetUser(id).Result.FirstName;
 
 			var reservations = await context.Reservations
-				.Where(r => r.ReservationOwnerId == id)
+				.Where(r => r.ReservationOwnerId == id
+				&& r.DateTime >= DateTime.Now)
 				.Select(r => new ReservationViewModel()
 				{
 					Id = r.Id,
@@ -82,8 +84,6 @@ namespace BoardGameHub.Core.Services
 		{
 			string userName = GetUser(userId).Result.FirstName;
 
-
-
 			var model = new ReservationDetailsViewModel()
 			{
 				Id = reservation.Id,
@@ -93,13 +93,75 @@ namespace BoardGameHub.Core.Services
 				AdditionalComment = reservation.AdditionalComment,
 				PhoneNumber = reservation.PhoneNumber,
 				PlaceReservedName = reservation.ReservationPlace.Name,
-				BoardgameReservedName = reservation.BoardgameReserved.Name
+				BoardgameReservedName = reservation.BoardgameReserved?.Name is null ? "None" : reservation.BoardgameReserved.Name,
 			};
 
 			return model;
 		}
+		public async Task<ReservationEditFormModel> GetEditFormAsync(int reservationId)
+		{
+			Reservation reservation = await GetReservationAsync(reservationId);
 
-		public async Task<ReservationDeleteFormModel> GetDeleteFormAsync(Reservation reservation)
+			var form = new ReservationEditFormModel()
+			{
+				Id = reservation.Id,
+				FirstName = reservation.ReservationOwner.FirstName,
+				LastName = reservation.ReservationOwner.LastName,
+				PhoneNumber = reservation.PhoneNumber,
+				DateTime = reservation.DateTime.ToString(ReservationDateTimeFormat),
+				AdditionalComment = reservation.AdditionalComment,
+				BoardgameReservedId = reservation.BoardgameReserved?.Id,
+				BoardgameReservedName = reservation.BoardgameReserved?.Name,
+				PlaceReservedId = reservation.ReservationPlaceId,
+				PlaceReservedName = reservation.ReservationPlace.Name,
+				FreeBoardgames = await GetAllFreeBoardgamesAsync(),
+				FreePlaces = await GetAllFreeReservationPlacesAsync()
+			};
+
+			return form;
+		}
+
+		public async Task EditAsync(ReservationEditFormModel form, DateTime dateTime)
+        {
+			var reservation = await GetReservationAsync(form.Id) ?? throw new ArgumentNullException(nameof(form));
+
+			var oldBoardgameId = reservation.BoardgameReservedId;
+			int oldPlaceReservedId = reservation.ReservationPlaceId;
+
+			reservation.ReservationOwner.FirstName = form.FirstName;
+			reservation.ReservationOwner.LastName = form.LastName;
+			reservation.PhoneNumber = form.PhoneNumber;
+			reservation.DateTime = dateTime;
+			reservation.AdditionalComment = form.AdditionalComment;
+			reservation.BoardgameReservedId = form.BoardgameReservedId;
+			reservation.ReservationPlaceId = form.PlaceReservedId;
+
+			var newBoardgame = await context.Boardgames.FirstOrDefaultAsync(b => b.Id == reservation.BoardgameReservedId);
+			if(newBoardgame != null)
+			{
+				newBoardgame.IsReserved = true;
+				newBoardgame.ReservationId = reservation.Id;
+			}
+
+			var newPlace = await context.ReservationPlaces.FindAsync(reservation.ReservationPlaceId);
+			newPlace.IsReserved = true;
+			newPlace.ReservationId = reservation.Id;
+
+			if (oldBoardgameId is not null)
+			{
+				Boardgame oldBoardgame = await context.Boardgames.FindAsync(oldBoardgameId);
+				oldBoardgame.IsReserved = false;
+				oldBoardgame.ReservationId = null;
+			}
+
+			var oldPlace = await context.ReservationPlaces.FindAsync(oldPlaceReservedId);
+			oldPlace.IsReserved = false;
+			oldPlace.ReservationId = null;
+
+			await context.SaveChangesAsync();
+		}
+
+        public async Task<ReservationDeleteFormModel> GetDeleteFormAsync(Reservation reservation)
 		{
 			var form = new ReservationDeleteFormModel()
 			{
@@ -165,6 +227,7 @@ namespace BoardGameHub.Core.Services
 			return await context.Reservations
 				.Include(r => r.BoardgameReserved)
 				.Include(r => r.ReservationPlace)
+				.Include(r => r.ReservationOwner)
 				.FirstOrDefaultAsync(r => r.Id == id);
 		}
 
@@ -191,6 +254,6 @@ namespace BoardGameHub.Core.Services
 				.ToListAsync();
 		}
 
-
-	}
+        
+    }
 }
