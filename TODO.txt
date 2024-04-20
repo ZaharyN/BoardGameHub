@@ -1,11 +1,7 @@
 Reservation controller:
 
-- Reservation name is the current name
-- Add additional comment
-- Add Delete for Admin
-- Make admin method to free the tables
 - Make so the ModelState error visualises
-- Fix reservation details button - if it is user Back To My Res, if it is admin back to All reservaions
+- Fix reservation details button - if it is user Back To My Reservations, if it is admin back to All reservaions
 
 Other:
 - How to add new lines in the html description texts
@@ -19,7 +15,6 @@ Other:
 
 GameReviewController:
 - How to show error message "User has already commented this boardgame!"
-- Add some reviews to the games
 
 Admin controller:
 Home page - Four buttons: 

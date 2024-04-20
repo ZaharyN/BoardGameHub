@@ -297,7 +297,5 @@ namespace BoardGameHub.Core.Services
 				})
 				.ToListAsync();
 		}
-
-		
 	}
 }
