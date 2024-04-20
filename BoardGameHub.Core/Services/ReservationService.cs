@@ -216,6 +216,7 @@ namespace BoardGameHub.Core.Services
 			reservation.ReservationPlace.IsReserved = false;
 			reservation.ReservationPlace.ReservationId = null;
 
+
 			Boardgame? boardgameReserved = await context.Boardgames.FindAsync(reservation.BoardgameReservedId);
 
 			if (boardgameReserved != null)
@@ -225,7 +226,7 @@ namespace BoardGameHub.Core.Services
 			}
 
 			reservation.IsExpired = true;
-			
+
 			await context.SaveChangesAsync();
 		}
 

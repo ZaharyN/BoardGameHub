@@ -129,7 +129,7 @@ namespace BoardGameHub.Areas.Admin.Controllers
 		{
 			await reservationService.FreeTablesAsync(id);
 
-			return View();
+			return View(nameof(Expired));
 		}
 	}
 }
