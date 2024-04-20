@@ -1,6 +1,7 @@
 ﻿using BoardGameHub.Core.Contracts;
 using BoardGameHub.Core.Models.ReservationViewModel;
 using BoardGameHub.Data.Data.DataModels;
+using Microsoft.AspNetCore.Http.Metadata;
 using Microsoft.AspNetCore.Mvc;
 using System.Globalization;
 using System.Security.Claims;
@@ -21,7 +22,7 @@ namespace BoardGameHub.Areas.Admin.Controllers
 		[HttpGet]
         public async Task<IActionResult> All()
 		{
-			var reservations = await reservationService.GetAllAsync();
+			var reservations = await reservationService.GetAllActiveAsync();
 
 			return View(reservations);
 		}
@@ -113,6 +114,22 @@ namespace BoardGameHub.Areas.Admin.Controllers
 			await reservationService.DeleteConfirmedAsync(form);
 
 			return RedirectToAction(nameof(All));
+		}
+
+		[HttpGet]
+		public async Task<IActionResult> Expired()
+		{
+			var expired = await reservationService.GetAllExpiredAsync();
+
+			return View(expired);
+		}
+
+		[HttpPost]
+		public async Task<IActionResult> FreePlaces(int id)
+		{
+			await reservationService.FreeTablesAsync(id);
+
+			return View();
 		}
 	}
 }

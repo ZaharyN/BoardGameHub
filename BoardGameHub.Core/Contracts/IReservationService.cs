@@ -13,11 +13,13 @@ namespace BoardGameHub.Core.Contracts
 		Task EditAsync(ReservationEditFormModel form, DateTime dateTime);
 		Task<ReservationDeleteFormModel> GetDeleteFormAsync(Reservation reservation);
 		Task DeleteConfirmedAsync(ReservationDeleteFormModel form);
-		Task<ApplicationUser> GetUser(string userId);
+        Task<IEnumerable<ReservationViewModel>> GetAllExpiredAsync();
+		Task FreeTablesAsync(int id);
+        Task<ApplicationUser> GetUser(string userId);
 		Task<List<ReservationBoardgameViewModel>> GetAllFreeBoardgamesAsync();
 		Task<List<ReservationPlaceViewModel>> GetAllFreeReservationPlacesAsync();
 		Task<Reservation> GetReservationAsync(int reservationId);
 		Task<bool> UserHasReservation(string userId, DateTime date);
-		Task<IEnumerable<ReservationViewModel>> GetAllAsync();
+		Task<IEnumerable<ReservationViewModel>> GetAllActiveAsync();
 	}
 }

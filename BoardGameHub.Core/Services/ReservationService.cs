@@ -98,6 +98,7 @@ namespace BoardGameHub.Core.Services
 
 			return model;
 		}
+
 		public async Task<ReservationEditFormModel> GetEditFormAsync(int reservationId)
 		{
 			Reservation reservation = await GetReservationAsync(reservationId);
@@ -191,6 +192,43 @@ namespace BoardGameHub.Core.Services
 			context.Reservations.Remove(reservation);
 			await context.SaveChangesAsync();
 		}
+		public async Task<IEnumerable<ReservationViewModel>> GetAllExpiredAsync()
+		{
+			return await context.Reservations
+				.Include(r => r.ReservationOwner)
+				.Where(r => r.DateTime.Day < DateTime.Now.Day
+				&& r.IsExpired == false)
+				.AsNoTracking()
+				.OrderByDescending(r => r.DateTime)
+				.Select(r => new ReservationViewModel()
+				{
+					Id = r.Id,
+					ReservationImage = ReservationImagePath,
+					ReservationName = $"{r.ReservationOwner.FirstName}'s reservation",
+					DateTime = r.DateTime.ToString(ReservationDateTimeFormat)
+				})
+				.ToListAsync();
+		}
+		public async Task FreeTablesAsync(int reservationId)
+		{
+			Reservation reservation = await GetReservationAsync(reservationId);
+
+			reservation.ReservationPlace.IsReserved = false;
+			reservation.ReservationPlace.ReservationId = null;
+
+			Boardgame? boardgameReserved = await context.Boardgames.FindAsync(reservation.BoardgameReservedId);
+
+			if (boardgameReserved != null)
+			{
+				boardgameReserved.IsReserved = false;
+				boardgameReserved.ReservationId = null;
+			}
+
+			reservation.IsExpired = true;
+			
+			await context.SaveChangesAsync();
+		}
+
 		public async Task<ApplicationUser> GetUser(string id)
 		{
 			var user = await context.ApplicationUsers.FirstOrDefaultAsync(u => u.Id == id);
@@ -242,10 +280,11 @@ namespace BoardGameHub.Core.Services
 				&& r.DateTime.Day == dateTime.Day);
 		}
 
-		public async Task<IEnumerable<ReservationViewModel>> GetAllAsync()
+		public async Task<IEnumerable<ReservationViewModel>> GetAllActiveAsync()
 		{
 			return await context.Reservations
 				.Include(r => r.ReservationOwner)
+				.Where(r => r.DateTime.Day >= DateTime.Now.Day)
 				.AsNoTracking()
                 .OrderBy(r => r.DateTime)
                 .Select(r => new ReservationViewModel()
@@ -257,5 +296,7 @@ namespace BoardGameHub.Core.Services
 				})
 				.ToListAsync();
 		}
-    }
+
+		
+	}
 }
