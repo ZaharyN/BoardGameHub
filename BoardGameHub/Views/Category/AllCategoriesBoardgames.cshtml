@@ -3,6 +3,16 @@
 @{
 	ViewData["Title"] = "Category boardgames";
 	var models = Model.ToList();
+
+	PaginatedList pager = new();
+
+	int pageNo = 0;
+
+	if (ViewBag.Pager != null)
+	{
+		pager = ViewBag.Pager;
+		pageNo = pager.CurrentPage;
+	}
 }
 
 <div class="container">
@@ -28,7 +38,7 @@
 		{
 			<div class="col-lg-3 col-xs-12">
 				<div class="card mb-3">
-					<img class="card-img-top" src="@e.CardImageUrl" alt="Card image cap">
+					<img class="card-img-top" style="height: 300px; object-fit: contain;" src="@e.CardImageUrl" alt="Card image cap">
 					<div class="card-body">
 						<h5 class="card-title">@e.Name</h5>
 						<p class="card-text">Appropriate Age: @e.AppropriateAge+</p>
@@ -36,9 +46,46 @@
 						<p class="card-text">Rating: @e.Rating</p>
 						<p class="card-text">Price in shop: @e.PriceInShop lv.</p>
 						<p class="card-text">Players: @e.MinimumPlayersAllowedToPlay - @e.MaximumPlayersAllowedToPlay</p>
+						<a asp-area="" asp-controller="Boardgame" asp-action="Details" asp-route-id="@e.Id"
+						   class="btn btn-info mb-2 w-100 p-3 fw-bold">Details</a>
 					</div>
 				</div>
 			</div>
 		}
 	</div>
+</div>
+
+<div class="container">
+	@if (pager.TotalPages > 0)
+	{
+		<ul class="pagination justify-content-end">
+			@if (pager.CurrentPage > 1)
+			{
+				<li class="page-item">
+					<a class="page-link" asp-controller="Category" asp-action="AllCategoriesBoardgames" asp-route-page="1">First</a>
+				</li>
+				<li>
+					<a class="page-link" asp-controller="Category" asp-action="AllCategoriesBoardgames"
+					   asp-route-page="@(pager.CurrentPage-1)">Previous</a>
+				</li>
+			}
+
+			@for (var pge = pager.StartPage; pge <= pager.EndPage; pge++)
+			{
+				<li class="page-item @(pge== pager.CurrentPage ? "active" : "")">
+					<a class="page-link" asp-controller="Category" asp-action="AllCategoriesBoardgames" asp-route-page="@pge">@pge</a>
+				</li>
+			}
+
+			@if (pager.CurrentPage < pager.TotalPages)
+			{
+				<li class="page-item">
+					<a class="page-link" asp-controller="Category" asp-action="AllCategoriesBoardgames" asp-route-page="@(pager.CurrentPage+1)">Next</a>
+				</li>
+				<li>
+					<a class="page-link" asp-controller="Category" asp-action="AllCategoriesBoardgames" asp-route-page="@(pager.TotalPages)">Last</a>
+				</li>
+			}
+		</ul>
+	}
 </div>

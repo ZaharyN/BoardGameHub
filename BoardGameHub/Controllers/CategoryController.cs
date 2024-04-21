@@ -1,4 +1,5 @@
 ﻿using BoardGameHub.Core.Contracts;
+using BoardGameHub.Core.Models.Pagination;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Routing;
 
@@ -8,10 +9,10 @@ namespace BoardGameHub.Controllers
 	{
 		private readonly ICategoryService categoryService;
 
-        public CategoryController(ICategoryService _categoryService)
-        {
+		public CategoryController(ICategoryService _categoryService)
+		{
 			categoryService = _categoryService;
-        }
+		}
 
 		public async Task<IActionResult> All()
 		{
@@ -20,11 +21,22 @@ namespace BoardGameHub.Controllers
 			return View(sorted);
 		}
 
-		public async Task<IActionResult> AllCategoriesBoardgames()
+		public async Task<IActionResult> AllCategoriesBoardgames(int page = 1)
 		{
-			var models = await categoryService.AllCategoriesBoardgamesAsync();
+			var allCategoriesBoardgames = await categoryService.AllCategoriesBoardgamesAsync();
 
-			return View(models);
+			int boardgamesCount = allCategoriesBoardgames.Count();
+
+			int pageSize = 8;
+			var pager = new PaginatedList(boardgamesCount, page, pageSize);
+
+			int skipper = (page - 1) * pageSize;
+
+			var categoriesPerPage = allCategoriesBoardgames.Skip(skipper).Take(pager.PageSize).ToList();
+
+			ViewBag.Pager = pager;
+
+			return View(categoriesPerPage);
 		}
 
 		public async Task<IActionResult> SortByLowestDifficulty()

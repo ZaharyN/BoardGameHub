@@ -7,26 +7,13 @@ Other:
 - Tests!
 - partial views for categories
 
-GameReviewController:
-- How to show error message "User has already commented this boardgame!"
-
-Admin controller:
-Home page - Four buttons: 
-	= Boargames - Redirect to public interface Active boardgames
-	= Categories - Redirect to browse page
-	= All reservations - View All 
-	= Free tables - Get All reservation with past date so the admin can free the tables and the boardgames
-
-Help from Paca:
-
+Questions:
+- How to show error message "User has already commented this boardgame!"?
 - How can I remember the chosen category and display it on the next page?
-
-Boardgame controller:
-- In the edit form, how to display the current categories and if the person does not choose new ones, the old ones stay?
-
-Categories controller:
 - How  can I remember the chosen category and display it on the next page?
+
 
 Help from Paca:
 
 - Fix the buttons in the admin home page
+- Will the homepage carousel be better after the masthead?
