@@ -133,6 +133,7 @@ namespace BoardGameHub.Core.Services
 				.ToListAsync();
 
 			boardgame.GameReviews = await context.GameReviews
+				.Include(gr => gr.ReviewOwner)
 				.Where(gr => gr.BoardGameId == id)
 				.ToListAsync();
 
