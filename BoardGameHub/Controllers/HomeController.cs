@@ -2,6 +2,7 @@
 using BoardGameHub.Core.Models;
 using BoardGameHub.Core.Models.BoardgameViewModels;
 using BoardGameHub.Data.Data.DataModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using System.Security.Claims;
@@ -25,9 +26,21 @@ namespace BoardGameHub.Controllers
 			return View(randomBoardgames);
 		}
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
+		[AllowAnonymous]
+		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+		public async Task<IActionResult> Error(int statusCode)
+		{
+			if (statusCode == 404)
+			{
+				return View("Error400");
+			}
+
+			if (statusCode == 401)
+			{
+				return View("Error401");
+			}
+
+			return View();
+		}
 	}
 }

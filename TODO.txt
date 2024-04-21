@@ -1,19 +1,20 @@
 Other:
-- How to add new lines in the html description texts
 - Custom error 404 and 502 pages
-- Fix when clicking on the userName 
 - Add validations and error handling
-- Add AntiforgeryKey
 - Tests!
-- partial views for categories
+
 
 Questions:
-- How to show error message "User has already commented this boardgame!"?
-- How can I remember the chosen category and display it on the next page?
-- How  can I remember the chosen category and display it on the next page?
-
+- How to show error message "User has already commented this boardgame!" ?
+- How can I remember the chosen category and display it on the next page ?
+- How  can I remember the chosen category and display it on the next page ?
 
 Help from Paca:
 
 - Fix the buttons in the admin home page
-- Will the homepage carousel be better after the masthead?
+- Will the homepage carousel be better after the masthead ?
+
+Eventual work:
+
+- partial views for categories
+- How to add new lines in the html description texts

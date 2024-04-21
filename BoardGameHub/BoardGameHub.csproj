@@ -8,13 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="wwwroot\assets\NewFolder\**" />
-    <Content Remove="wwwroot\assets\NewFolder\**" />
-    <EmbeddedResource Remove="wwwroot\assets\NewFolder\**" />
-    <None Remove="wwwroot\assets\NewFolder\**" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.28" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.28" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.28" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.28" />
@@ -34,6 +28,7 @@
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="wwwroot\assets\Errors\" />
   </ItemGroup>
 
 </Project>
