@@ -2,6 +2,16 @@
 
 @{
 	ViewData["Title"] = "All Reservations";
+
+	PaginatedList pager = new();
+
+	int pageNo = 0;
+
+	if(ViewBag.Pager != null)
+	{
+		pager = ViewBag.Pager;
+		pageNo = pager.CurrentPage;
+	}
 }
 
 <h2 class="text-center">@ViewBag.Title</h2>
@@ -34,6 +44,8 @@
 		</div>
 	}
 </div>
+
+<partial name="_PaginationPartial" model="@pager" />
 
 @section Scripts {
 	<partial name="_ValidationScriptsPartial" />

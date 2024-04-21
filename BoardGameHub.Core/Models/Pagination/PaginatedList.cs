@@ -1,7 +1,7 @@
-﻿namespace BoardGameHub.Core.Models.BoardgameViewModels
+﻿namespace BoardGameHub.Core.Models.Pagination
 {
-	public class PaginatedList
-	{
+    public class PaginatedList
+    {
         public int TotalItems { get; set; }
         public int CurrentPage { get; set; }
         public int PageSize { get; set; }
@@ -11,7 +11,7 @@
 
         public PaginatedList()
         {
-            
+
         }
         public PaginatedList(int totalItems, int page, int pageSize = 8)
         {

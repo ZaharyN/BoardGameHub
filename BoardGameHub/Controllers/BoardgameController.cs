@@ -1,5 +1,6 @@
 ﻿using BoardGameHub.Core.Contracts;
 using BoardGameHub.Core.Models.BoardgameViewModels;
+using BoardGameHub.Core.Models.Pagination;
 using BoardGameHub.Data.Data.DataModels;
 using Microsoft.AspNetCore.Mvc;
 

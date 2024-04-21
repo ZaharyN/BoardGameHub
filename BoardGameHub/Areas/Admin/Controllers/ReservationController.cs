@@ -1,4 +1,5 @@
 ﻿using BoardGameHub.Core.Contracts;
+using BoardGameHub.Core.Models.Pagination;
 using BoardGameHub.Core.Models.ReservationViewModel;
 using BoardGameHub.Data.Data.DataModels;
 using Microsoft.AspNetCore.Http.Metadata;
@@ -20,11 +21,19 @@ namespace BoardGameHub.Areas.Admin.Controllers
         }
 
 		[HttpGet]
-        public async Task<IActionResult> All()
+        public async Task<IActionResult> All(int page = 1)
 		{
-			var reservations = await reservationService.GetAllActiveAsync();
+			var allReservations = await reservationService.GetAllActiveAsync();
 
-			return View(reservations);
+			int reservationsCount = allReservations.Count();
+
+			const int pageSize = 8;
+			var pager = new PaginatedList(reservationsCount, page, pageSize);
+			int skipper = (page - 1) * pageSize;
+
+			var reservationsPerPage = allReservations.Skip(skipper).Take(pager.PageSize).ToList();
+
+			return View(reservationsPerPage);
 		}
 
 		[HttpGet]
