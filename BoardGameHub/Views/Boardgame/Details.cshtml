@@ -2,6 +2,9 @@
 
 @{
 	ViewBag.Title = "Boardgame Details";
+
+	var categoriesNames = Model.BoardgameCategories.Select(bc => bc.Name);
+
 }
 
 <section class="py-5">
@@ -34,13 +37,13 @@
 					</div>
 					<div class="d-flex">
 						<div class="d-flex flex-column w-50 fs-5 ">
-							<span class="mb-2">Difficulty:</span>
+							<span class="mb-2">Rating:</span>
 							<span class="mb-2">Average playing time:</span>
 							<span class="mb-2">Players:</span>
 							<span class="mb-2">Appropriate age:</span>
 						</div>
 						<div class="d-flex flex-column w-50 fs-5">
-							<span class="mb-2">@Model.Difficulty</span>
+							<span class="mb-2">@Model.Rating</span>
 							<span class="mb-2">@Model.AveragePlayingTime min</span>
 							<span class="mb-2">@Model.MinimumPlayersAllowedToPlay - @Model.MaximumPlayersAllowedToPlay players</span>
 							<span class="mb-2">@Model.AppropriateAge+</span>
@@ -51,12 +54,72 @@
 			<div class="col-md-12">
 				<div class="mt-5 w-100">
 					<h3 clas="text-center py-2">Full Description</h3>
-					<p class="mb-4">  @Model.Description</p>
+					<p class="mb-4">@Model.Description</p>
 				</div>
 				<img class="w-100 h-auto" src="@Model.DetailsImageUrl" />
 			</div>
 		</div>
-		<a asp-area="" asp-controller="GameReview" asp-action="Add" asp-route-id="@Model.Id" class="btn btn-danger mt-2 mb-2 w-100 p-3 fw-bold">Leave a review</a>
+		<div class="col-xs-12 my-2">
+			<div class="container">
+				<div class="custom-table mt-4 mb-4">
+					<div class="row py-2">
+						<div class="col font-weight-bold">Categories:</div>
+						<div class="col">@string.Join(", ", categoriesNames)</div>
+					</div>
+					<div class="row py-2">
+						<div class="col font-weight-bold">Rating:</div>
+						<div class="col">@Model.Rating</div>
+					</div>
+					<div class="row py-2">
+						<div class="col font-weight-bold">Appropriate for:</div>
+						<div class="col">@Model.AppropriateAge+</div>
+					</div>
+					<div class="row py-2">
+						<div class="col font-weight-bold">Average palying time:</div>
+						<div class="col">@Model.AveragePlayingTime</div>
+					</div>
+					<div class="row py-2">
+						<div class="col font-weight-bold">Difficulty:</div>
+						<div class="col">@Model.Difficulty</div>
+					</div>
+					<div class="row py-2">
+						<div class="col font-weight-bold">Year published:</div>
+						<div class="col">@Model.YearPublished</div>
+					</div>
+					<div class="row py-2">
+						<div class="col font-weight-bold">Players allowed:</div>
+						<div class="col">@Model.MinimumPlayersAllowedToPlay - @Model.MaximumPlayersAllowedToPlay players</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-12">
+			<div class="container">
+				<div class="row">
+					<div class="col-12 text-center">
+						<h3 class="mb-3 mt-3">Reviews</h3>
+					</div>
+					@foreach (var gameReview in Model.GameReviews)
+					{
+						<div class="col-md-4 mb-3">
+							<div class="card">
+								<div class="card-body" style="height: 200px;">
+									<h6 class="card-title">@gameReview.ReviewOwner.FirstName @gameReview.ReviewOwner.LastName</h6>
+									<p class="card-text">@gameReview.ReviewText</p>
+								</div>
+							</div>
+						</div>
+					}
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-12 mb-2">
+			<div class="w-100 d-flex align-items-center justify-content-center">
+				<a asp-area="" asp-controller="GameReview" asp-action="Add" asp-route-id="@Model.Id" class="btn btn-danger mt-2 mb-2 w-25 p-3 fw-bold">Leave a review</a>
+			</div>
+		</div>
 	</div>
 </section>
+
+
 

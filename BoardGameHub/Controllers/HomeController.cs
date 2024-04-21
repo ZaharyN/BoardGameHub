@@ -29,6 +29,5 @@ namespace BoardGameHub.Controllers
         {
             return View();
         }
-		
 	}
 }
