@@ -6,7 +6,6 @@ Reservation controller:
 Other:
 - How to add new lines in the html description texts
 - Custom error 404 and 502 pages
-- Add pagination 
 - Fix when clicking on the userName 
 - Add validations and error handling
 - Add AntiforgeryKey
