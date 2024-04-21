@@ -1,13 +1,8 @@
 ﻿using BoardGameHub.Data.Data.DataModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BoardGameHub.Data.Data.Seed
 {
-    internal class SeedPlaceTypeData
+	internal class SeedPlaceTypeData
     {
         public SeedPlaceTypeData()
         {

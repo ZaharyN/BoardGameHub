@@ -1,4 +1,4 @@
-﻿@model IEnumerable<PlaceTypeViewModel>
+﻿@model PlaceTypeViewModel[]
 
 @{
 	ViewData["Title"] = "Our prices";
@@ -6,3 +6,50 @@
 
 <h1 class="text-center">Our prices</h1>
 
+
+<section class="projects-section bg-light" id="projects">
+	<div class="container px-4 px-lg-5">
+		<div class="row gx-0 mb-5 mb-lg-0 justify-content-center">
+			<div class="col-lg-6 d-flex justify-content-center"><img class="img-fluid" src="/assets/PlaceTypes/table_for_2.jpg" alt="..." /></div>
+			<div class="col-lg-6">
+				<div class="bg-black text-center h-100 project">
+					<div class="d-flex h-100">
+						<div class="project-text w-100 my-auto text-center text-lg-left">
+							<h3 class="text-white">@Model[0].Name</h3>
+							<p class="mb-0 text-white-50">Capacity: @Model[0].Capacity </p>
+							<p class="mb-0 text-white-50">Price per hour: @Model[0].PricePerHour lv. </p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row gx-0 justify-content-center">
+			<div class="col-lg-6 d-flex justify-content-center"><img class="img-fluid" src="/assets/PlaceTypes/table_for_4.jpg" alt="..." /></div>
+			<div class="col-lg-6 order-lg-first">
+				<div class="bg-black text-center h-100 project">
+					<div class="d-flex h-100">
+						<div class="project-text w-100 my-auto text-center text-lg-right">
+							<h3 class="text-white">@Model[1].Name</h3>
+							<p class="mb-0 text-white-50">Capacity: @Model[1].Capacity </p>
+							<p class="mb-0 text-white-50">Price per hour: @Model[1].PricePerHour lv. </p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row gx-0 mb-5 mb-lg-0 justify-content-center">
+			<div class="col-lg-6 d-flex justify-content-center"><img class="img-fluid" src="/assets/PlaceTypes/table_for_10.jpg" alt="..." /></div>
+			<div class="col-lg-6">
+				<div class="bg-black text-center h-100 project">
+					<div class="d-flex h-100">
+						<div class="project-text w-100 my-auto text-center text-lg-left">
+							<h3 class="text-white">@Model[2].Name</h3>
+							<p class="mb-0 text-white-50">Capacity: @Model[2].Capacity </p>
+							<p class="mb-0 text-white-50">Price per hour: @Model[2].PricePerHour lv. </p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

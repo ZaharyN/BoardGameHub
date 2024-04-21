@@ -15,7 +15,7 @@ namespace BoardGameHub.Controllers
 
         public async Task<IActionResult> All()
         {
-            IEnumerable<PlaceTypeViewModel> models = await placeTypeService.GetAllAsync();
+            var models = await placeTypeService.GetAllAsync();
 
             return View(models);
         }

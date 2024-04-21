@@ -1,21 +1,22 @@
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
 }
+
 @charset "UTF-8";
 /*!
 * Start Bootstrap - Grayscale v7.0.6 (https://startbootstrap.com/theme/grayscale)
@@ -12840,11 +12841,10 @@ body {
             }
 
 .footer {
-    height: 150px;
-    padding: 2rem 0;
+    height: 100px;
 }
 
-.main-content{
+.main-content {
     margin-bottom: 150px;
 }
 
@@ -12852,4 +12852,16 @@ body {
     display: inline-block;
     font-size: 1.5rem;
     color: #ffc107;
+}
+
+.custom-table {
+    background-color: #f8f9fa;
+}
+
+.custom-table .row:nth-child(even) {
+    background-color: #ffffff;
+}
+
+.custom-table .row:nth-child(odd) {
+    background-color: #e9ecef;
 }

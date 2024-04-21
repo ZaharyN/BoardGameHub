@@ -16,14 +16,14 @@ namespace BoardGameHub.Core.Services
 
         public async Task<IEnumerable<PlaceTypeViewModel>> GetAllAsync()
         {
-            IEnumerable<PlaceTypeViewModel> models = await context.PlaceTypes
+            var models = await context.PlaceTypes
                 .Select(pt => new PlaceTypeViewModel()
                 {
                     Name = pt.Name,
                     Capacity = pt.Capacity,
                     PricePerHour = pt.PricePerHour
                 })
-                .ToListAsync();
+                .ToArrayAsync();
 
             return models;
         }
