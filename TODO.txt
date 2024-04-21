@@ -1,8 +1,3 @@
-Reservation controller:
-
-- Make so the ModelState error visualises
-- Fix reservation details button - if it is user Back To My Reservations, if it is admin back to All reservaions
-
 Other:
 - How to add new lines in the html description texts
 - Custom error 404 and 502 pages
@@ -23,15 +18,15 @@ Home page - Four buttons:
 	= Free tables - Get All reservation with past date so the admin can free the tables and the boardgames
 
 Help from Paca:
-- Help with the footer
-- Price page
-- Details page finish up
-- How  can I remember the chosen category and display it on the next page?
 
-Additional questions:
+- How can I remember the chosen category and display it on the next page?
 
 Boardgame controller:
 - In the edit form, how to display the current categories and if the person does not choose new ones, the old ones stay?
 
 Categories controller:
 - How  can I remember the chosen category and display it on the next page?
+
+Help from Paca:
+
+- Fix the buttons in the admin home page

@@ -8,11 +8,11 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="btn-group d-flex" role="group">
-                <button type="button" class="btn btn-primary btn-lg mr-2">Button 1</button>
-                <button type="button" class="btn btn-primary btn-lg mr-2">Button 2</button>
-                <button type="button" class="btn btn-primary btn-lg mr-2">Button 3</button>
-                <button type="button" class="btn btn-primary btn-lg">Button 4</button>
+            <div class="btn-group d-flex justify-content-center" role="group">
+                <a asp-area="" asp-controller="Boardgame" asp-action="Active" class="btn btn-primary btn-sm mb-2 w-25 fw-bold rounded btn-dark-text">Boardgames</a>
+                <a asp-area="" asp-controller="Category" asp-action="All" class="btn btn-primary btn-sm mb-2 w-25 fw-bold rounded btn-dark-text">Categories</a>
+                <a asp-area="Admin" asp-controller="Reservation" asp-action="All" class="btn btn-primary btn-sm mb-2 w-25 fw-bold rounded btn-dark-text">All reservations</a>
+                <a asp-area="Admin" asp-controller="Reservation" asp-action="Expired" class="btn btn-primary btn-sm mb-2 w-25 fw-bold rounded btn-dark-text">Free tables</a>
             </div>
         </div>
     </div>
