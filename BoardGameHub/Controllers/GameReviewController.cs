@@ -35,11 +35,6 @@ namespace BoardGameHub.Controllers
                 return BadRequest();
             }
 
-            if (await gamereviewService.UserHasComment(userId, id))
-            {
-                return BadRequest();
-            };
-
             GameReviewCreateFormModel form = await gamereviewService.GetCreateFormAsync(id);
 
             return View(form);
@@ -57,10 +52,11 @@ namespace BoardGameHub.Controllers
 
             string userId = GetUser();
 
-            if (userId == null)
+            if (await gamereviewService.UserHasComment(userId, id))
             {
+                ModelState.AddModelError(User.Identity.Name, "User already has left a review!");
                 return BadRequest();
-            }
+            };
 
             await gamereviewService.CreateAsync(form, id, userId);
 

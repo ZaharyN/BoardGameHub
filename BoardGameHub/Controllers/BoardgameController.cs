@@ -6,41 +6,52 @@ using Microsoft.AspNetCore.Mvc;
 namespace BoardGameHub.Controllers
 {
 	public class BoardgameController : Controller
-    {
-        private readonly IBoardgameService boardgameService;
+	{
+		private readonly IBoardgameService boardgameService;
 
-        public BoardgameController( IBoardgameService _boardgameService)
-        {
-            boardgameService = _boardgameService;
-        }
+		public BoardgameController(IBoardgameService _boardgameService)
+		{
+			boardgameService = _boardgameService;
+		}
 
-        [HttpGet]
-        public async Task<IActionResult> Active()
-        {
-            var models = await boardgameService.ActiveAsync();
+		[HttpGet]
+		public async Task<IActionResult> Active(int page = 1)
+		{
+			var allBoardgames = await boardgameService.ActiveAsync();
 
-            return View(models);
-        }
+			int boardgamesCount = allBoardgames.Count();
 
-        [HttpGet]
-        public async Task<IActionResult> Upcoming()
-        {
-            var models = await boardgameService.UpcomingAsync();
+			int pageSize = 8;
+			var pager = new PaginatedList(boardgamesCount, page, pageSize);
 
-            return View(models);
-        }
+			int skipper = (page - 1) * pageSize;
 
-        [HttpGet]
-        public async Task<IActionResult> Details(int id)
-        {
-            if (await boardgameService.ExistsAsync(id) == null)
-            {
-                return NotFound();
-            }
+			var boardgamesPerPage = allBoardgames.Skip(skipper).Take(pager.PageSize).ToList();
 
-            BoardgameDetailsViewModel model = await boardgameService.DetailsAsync(id);
+			ViewBag.Pager = pager;
 
-            return View(model);
-        }
-    }
+			return View(boardgamesPerPage);
+		}
+
+		[HttpGet]
+		public async Task<IActionResult> Upcoming()
+		{
+			var models = await boardgameService.UpcomingAsync();
+
+			return View(models);
+		}
+
+		[HttpGet]
+		public async Task<IActionResult> Details(int id)
+		{
+			if (await boardgameService.ExistsAsync(id) == null)
+			{
+				return NotFound();
+			}
+
+			BoardgameDetailsViewModel model = await boardgameService.DetailsAsync(id);
+
+			return View(model);
+		}
+	}
 }

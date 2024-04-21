@@ -3,10 +3,22 @@
 @{
 	ViewData["Title"] = "Our games";
 	var models = Model.ToList();
+
+	PaginatedList pager = new();
+
+	int pageNo = 0;
+
+	if(ViewBag.Pager != null)
+	{
+		pager = ViewBag.Pager;
+		pageNo = pager.CurrentPage;
+	}
 }
 
 <h2 class="text-center">@ViewData["Title"]</h2>
 <hr />
+
+<partial name="_PaginationPartial" model="@pager" />
 
 <div class="container">
 	<div class="row">
@@ -34,6 +46,7 @@
 	</div>
 </div>
 
+<partial name="_PaginationPartial" model="@pager" />
 
 
 
