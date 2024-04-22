@@ -1,10 +1,7 @@
 Most important:
 - Tests!
 - Fix categories controller
-
-Help from Paca:
-- Fix the buttons in the admin home page
-- Will the homepage carousel be better after the masthead ?
+- Free tables throws error
 
 Eventual work:
 - How to add new lines in the html description texts

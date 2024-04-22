@@ -12842,6 +12842,9 @@ body {
 
 .footer {
     height: 100px;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
 }
 
 .main-content {
@@ -12858,10 +12861,10 @@ body {
     background-color: #f8f9fa;
 }
 
-.custom-table .row:nth-child(even) {
-    background-color: #ffffff;
-}
+    .custom-table .row:nth-child(even) {
+        background-color: #ffffff;
+    }
 
-.custom-table .row:nth-child(odd) {
-    background-color: #e9ecef;
-}
+    .custom-table .row:nth-child(odd) {
+        background-color: #e9ecef;
+    }
