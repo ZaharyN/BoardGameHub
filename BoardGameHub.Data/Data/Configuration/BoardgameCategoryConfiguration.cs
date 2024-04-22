@@ -11,13 +11,6 @@ namespace BoardGameHub.Data.Data.Configuration
         {
             SeedBoardgameCategoryData data = new SeedBoardgameCategoryData();
 
-            builder
-                .HasKey(bg => new
-                {
-                    bg.BoardgameId,
-                    bg.CategoryId
-                });
-
             builder.HasData(new BoardgameCategory[]
             {
                 data.DuneCategory1,

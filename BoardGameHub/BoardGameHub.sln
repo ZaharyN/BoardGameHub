@@ -5,9 +5,11 @@ VisualStudioVersion = 17.9.34622.214
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BoardGameHub", "BoardGameHub.csproj", "{1E2DFB44-BD26-4000-843F-FDBA057DD282}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoardGameHub.Core", "..\BoardGameHub.Core\BoardGameHub.Core.csproj", "{3CFEDB8A-8CCA-435F-8396-8BBF308A5936}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BoardGameHub.Core", "..\BoardGameHub.Core\BoardGameHub.Core.csproj", "{3CFEDB8A-8CCA-435F-8396-8BBF308A5936}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoardGameHub.Data", "..\BoardGameHub.Data\BoardGameHub.Data.csproj", "{2E89227D-EF31-4B55-BF4A-FAA8904312D1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BoardGameHub.Data", "..\BoardGameHub.Data\BoardGameHub.Data.csproj", "{2E89227D-EF31-4B55-BF4A-FAA8904312D1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoardGameHUB.Tests", "..\BoardGameHUB.Tests\BoardGameHUB.Tests.csproj", "{FE361C1D-E7A1-4AEB-98ED-8EF3683507C4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{2E89227D-EF31-4B55-BF4A-FAA8904312D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2E89227D-EF31-4B55-BF4A-FAA8904312D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2E89227D-EF31-4B55-BF4A-FAA8904312D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE361C1D-E7A1-4AEB-98ED-8EF3683507C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE361C1D-E7A1-4AEB-98ED-8EF3683507C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE361C1D-E7A1-4AEB-98ED-8EF3683507C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE361C1D-E7A1-4AEB-98ED-8EF3683507C4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

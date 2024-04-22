@@ -7,10 +7,21 @@ namespace BoardGameHub.Data.Data
 {
     public class BoardGameHubDbContext : IdentityDbContext<ApplicationUser>
     {
-        public BoardGameHubDbContext(DbContextOptions<BoardGameHubDbContext> options)
+        private bool _seedDb;
+
+        public BoardGameHubDbContext(DbContextOptions<BoardGameHubDbContext> options, bool seed = true)
             : base(options)
         {
-            
+            if (Database.IsRelational())
+            {
+                Database.Migrate();
+            }
+            else
+            {
+                Database.EnsureCreated();
+            }
+
+            _seedDb = seed;
         }
 
         public DbSet<Boardgame> Boardgames { get; set; } = null!;
@@ -24,13 +35,34 @@ namespace BoardGameHub.Data.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.ApplyConfiguration(new GameReviewConfiguration());
-            builder.ApplyConfiguration(new CategoryConfiguration());
-            builder.ApplyConfiguration(new BoardgameConfiguration());
-            builder.ApplyConfiguration(new BoardgameCategoryConfiguration());
-            builder.ApplyConfiguration(new PlaceTypeConfiguration());
-            builder.ApplyConfiguration(new ReservationPlaceConfiguration());
-            builder.ApplyConfiguration(new ApplicationUserConfiguration());
+            builder.Entity<BoardgameCategory>()
+                .HasKey(bg => new
+                {
+                    bg.BoardgameId,
+                    bg.CategoryId
+                });
+
+            builder.Entity<GameReview>()
+               .HasOne(gr => gr.Boardgame)
+                   .WithMany(b => b.GameReviews)
+               .HasForeignKey(gr => gr.BoardGameId)
+               .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<GameReview>()
+               .HasOne(gr => gr.ReviewOwner)
+                   .WithMany(reviewOwner => reviewOwner.GameReviews)
+               .HasForeignKey(gr => gr.ReviewOwnerId)
+               .OnDelete(DeleteBehavior.Restrict);
+
+            if (_seedDb)
+            {
+                builder.ApplyConfiguration(new CategoryConfiguration());
+                builder.ApplyConfiguration(new BoardgameConfiguration());
+                builder.ApplyConfiguration(new BoardgameCategoryConfiguration());
+                builder.ApplyConfiguration(new PlaceTypeConfiguration());
+                builder.ApplyConfiguration(new ReservationPlaceConfiguration());
+                builder.ApplyConfiguration(new ApplicationUserConfiguration());
+            }
 
             base.OnModelCreating(builder);
         }
