@@ -133,12 +133,11 @@ namespace BoardGameHub.Areas.Admin.Controllers
 			return View(expired);
 		}
 
-		[HttpPost]
 		public async Task<IActionResult> FreePlaces(int id)
 		{
 			await reservationService.FreeTablesAsync(id);
 
-			return View(nameof(Expired));
+			return RedirectToAction(nameof(Expired));
 		}
 	}
 }

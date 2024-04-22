@@ -2,6 +2,3 @@ Most important:
 - Tests!
 - Fix categories controller
 - Free tables throws error
-
-Eventual work:
-- How to add new lines in the html description texts

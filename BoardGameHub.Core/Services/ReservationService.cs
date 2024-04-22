@@ -198,7 +198,6 @@ namespace BoardGameHub.Core.Services
 				.Include(r => r.ReservationOwner)
 				.Where(r => r.DateTime.Day < DateTime.Now.Day
 				&& r.IsExpired == false)
-				.AsNoTracking()
 				.OrderByDescending(r => r.DateTime)
 				.Select(r => new ReservationViewModel()
 				{
@@ -223,6 +222,7 @@ namespace BoardGameHub.Core.Services
 			{
 				boardgameReserved.IsReserved = false;
 				boardgameReserved.ReservationId = null;
+				reservation.BoardgameReservedId = null;
 			}
 
 			reservation.IsExpired = true;
