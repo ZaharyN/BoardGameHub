@@ -49,7 +49,7 @@ namespace BoardGameHub.Core.Services
 
 		public async Task<IEnumerable<CategoryViewModel>> AllCategoriesAsync()
 		{
-			IEnumerable<CategoryViewModel> Categorys = await context.Categories
+			IEnumerable<CategoryViewModel> categories = await context.Categories
 				.Select(g => new CategoryViewModel()
 				{
 					Id = g.Id,
@@ -57,7 +57,7 @@ namespace BoardGameHub.Core.Services
 				})
 				.ToListAsync();
 
-			return Categorys;
+			return categories;
 		}
 
 		public async Task<int> CreateAsync(BoardgameCreateFormModel form)

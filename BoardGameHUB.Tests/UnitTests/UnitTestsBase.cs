@@ -11,7 +11,7 @@ namespace BoardGameHUB.Tests.UnitTests
     {
         protected BoardGameHubDbContext context;
         protected IMapper mapper;
-
+        
         [OneTimeSetUp]
         public void SetUpBase()
         {
@@ -23,6 +23,7 @@ namespace BoardGameHUB.Tests.UnitTests
         public ApplicationUser AppUser2 { get; private set; }
         public Boardgame Dune { get; private set; }
         public Boardgame TerraformMars { get; private set; }
+        public Boardgame EclipseSecondDawnForTheGalaxyBoardgame { get; set; }
         public BoardgameCategory DuneCategory1 { get; private set; }
         public BoardgameCategory TerraformMarsCategory1 { get; private set; }
         public BoardgameCategory DuneCategory2 { get; private set; }
@@ -110,6 +111,27 @@ namespace BoardGameHUB.Tests.UnitTests
                 IsUpcoming = false
             };
             context.Boardgames.AddAsync(TerraformMars);
+
+            EclipseSecondDawnForTheGalaxyBoardgame = new Boardgame()
+            {
+                Id = 21,
+                Name = "Eclipse: Second Dawn for the Galaxy",
+                AppropriateAge = 14,
+                AveragePlayingTime = 150,
+                Rating = 5,
+                Description = "A game of Eclipse places you in control of a vast interstellar civilization, competing for success with its rivals. You explore new star systems, research technologies, and build spaceships with which to wage war. There are many potential paths to victory, so you need to plan your strategy according to the strengths and weaknesses of your species, while paying attention to the other civilizations' endeavors.\r\n\r\nEclipse: Second Dawn for the Galaxy is a revised and upgraded version of the Eclipse base game that debuted in 2011 that features:\r\n\r\nNew graphic design, while maintaining the acclaimed symbology of the first edition\r\nA full line of Ship Pack 1 miniatures\r\nNew miniatures for ancients, GCDS, orbitals, and more\r\nCustom plastic inlays\r\nCustom combat dice\r\nFine-tuned gameplay",
+
+                Difficulty = 3.7,
+                CardImageUrl = "/assets/games/Eclipse_card.jpg",
+                DetailsImageUrl = "/assets/games/Eclipse_details.jpg",
+                YearPublished = 2020,
+                PriceInShop = 275.00M,
+                MinimumPlayersAllowedToPlay = 2,
+                MaximumPlayersAllowedToPlay = 6,
+                IsReserved = false,
+                IsUpcoming = true
+            };
+            context.Boardgames.AddAsync(EclipseSecondDawnForTheGalaxyBoardgame);
 
             Category1 = new Category()
             {
@@ -258,6 +280,8 @@ namespace BoardGameHUB.Tests.UnitTests
                 IsExpired = false
             };
             context.Reservations.AddAsync(Reservation2);
+
+            context.SaveChangesAsync();
         }
 
         [OneTimeTearDown]

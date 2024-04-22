@@ -1,20 +1,10 @@
-Other:
-- Custom error 404 and 502 pages
-- Add validations and error handling
+Most important:
 - Tests!
-
-
-Questions:
-- How to show error message "User has already commented this boardgame!" ?
-- How can I remember the chosen category and display it on the next page ?
-- How  can I remember the chosen category and display it on the next page ?
+- Fix categories controller
 
 Help from Paca:
-
 - Fix the buttons in the admin home page
 - Will the homepage carousel be better after the masthead ?
 
 Eventual work:
-
-- partial views for categories
 - How to add new lines in the html description texts
