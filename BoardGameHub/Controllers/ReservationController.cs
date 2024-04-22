@@ -47,30 +47,17 @@ namespace BoardGameHub.Controllers
                 out DateTime dateTime))
             {
 				ModelState.AddModelError(form.DateTime, $"Invalid date! Format must be: {ReservationDateTimeFormat}");
-				//form.FreeBoardgames = await reservationService.GetAllFreeBoardgamesAsync();
-				//form.FreePlaces = await reservationService.GetAllFreeReservationPlacesAsync();
-
-				//return View(form);
 			}
 
 			if(dateTime <= DateTime.Now)
 			{
 				ModelState.AddModelError(form.DateTime, $"Invalid date! Date must be after {DateTime.Now.ToString(ReservationDateTimeFormat)}");
-
-				//form.FreeBoardgames = await reservationService.GetAllFreeBoardgamesAsync();
-				//form.FreePlaces = await reservationService.GetAllFreeReservationPlacesAsync();
-
-				//return View(form);
 			}
 
 			string userId = GetUser();
 			if (await reservationService.UserHasReservation(userId, dateTime))
 			{
 				ModelState.AddModelError(form.DateTime, $"Invalid date! User already has a reservation for this day!");
-				//form.FreeBoardgames = await reservationService.GetAllFreeBoardgamesAsync();
-				//form.FreePlaces = await reservationService.GetAllFreeReservationPlacesAsync();
-
-				//return View(form);
 			}
 
 			if (!ModelState.IsValid)

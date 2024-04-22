@@ -44,7 +44,7 @@ namespace BoardGameHub.Controllers
 
 		[HttpGet]
 		public async Task<IActionResult> Details(int id)
-		{
+		 {
 			if (await boardgameService.ExistsAsync(id) == null)
 			{
 				return NotFound();

@@ -32,15 +32,14 @@ namespace BoardGameHub.Controllers
 		{
 			if (statusCode == 404)
 			{
-				return View("Error400");
+				return View("Error404");
 			}
+            if (statusCode == 500)
+            {
+                return View("Error500");
+            }
 
-			if (statusCode == 401)
-			{
-				return View("Error401");
-			}
-
-			return View();
+            return View();
 		}
 	}
 }

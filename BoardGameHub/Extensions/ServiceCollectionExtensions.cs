@@ -39,7 +39,7 @@ namespace BoardGameHub.Extensions
 
         public static IServiceCollection AddApplicationDbContext(this IServiceCollection services, IConfiguration config)
         {
-            string connectionString = config.GetConnectionString("DefaultConnection");
+            string connectionString = config.GetConnectionString("DevelopmentConnection");
 
             services.AddDbContext<BoardGameHubDbContext>(options =>
             {
