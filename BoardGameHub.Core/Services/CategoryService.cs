@@ -318,34 +318,5 @@ namespace BoardGameHub.Core.Services
 
 			return models;
 		}
-        public async Task<IEnumerable<CategoryBoardgameViewModel>> GetSortedCategories(string sortBy)
-		{
-			return await BuildCategories().ToListAsync();
-		}
-
-        private IQueryable<CategoryBoardgameViewModel> BuildCategories()
-        {
-			return context.Boardgames
-				.AsNoTracking()
-				.Select(b => new CategoryBoardgameViewModel()
-				{
-					Id = b.Id,
-					Name = b.Name,
-					BoardgameCategories = b.BoardgamesCategories
-						.Select(bg => new CategoryViewModel()
-						{
-							Id = bg.CategoryId,
-							Name = bg.Category.Name
-						})
-						.ToList(),
-					PriceInShop = b.PriceInShop,
-					AppropriateAge = b.AppropriateAge,
-					Rating = b.Rating,
-					Difficulty = b.Difficulty,
-					CardImageUrl = b.CardImageUrl,
-					MinimumPlayersAllowedToPlay = b.MinimumPlayersAllowedToPlay,
-					MaximumPlayersAllowedToPlay = b.MaximumPlayersAllowedToPlay
-				});
-        }
     }
 }

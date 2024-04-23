@@ -15,7 +15,7 @@ namespace BoardGameHub.Core.Contracts
         Task<BoardgameEditFormModel> GetEditFormAsync(Boardgame boardgame);
         Task EditAsync(BoardgameEditFormModel model, Boardgame boardgame);
         Task<BoardgameDeleteFormModel> GetDeleteFormAsync(Boardgame boardgame);
-        Task DeleteConfirmed(Boardgame boardgame);
+        Task DeleteAsync(Boardgame boardgame);
         Task<BoardgameDetailsViewModel> DetailsAsync(int id);
         Task<IEnumerable<CategoryViewModel>> AllCategoriesAsync();
         Task<Boardgame> ExistsAsync(int id);

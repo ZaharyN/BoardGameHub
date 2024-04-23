@@ -111,7 +111,7 @@ namespace BoardGameHub.Areas.Admin.Controllers
                 return Unauthorized();
             }
 
-            await boardgameService.DeleteConfirmed(boardgame);
+            await boardgameService.DeleteAsync(boardgame);
 
 			return RedirectToAction("Active", "Boardgame", new { area = "" });
 		}
