@@ -3,13 +3,12 @@ using BoardGameHub.Core.Models.ReservationViewModel;
 using BoardGameHub.Data.Data;
 using BoardGameHub.Data.Data.DataModels;
 using Microsoft.EntityFrameworkCore;
-using System.Globalization;
-using static BoardGameHub.Data.Constants.DataConstants;
 using static BoardGameHub.Core.Constants.OtherConstants;
+using static BoardGameHub.Data.Constants.DataConstants;
 
 namespace BoardGameHub.Core.Services
 {
-	public class ReservationService : IReservationService
+    public class ReservationService : IReservationService
 	{
 		private readonly BoardGameHubDbContext context;
 
@@ -32,7 +31,7 @@ namespace BoardGameHub.Core.Services
 
 		public async Task CreateReservationAsync(ReservationCreateFormModel form, string userId, DateTime dateTime)
 		{
-			ReservationPlace? placeReserved = await context.ReservationPlaces.FindAsync(form.PlaceReservedId);
+			ReservationPlace placeReserved = await context.ReservationPlaces.FindAsync(form.PlaceReservedId);
 
 			Boardgame? boardgameReserved = await context.Boardgames.FindAsync(form.BoardgameReservedId);
 
@@ -80,10 +79,8 @@ namespace BoardGameHub.Core.Services
 			return reservations;
 		}
 
-		public async Task<ReservationDetailsViewModel> ReservationDetailsAsync(Reservation reservation, string userId)
+		public async Task<ReservationDetailsViewModel> ReservationDetailsAsync(Reservation reservation)
 		{
-			string userName = GetUser(userId).Result.FirstName;
-
 			var model = new ReservationDetailsViewModel()
 			{
 				Id = reservation.Id,

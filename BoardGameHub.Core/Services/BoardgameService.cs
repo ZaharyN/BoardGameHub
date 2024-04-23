@@ -3,9 +3,7 @@ using BoardGameHub.Core.Models.BoardgameViewModels;
 using BoardGameHub.Core.Models.CategoryModel;
 using BoardGameHub.Data.Data;
 using BoardGameHub.Data.Data.DataModels;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.EntityFrameworkCore;
 
 namespace BoardGameHub.Core.Services

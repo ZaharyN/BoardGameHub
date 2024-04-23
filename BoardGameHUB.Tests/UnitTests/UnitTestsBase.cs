@@ -254,7 +254,7 @@ namespace BoardGameHUB.Tests.UnitTests
                 Id = 1,
                 ReservationOwner = AppUser1,
                 ReservationOwnerId = "1b572cdb-ca30-43a0-8718-12df99d66c45",
-                DateTime = DateTime.Now,
+                DateTime = DateTime.Now.AddDays(10),
                 AdditionalComment = null,
                 PhoneNumber = "0896778522",
                 ReservationPlace = ReservationPlace1,

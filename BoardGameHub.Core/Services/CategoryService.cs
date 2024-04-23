@@ -1,5 +1,4 @@
 ﻿using BoardGameHub.Core.Contracts;
-using BoardGameHub.Core.Models.BoardgameViewModels;
 using BoardGameHub.Core.Models.CategoryModel;
 using BoardGameHub.Data.Data;
 using Microsoft.EntityFrameworkCore;
