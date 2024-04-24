@@ -19,11 +19,11 @@
         </div>
         @if (User.IsInRole(AdminRole))
         {
-            <a asp-area="Admin" asp-controller="Reservation" asp-action="All" class="btn btn-warning btn-dark-text btn-rounded mb-2 w-100 p-3 fw-bold">Back to All Reservations</a>
+            <a asp-area="Admin" asp-controller="Reservation" asp-action="All" class="btn btn-warning btn-dark-text btn-rounded mb-2 w-25 p-3 fw-bold">Back to All Reservations</a>
         }
         else
         {
-            <a asp-area="" asp-controller="Reservation" asp-action="Mine" class="btn btn-warning btn-dark-text btn-rounded mb-2 w-100 p-3 fw-bold">Back to My reservations</a>
+            <a asp-area="" asp-controller="Reservation" asp-action="Mine" class="btn btn-warning btn-dark-text btn-rounded mb-2 w-25 p-3 fw-bold">Back to My reservations</a>
         }
     </div>
 </div>
