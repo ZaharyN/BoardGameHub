@@ -8,6 +8,7 @@
         public int TotalPages { get; set; }
         public int StartPage { get; set; }
         public int EndPage { get; set; }
+        public string Sorting { get; set; }
 
         public PaginatedList()
         {

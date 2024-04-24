@@ -21,14 +21,47 @@ namespace BoardGameHub.Controllers
 			return View(sorted);
 		}
 
-		public async Task<IActionResult> AllCategoriesBoardgames(int page = 1)
+		public async Task<IActionResult> AllCategoriesBoardgames(string sortOrder, int page = 1)
 		{
 			var allCategoriesBoardgames = await categoryService.AllCategoriesBoardgamesAsync();
+
+			switch (sortOrder)
+			{
+				case "rating_asc":
+					allCategoriesBoardgames = allCategoriesBoardgames.OrderBy(c => c.Rating);
+					break;
+				case "rating_desc":
+					allCategoriesBoardgames = allCategoriesBoardgames.OrderByDescending(c => c.Rating);
+					break;
+				case "difficulty_asc":
+					allCategoriesBoardgames = allCategoriesBoardgames.OrderBy(c => c.Difficulty);
+					break;
+				case "difficulty_desc":
+					allCategoriesBoardgames = allCategoriesBoardgames.OrderByDescending(c => c.Difficulty);
+					break;
+				case "price_asc":
+					allCategoriesBoardgames = allCategoriesBoardgames.OrderBy(c => c.PriceInShop);
+					break;
+				case "price_desc":
+					allCategoriesBoardgames = allCategoriesBoardgames.OrderByDescending(c => c.PriceInShop);
+					break;
+				case "players_asc":
+					allCategoriesBoardgames = allCategoriesBoardgames
+						.OrderBy(c => c.MinimumPlayersAllowedToPlay)
+						.ThenBy(c => c.MaximumPlayersAllowedToPlay);
+					break;
+				case "players_desc":
+					allCategoriesBoardgames = allCategoriesBoardgames
+						.OrderByDescending(c => c.MaximumPlayersAllowedToPlay)
+						.ThenByDescending(c => c.MinimumPlayersAllowedToPlay);
+					break;
+			}
 
 			int boardgamesCount = allCategoriesBoardgames.Count();
 
 			int pageSize = 8;
 			var pager = new PaginatedList(boardgamesCount, page, pageSize);
+			pager.Sorting = sortOrder;
 
 			int skipper = (page - 1) * pageSize;
 
@@ -39,20 +72,6 @@ namespace BoardGameHub.Controllers
 			return View(categoriesPerPage);
 		}
 
-		public async Task<IActionResult> SortByLowestDifficulty()
-		{
-			var sorted = await categoryService.SortByLowestDifficultyAsync();
-
-			return View(sorted);
-		}
-
-		public async Task<IActionResult> SortByHighestDifficulty()
-		{
-			var sorted = await categoryService.SortByHighestDifficultyAsync();
-
-			return View(sorted);
-		}
-
 		public async Task<IActionResult> SortByCategory(int id)
 		{
 			var sorted = await categoryService.SortByCategoryAsync(id);
@@ -60,46 +79,5 @@ namespace BoardGameHub.Controllers
 			return View(sorted);
 		}
 
-		public async Task<IActionResult> SortByMinPlayers()
-		{
-			var sorted = await categoryService.SortByMinPlayersAsync();
-
-			return View(sorted);
-		}
-
-		public async Task<IActionResult> SortByMaxPlayers()
-		{
-			var sorted = await categoryService.SortByMaxPlayersAsync();
-
-			return View(sorted);
-		}
-
-		public async Task<IActionResult> SortByLowestPrice()
-		{
-			var sorted = await categoryService.SortByLowestPriceAsync();
-
-			return View(sorted);
-		}
-
-		public async Task<IActionResult> SortByHighestPrice()
-		{
-			var sorted = await categoryService.SortByHighestPriceAsync();
-
-			return View(sorted);
-		}
-
-		public async Task<IActionResult> SortByLowestRating()
-		{
-			var sorted = await categoryService.SortByLowestRatingAsync();
-
-			return View(sorted);
-		}
-
-		public async Task<IActionResult> SortByHighestRating()
-		{
-			var sorted = await categoryService.SortByHighestRatingAsync();
-
-			return View(sorted);
-		}
 	}
 }
