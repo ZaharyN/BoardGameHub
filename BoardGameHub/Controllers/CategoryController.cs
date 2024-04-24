@@ -21,7 +21,7 @@ namespace BoardGameHub.Controllers
 			return View(sorted);
 		}
 
-		public async Task<IActionResult> AllCategoriesBoardgames(string sortOrder, int page = 1)
+		public async Task<IActionResult> Browse(string sortOrder, int page = 1)
 		{
 			var allCategoriesBoardgames = await categoryService.AllCategoriesBoardgamesAsync();
 
@@ -78,6 +78,5 @@ namespace BoardGameHub.Controllers
 
 			return View(sorted);
 		}
-
 	}
 }

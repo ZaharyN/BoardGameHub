@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<CategoryBoardgameViewModel>
 
 @{
-	ViewData["Title"] = "Boardgames per Category";
+	ViewData["Title"] = "Browse";
 	var models = Model.ToList();
 
 	PaginatedList pager = new();
@@ -15,7 +15,7 @@
 	}
 }
 
-<h2 class="text-center">@ViewData["Title"]</h2>
+<h1 class="text-center">@ViewData["Title"]</h1>
 <hr />
 
 <div class="container">
@@ -25,14 +25,14 @@
 				<label for="sortSelect">Sort By:</label>
 				<select class="form-control" id="sortSelect" onchange="location = this.value;">
 					<option value="" selected disabled hidden>Choose here</option>
-					<option value="AllCategoriesBoardgames?sortOrder=rating_asc">Lowest rating</option>
-					<option value="AllCategoriesBoardgames?sortOrder=rating_desc">Highest rating</option>
-					<option value="AllCategoriesBoardgames?sortOrder=difficulty_asc">Lowest difficulty</option>
-					<option value="AllCategoriesBoardgames?sortOrder=difficulty_desc">Highest difficulty</option>
-					<option value="AllCategoriesBoardgames?sortOrder=price_asc">Lowest price</option>
-					<option value="AllCategoriesBoardgames?sortOrder=price_desc">Highest price</option>
-					<option value="AllCategoriesBoardgames?sortOrder=players_asc">Minimum players allowed</option>
-					<option value="AllCategoriesBoardgames?sortOrder=players_desc">Maximum players allowed</option>
+					<option value="Browse?sortOrder=rating_asc">Lowest rating</option>
+					<option value="Browse?sortOrder=rating_desc">Highest rating</option>
+					<option value="Browse?sortOrder=difficulty_asc">Lowest difficulty</option>
+					<option value="Browse?sortOrder=difficulty_desc">Highest difficulty</option>
+					<option value="Browse?sortOrder=price_asc">Lowest price</option>
+					<option value="Browse?sortOrder=price_desc">Highest price</option>
+					<option value="Browse?sortOrder=players_asc">Minimum players allowed</option>
+					<option value="Browse?sortOrder=players_desc">Maximum players allowed</option>
 				</select>
 			</div>
 		</div>
