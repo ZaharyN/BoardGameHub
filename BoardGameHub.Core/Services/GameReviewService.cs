@@ -47,30 +47,8 @@ namespace BoardGameHub.Core.Services
 				context.GameReviews.Add(gameReview);
 			}
 
-			Boardgame boardgame = await boardgameservice.ExistsAsync(gameReview.BoardGameId);
-
-			if (boardgame != null)
-			{
-				boardgame.GameReviews.Add(gameReview);
-			}
-			
             await context.SaveChangesAsync();
-
         }
-
-        public async Task<int> GetLastGameReviewId(int boardgameId)
-		{
-			Boardgame boardgame = await boardgameservice.ExistsAsync(boardgameId);
-
-			if (!boardgame.GameReviews.Any())
-			{
-				return 0;
-			}
-
-			var lastGameReviewById = boardgame.GameReviews.OrderBy(gr => gr.Id).Last();
-
-			return lastGameReviewById.Id;
-		}
 
         public async Task<bool> UserHasComment(string userId, int boardgameId)
         {

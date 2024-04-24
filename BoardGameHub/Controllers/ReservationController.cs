@@ -83,9 +83,7 @@ namespace BoardGameHub.Controllers
 				return BadRequest();
 			}
 
-			string userId = GetUser();
-
-			var model = await reservationService.ReservationDetailsAsync(reservation, userId);
+			var model = await reservationService.ReservationDetailsAsync(reservation);
 
 			return View(model);
 		}

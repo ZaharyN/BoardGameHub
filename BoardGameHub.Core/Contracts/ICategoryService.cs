@@ -1,10 +1,4 @@
-﻿using BoardGameHub.Core.Models.BoardgameViewModels;
-using BoardGameHub.Core.Models.CategoryModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BoardGameHub.Core.Models.CategoryModel;
 
 namespace BoardGameHub.Core.Contracts
 {

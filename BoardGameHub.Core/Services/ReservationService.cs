@@ -189,6 +189,7 @@ namespace BoardGameHub.Core.Services
 			context.Reservations.Remove(reservation);
 			await context.SaveChangesAsync();
 		}
+
 		public async Task<IEnumerable<ReservationViewModel>> GetAllExpiredAsync()
 		{
 			return await context.Reservations
@@ -205,6 +206,7 @@ namespace BoardGameHub.Core.Services
 				})
 				.ToListAsync();
 		}
+
 		public async Task FreeTablesAsync(int reservationId)
 		{
 			Reservation reservation = await GetReservationAsync(reservationId);
@@ -222,7 +224,7 @@ namespace BoardGameHub.Core.Services
 				reservation.BoardgameReservedId = null;
 			}
 
-			reservation.IsExpired = true;
+			reservation.IsExpired = true;	
 
 			await context.SaveChangesAsync();
 		}
@@ -275,7 +277,7 @@ namespace BoardGameHub.Core.Services
 		{
 			return await context.Reservations
 				.AnyAsync(r => r.ReservationOwnerId == userId
-				&& r.DateTime.Day == dateTime.Day);
+				&& r.DateTime == dateTime);
 		}
 
 		public async Task<IEnumerable<ReservationViewModel>> GetAllActiveAsync()

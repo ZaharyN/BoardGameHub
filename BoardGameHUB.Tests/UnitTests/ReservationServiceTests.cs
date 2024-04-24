@@ -179,7 +179,7 @@ namespace BoardGameHUB.Tests.UnitTests
                 Id = 5,
                 ReservationOwner = AppUser1,
                 ReservationOwnerId = AppUser1.Id,
-                DateTime = new DateTime(2024,12,10),
+                DateTime = new DateTime(2024, 12, 10),
                 AdditionalComment = "Add comment",
                 PhoneNumber = "0896778484",
                 ReservationPlaceId = 2,
@@ -215,7 +215,7 @@ namespace BoardGameHUB.Tests.UnitTests
         {
             var reservationFound = await reservationService.GetReservationAsync(Reservation1.Id);
 
-            Assert.AreEqual(Reservation1,reservationFound);
+            Assert.AreEqual(Reservation1, reservationFound);
         }
 
         [Test]
@@ -234,7 +234,7 @@ namespace BoardGameHUB.Tests.UnitTests
         {
             Reservation newReservation = new()
             {
-                DateTime = new DateTime(2025, 12,12)
+                DateTime = new DateTime(2025, 12, 12)
             };
 
             await context.Reservations.AddAsync(newReservation);
@@ -247,5 +247,116 @@ namespace BoardGameHUB.Tests.UnitTests
             Assert.AreEqual(activeReservations, activerReservationsFromService.Count());
         }
 
+        [Test]
+        public async Task GetDeleteFormShouldReturnReservationWithCorrectInformation()
+        {
+            var form = await reservationService.GetDeleteFormAsync(Reservation2);
+
+            Assert.AreEqual(Reservation2.Id, form.Id);
+            Assert.AreEqual($"{Reservation2.ReservationOwner.FirstName}'s reservation", form.ReservationName);
+        }
+
+        [Test]
+        public async Task DeleteShouldRemoveTheReservation()
+        {
+            int reservationCountBefore = await context.Reservations.CountAsync();
+
+            ReservationDeleteFormModel deleteForm = new()
+            {
+                Id = Reservation1.Id
+            };
+
+            await reservationService.DeleteConfirmedAsync(deleteForm);
+
+            int reservationCountAfter = await context.Reservations.CountAsync();
+
+            Assert.AreNotEqual(reservationCountBefore, reservationCountAfter);
+            Assert.AreEqual(reservationCountBefore, reservationCountAfter + 1);
+        }
+
+        [Test]
+        public async Task DeleteShouldChangeBoardgameAndPlaceTypeStatusToNotReserved()
+        {
+            Reservation1.ReservationPlace.IsReserved = true;
+            Reservation1.BoardgameReserved.IsReserved = true;
+
+            ReservationDeleteFormModel deleteForm = new()
+            {
+                Id = Reservation1.Id
+            };
+            await reservationService.DeleteConfirmedAsync(deleteForm);
+
+            Assert.IsFalse(Reservation1.ReservationPlace.IsReserved);
+            Assert.IsFalse(Reservation1.BoardgameReserved.IsReserved);
+            Assert.IsNull(Reservation1.BoardgameReserved.ReservationId);
+        }
+
+        [Test]
+        public async Task GetAllExpiredShouldReturnTheCorrectAmount()
+        {
+            int expired = await context.Reservations
+                .Where(r => r.DateTime <= DateTime.Now
+                && r.IsExpired == false)
+                .CountAsync();
+
+            var serviceResult = await reservationService.GetAllExpiredAsync();
+
+            Assert.AreEqual(expired, serviceResult.Count());
+        }
+
+        [Test]
+        public async Task FreeTablesShouldWorkProperly()
+        {
+            Reservation1.BoardgameReserved.IsReserved = true;
+            Reservation1.BoardgameReservedId = 1;
+
+            Dune.ReservationId = 1;
+            Dune.IsReserved = true;
+
+            await reservationService.FreeTablesAsync(Reservation1.Id);
+
+            Assert.IsFalse(Reservation1.ReservationPlace.IsReserved);
+            Assert.IsNull(Reservation1.ReservationPlace.ReservationId);
+
+            Assert.IsNull(Reservation1.BoardgameReserved);
+            Assert.IsFalse(Dune.IsReserved);
+            Assert.IsNull(Dune.ReservationId);
+        }
+
+        [Test]
+        public async Task GetUserShouldReturnTheCorrectUser()
+        {
+            string user1Id = AppUser1.Id;
+
+            var serviceResult = await reservationService.GetUser(user1Id);
+
+            Assert.AreEqual(AppUser1, serviceResult);
+        }
+
+        [Test]
+        public async Task GetUserShouldReturnNullIfTheIdIsNotValid()
+        {
+            string nullId = "nullId";
+
+            var nullUser = await reservationService.GetUser(nullId);
+
+            Assert.IsNull(nullUser);
+        }
+
+        [Test]
+        public async Task UserHasReservationShouldWorkProperly()
+        {
+            Reservation newRes = new()
+            {
+                ReservationOwnerId = AppUser1.Id,
+                DateTime = new DateTime(2024, 04, 10)
+            };
+
+            await context.Reservations.AddAsync(newRes);
+
+            bool result = await reservationService.UserHasReservation(AppUser1.Id, new DateTime(2024, 04, 10));
+
+            Assert.IsTrue(result);
+        }
     }
 }
