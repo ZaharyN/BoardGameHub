@@ -1,4 +1,2 @@
 Most important:
-- Tests!
-- Fix categories controller
-- Free tables throws error
+- Browse throws eorror 404 
